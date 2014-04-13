@@ -2,6 +2,14 @@ package org.moon.test.mybatis.repository;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.Iterator;
+import java.util.Properties;
+import java.util.Set;
+
+import javax.sql.DataSource;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,6 +17,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.moon.test.db.DataBaseManager;
 import org.moon.test.mybatis.persistence.User;
 
 public class UserRepositoryTest {
@@ -19,6 +28,21 @@ public class UserRepositoryTest {
 
 	@Before
 	public void setUp() throws Exception {
+		Properties props = new Properties();
+		props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties"));
+		DataBaseManager.initializeH2DataBase();
+		Set<String> keys = props.stringPropertyNames();
+		DataSource ds = DataBaseManager.getDataSource();
+		Connection conn = ds.getConnection();
+		for (Iterator<String> it = keys.iterator(); it.hasNext();) {
+			String key = it.next();
+			if(key.startsWith("table")){
+				PreparedStatement statement = conn.prepareStatement(props.getProperty(key));
+				statement.execute();
+				statement.close();
+			}
+		}
+		conn.close();
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis.xml"));
 		sqlSession = sqlSessionFactory.openSession();
 		userRepository = sqlSession.getMapper(UserRepository.class);

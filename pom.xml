@@ -7,6 +7,7 @@
 	<packaging>pom</packaging>
 	<properties>
 		<junit.version>4.11</junit.version>
+		<moon.version>0.0.1-SNAPSHOT</moon.version>
 	</properties>
 	<modules>
 		<module>db-test</module>
