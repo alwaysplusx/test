@@ -2,7 +2,12 @@ package org.moon.test.file;
 
 import java.io.File;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class FileUtil {
+	
+	private static Logger log = LoggerFactory.getLogger(FileUtil.class);
 
 	public static boolean deleteDirectory(String dir) {
 		File file = new File(dir);
@@ -12,7 +17,9 @@ public class FileUtil {
 				deleteDirectory(dir + File.separator + subDir);
 			}
 		}
-		return file.delete();
+		boolean done = file.delete();
+		log.info("Deleting file " + file.getAbsolutePath() + ", deleted already " + done);
+		return done;
 	}
 
 }
