@@ -18,7 +18,11 @@ public class FileUtil {
 			}
 		}
 		boolean done = file.delete();
-		log.info("Deleting file " + file.getAbsolutePath() + ", deleted already " + done);
+		if(done){			
+			log.info("Deleting file " + file.getAbsolutePath());
+		}else {
+			log.warn("Can't delete file " + file.getAbsolutePath());
+		}
 		return done;
 	}
 
