@@ -13,5 +13,6 @@
 		<module>log-test</module>
 		<module>mybatis-test</module>
 		<module>proxy-test</module>
+		<module>file-test</module>
 	</modules>
 </project>
