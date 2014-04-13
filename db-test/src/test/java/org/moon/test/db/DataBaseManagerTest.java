@@ -1,6 +1,8 @@
 package org.moon.test.db;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class DataBaseManagerTest {
@@ -11,20 +13,17 @@ public class DataBaseManagerTest {
 	}
 
 	@Test
-	public void testInitializeHSQLDataBase() {
+	public void testInitializeHSQLDataBase() throws Exception {
 		DataBaseManager.initializeHSQLDataBase();
 	}
 
 	@Test
-	public void testInitializeH2DataBase() {
+	@Ignore
+	public void testInitializeH2DataBase() throws Exception {
 		DataBaseManager.initializeH2DataBase();
 	}
-	
-	@Test
-	public void testInitializeDerbyDataBase(){
-		//DataBaseManager.initializeDerbyDataBase();
-	}
 
+	@After
 	public void tearDown() throws Exception {
 
 	}
