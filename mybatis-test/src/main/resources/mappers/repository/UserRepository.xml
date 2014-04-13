@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.moon.test.mybatis.repository.UserRepository">
+
+	<insert id="save" parameterType="org.moon.test.mybatis.persistence.User">
+		insert into t_user(id, username, password, status)
+		values (#{id},#{username},#{password},#{status})
+	</insert>
+
+	<select id="getById" parameterType="long" resultType="org.moon.test.mybatis.persistence.User">
+		select * from t_user where id = #{id}
+	</select>
+
+	<select id="countAll" resultType="int">
+		select count(*) from t_user
+	</select>
+
+</mapper>
