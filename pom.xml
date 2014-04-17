@@ -15,5 +15,6 @@
 		<module>mybatis-test</module>
 		<module>proxy-test</module>
 		<module>file-test</module>
+		<module>jpa-test</module>
 	</modules>
 </project>
