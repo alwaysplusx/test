@@ -13,12 +13,12 @@ public class DataBaseManagerTest {
 	}
 
 	@Test
+	@Ignore
 	public void testInitializeHSQLDataBase() throws Exception {
 		DataBaseManager.initializeHSQLDataBase();
 	}
 
 	@Test
-	@Ignore
 	public void testInitializeH2DataBase() throws Exception {
 		DataBaseManager.initializeH2DataBase();
 	}
