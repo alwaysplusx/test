@@ -1,51 +1,51 @@
 package org.moon.test.jpa.proxy;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 import javax.persistence.EntityManager;
 
-/**
- * {@link EntityManager} 代理类
- * @author wuxin
- * <p>2014年1月14日 下午10:27:35</p>
- */
-public class EntityManagerProxy implements InvocationHandler {
+import org.apache.log4j.Logger;
 
-	private EntityManager em;
-	private boolean transactionRequired = false;
+public class EntityManagerProxy extends ObjectProxy {
+
+	private Logger log = Logger.getLogger(EntityManagerProxy.class);
+	private EntityManager target;
+	private String include = "persist,merge,remove,flush,refresh";
+	private boolean transactionOpened = false;
+	private String methodName = "";
 	
-	public EntityManagerProxy(EntityManager em) {
-		this.em = em;
+	@Override
+	public Object bind(Object target) {
+		if (target instanceof EntityManager) {
+			this.target = (EntityManager) target;
+			Object proxyInstance = Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class[] { EntityManager.class }, this);
+			log.debug("bind entitymanager " + target);
+			return proxyInstance;
+		}
+		return null;
 	}
 
-	private void preExecute() {
-		if (transactionRequired) {
-			em.getTransaction().begin();
+	@Override
+	public void perExecute(Method method) {
+		methodName = method.getName();
+		if (!transactionOpened && include.contains(methodName)) {
+			target.getTransaction().begin();
+			log.debug("start transaction for method " + methodName + "!");
 		}
 	}
 
 	@Override
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		methodFilter(method, args);
-		preExecute();
-		Object result = method.invoke(em, args);
-		postExecute();
-		return result;
+	public Object execute(Method method, Object[] args) throws Throwable{
+		return method.invoke(target, args);
 	}
-	
-	private void postExecute() {
-		if (transactionRequired) {
-			em.getTransaction().commit();
+
+	@Override
+	public void postExecute(Method method) {
+		if (transactionOpened) {
+			target.getTransaction().commit();
+			log.debug("commit transaction for method " + methodName + "!");
 		}
 	}
-	
-	private void methodFilter(Method method, Object[] args) {
-		transactionRequired = false;
-		String methodName = method.getName();
-		if (("persist".equals(methodName) || "merge".equals(methodName) 
-				|| "remove".equals(methodName)) && (args.length == 1)) {
-			transactionRequired = true;
-		}
-	}
+
 }

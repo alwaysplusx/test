@@ -11,20 +11,21 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.log4j.Logger;
+import org.moon.test.jpa.proxy.EntityManagerProxy;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 public class DB {
 
-	private Logger log = Logger.getLogger(DB.class);
+	private static Logger log = Logger.getLogger(DB.class);
 	private static EntityManagerFactory entityManagerFactory;
 	private static List<EntityManager> entityManagerList = new ArrayList<EntityManager>();
-	private String persistenceUnitName;
-	private int maxSize = 50;
-	private int current = 0;
+	private static String persistenceUnitName;
+	private static int maxSize = 50;
+	private static int current = 0;
 
-	public EntityManager createEntityManager() {
+	public static EntityManager createEntityManager() {
 		try {
 			return createEntityManager(persistenceUnitName);
 		} catch (Exception e) {
@@ -33,28 +34,28 @@ public class DB {
 		}
 	}
 
-	public EntityManager createEntityManager(String persistenceUnitName) throws Exception {
+	public static EntityManager createEntityManager(String persistenceUnitName) throws Exception {
 		if (entityManagerFactory == null) {
 			synchronized (entityManagerFactory) {
-				if ((this.persistenceUnitName = persistenceUnitName) == null) {
-					this.persistenceUnitName = getDefaultPersistenceUnitName();
+				if ((DB.persistenceUnitName = persistenceUnitName) == null) {
+					DB.persistenceUnitName = getDefaultPersistenceUnitName();
 				}
-				entityManagerFactory = Persistence.createEntityManagerFactory(this.persistenceUnitName);
+				entityManagerFactory = Persistence.createEntityManagerFactory(DB.persistenceUnitName);
 			}
 		}
 		return findEntityManagerInList();
 	}
 
-	private EntityManager findEntityManagerInList() {
-		EntityManager em = entityManagerFactory.createEntityManager();
+	private static EntityManager findEntityManagerInList() {
 		if (entityManagerList.size() <= maxSize) {
-			entityManagerList.add(em);
-			return em;
+			EntityManager proxyEntityManager = (EntityManager) new EntityManagerProxy().bind(entityManagerFactory.createEntityManager());
+			entityManagerList.add((EntityManager) proxyEntityManager);
+			return proxyEntityManager;
 		}
 		return entityManagerList.get(current = (++current % maxSize));
 	}
 
-	private String getDefaultPersistenceUnitName() throws Exception {
+	private static String getDefaultPersistenceUnitName() throws Exception {
 		String classPath = Thread.currentThread().getContextClassLoader().getResource("").getFile();
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -70,17 +71,6 @@ public class DB {
 			throw new Exception("default persistence unit name not find!");
 		} catch (Exception e) {
 			throw e;
-		}
-	}
-
-	public static void main(String[] args) {
-		int current = 0;
-		int maxSize = 50;
-		for (int i = 0; i < 1000; i++) {
-			System.out.println(current = (++current % maxSize));
-			// System.out.println(current++);
-			// System.out.println(current = (current++ % maxSize));
-			// System.err.println(current);
 		}
 	}
 
