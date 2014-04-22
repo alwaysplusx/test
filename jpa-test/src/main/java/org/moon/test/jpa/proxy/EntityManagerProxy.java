@@ -14,13 +14,13 @@ public class EntityManagerProxy extends ObjectProxy {
 	private String include = "persist,merge,remove,flush,refresh";
 	private boolean transactionOpened = false;
 	private String methodName = "";
-	
+
 	@Override
 	public Object bind(Object target) {
 		if (target instanceof EntityManager) {
 			this.target = (EntityManager) target;
 			Object proxyInstance = Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class[] { EntityManager.class }, this);
-			log.debug("bind entitymanager " + target);
+			log.debug("[" + this + "] bind entitymanager [" + target + "]");
 			return proxyInstance;
 		}
 		return null;
@@ -31,19 +31,30 @@ public class EntityManagerProxy extends ObjectProxy {
 		methodName = method.getName();
 		if (!transactionOpened && include.contains(methodName)) {
 			target.getTransaction().begin();
+			transactionOpened = true;
 			log.debug("start transaction for method " + methodName + "!");
 		}
 	}
 
 	@Override
-	public Object execute(Method method, Object[] args) throws Throwable{
-		return method.invoke(target, args);
+	public Object execute(Method method, Object[] args) throws Throwable {
+		try {
+			return method.invoke(target, args);
+		} catch (Exception e) {
+			if (transactionOpened) {
+				target.getTransaction().rollback();
+				transactionOpened = false;
+				log.error(e);
+			}
+			throw e;
+		}
 	}
 
 	@Override
 	public void postExecute(Method method) {
 		if (transactionOpened) {
 			target.getTransaction().commit();
+			transactionOpened = false;
 			log.debug("commit transaction for method " + methodName + "!");
 		}
 	}

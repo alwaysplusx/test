@@ -36,7 +36,7 @@ public class DB {
 
 	public static EntityManager createEntityManager(String persistenceUnitName) throws Exception {
 		if (entityManagerFactory == null) {
-			synchronized (entityManagerFactory) {
+			synchronized (DB.class) {
 				if ((DB.persistenceUnitName = persistenceUnitName) == null) {
 					DB.persistenceUnitName = getDefaultPersistenceUnitName();
 				}
