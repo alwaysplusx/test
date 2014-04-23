@@ -35,33 +35,70 @@ public abstract class AbstractBond implements Bond {
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + " [key=" + key + ", logic=" + logic + ", type="
-				+ type + ", alias=" + alias + "]";
+		return this.getClass().getSimpleName() + " [key=" + key + ", logic=" + logic + ", type=" + type + ", alias=" + alias + "]";
 	}
 
-
 	/**
-	 * 对应于Type,sql中的and or
+	 * 对应于Bond的Type：and
 	 */
 	public static final String AND = "and";
+	/**
+	 * 对应于Bond的Type：or
+	 */
 	public static final String OR = "or";
 
 	/**
-	 * sql中判断条件
+	 * sql中逻辑条件：等于
 	 */
 	public static final String EQUAL = "=";
+	/**
+	 * sql中逻辑条件：不等于
+	 */
 	public static final String NOT_EQAUL = "<>";
+	/**
+	 * sql中逻辑条件：like
+	 */
 	public static final String LIKE = "like";
+	/**
+	 * sql中逻辑条件：not like
+	 */
 	public static final String NOT_LIKE = "not like";
+	/**
+	 * sql中逻辑条件：大于
+	 */
 	public static final String GREATER_THAN = ">";
+	/**
+	 * sql中逻辑条件：小于
+	 */
 	public static final String LESS_THAN = "<";
+	/**
+	 * sql中逻辑条件：in
+	 */
 	public static final String IN = "in";
+	/**
+	 * sql中逻辑条件：not in
+	 */
 	public static final String NOT_IN = "not in";
+	/**
+	 * sql中逻辑条件：空
+	 */
 	public static final String NULL = "null";
+	/**
+	 * sql中逻辑条件：不为空
+	 */
 	public static final String NOT_NULL = "not null";
+	/**
+	 * sql中逻辑条件：大于等于
+	 */
 	public static final String GREATER_EQUAL = ">=";
+	/**
+	 * sql中逻辑条件：小于等于
+	 */
 	public static final String LESS_EQUAL = "<=";
-	
+	/**
+	 * 代表一个BondManager中的所有key，用于map中
+	 * {@link AbstractBond#BOND_KEYS}
+	 */
 	public static final String ALL_KEYS = "org.moon.test.jpa.query.BondManager.ALL_KEYS";
 	/**
 	 * 该值用于指定所有keys的List

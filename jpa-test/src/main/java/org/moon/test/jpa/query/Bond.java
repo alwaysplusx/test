@@ -14,7 +14,8 @@ public interface Bond {
 	public String getType();
 
 	/**
-	 * field [logic] value <code>
+	 * 对应sql中的逻辑如：等于、大于、小于等
+	 * <p>field [logic] value <code>
 	 * <p>e.g.:
 	 * <p>&nbsp;&nbsp;username = 'test'
 	 * <p>&nbsp;&nbsp;age < 10	
