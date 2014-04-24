@@ -57,6 +57,8 @@ public class UserRepositoryTest {
 		assertEquals("username is test!",user.getUsername(), "test");
 		assertEquals("password is abcc123", user.getPassword(), "abc123");
 		assertEquals("status is OK!", user.getStatus(), "OK");
+		userRepository.delete(1l);
+		assertEquals("delete user, user is null", null, userRepository.getById(1l));
 	}
 
 	@After

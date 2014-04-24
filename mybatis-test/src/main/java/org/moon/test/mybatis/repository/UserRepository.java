@@ -6,4 +6,5 @@ public interface UserRepository {
 	public void save(User user);
 	public User getById(Long userId);
 	public int countAll();
+	public void delete(Long userId);
 }

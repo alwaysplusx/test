@@ -1,7 +1,6 @@
 package org.moon.test.mybatis.persistence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,9 +55,12 @@ public class UserTest {
 		assertEquals("username is test!",user.getUsername(), "test");
 		assertEquals("password is abcc123", user.getPassword(), "abc123");
 		assertEquals("status is OK!", user.getStatus(), "OK");
+		sqlSession.update(namespace + ".delete", 1l); 
+		assertEquals("delete user, user is null!", null, sqlSession.selectOne(namespace + ".getById", 1l));
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		sqlSession.close();
 	}
 }
