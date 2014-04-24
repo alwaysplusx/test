@@ -1,57 +1,50 @@
 package org.moon.test.jpa.query;
 
-import static org.moon.test.jpa.query.AbstractBond.*;
+import static org.moon.test.jpa.query.Bond.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Entity;
 
-import org.h2.engine.User;
-
+@SuppressWarnings("unused")
 public class BondManager {
 
 	/**
-	 * 用于存储条件的键值对
+	 * 存储用户所有的SQL条件
 	 */
-	private Map<Bond, Object> bondsMap = new HashMap<Bond, Object>();
+	private List<Bond> bondList = new ArrayList<Bond>();
 	/**
-	 * 为了让生成的sql有顺序,加入该成员变量,生成sql时候遍历keys即是按用户加入条件的先后顺序
+	 * 存储用户所有KEY，并记录KEY所用次数
 	 */
-	private List<Bond> keys = new ArrayList<Bond>();
-	/**
-	 * 所有key都存储在该keyContainer中,通过查找该容器中是否已经存在key判断生产key的别名(alias)
-	 * <p>保不齐用户要查询
-	 * <p> username = ?1 or username = ?2
-	 * <p>所以运用别名来进行该条件的操作
-	 * <p>username = alias1 or username = alias2
-	 */
-	private Map<String, Integer> keyContainer = new HashMap<String, Integer>();
-
-	/**
-	 * 待查询的类
-	 */
-	@SuppressWarnings("unused")
-	private Class<?> clazz;
+	private Map<String, Integer> keys = new HashMap<String, Integer>();
 	/**
 	 * 基础查询语句：select o from Entity o
 	 */
 	private String baseSQL;
+	/**
+	 * 表的别名
+	 */
+	private String tableAlias;
+	
+	public BondManager(String tableName){
+		this.tableAlias = "o";
+	}
 	
 	public BondManager(Class<?> clazz) {
-		this.clazz = clazz;
+		this.tableAlias = "o"; //generateTableAlias(clazz.getSimpleName());
 		Entity entityAnnotation = clazz.getAnnotation(Entity.class);
 		if (entityAnnotation == null) {
-			baseSQL = "select o from " + clazz.getSimpleName() + " o ";
+			baseSQL = "select " + tableAlias + " from " + clazz.getSimpleName() + " " + tableAlias;
 		} else {
 			String entityName = entityAnnotation.name();
 			if ("".equals(entityName)) {
-				baseSQL = "select o from " + clazz.getSimpleName() + " o ";
+				baseSQL = "select " + tableAlias + " from " + clazz.getSimpleName() + " " + tableAlias;
 			} else {
-				baseSQL = "select o from " + entityName + " o ";
+				baseSQL = "select " + tableAlias + " from " + entityName + " " + tableAlias;
 			}
 		}
 	}
@@ -63,7 +56,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager andNotEqual(String key, Object value) {
-		return paramHandler(new NotEqual(key, AND), value);
+		return bondHandler(new NotEqual(key, AND, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -73,7 +66,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager orNotEqual(String key, Object value) {
-		return paramHandler(new NotEqual(key, OR), value);
+		return bondHandler(new NotEqual(key, OR, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -83,7 +76,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager andLike(String key, Object value) {
-		return paramHandler(new Like(key, AND), value);
+		return bondHandler(new Like(key, AND, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -93,8 +86,28 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager orLike(String key, Object value) {
-		return paramHandler(new Like(key, OR), value);
+		return bondHandler(new Like(key, OR, value));
 	}
+	/**
+	 * <p>对应的SQL为:
+	 * <p><code>and key <> value</code>
+	 * @param key 键的名称
+	 * @param value 键对应的值
+	 * @return this
+	 */
+	public BondManager andNotLike(String key, Object value) {
+		return bondHandler(new NotLike(key, AND, value));
+	}
+	/**
+	 * <p>对应的SQL为:
+	 * <p><code>and key <> value</code>
+	 * @param key 键的名称
+	 * @param value 键对应的值
+	 * @return this
+	 */
+	public BondManager orNotLike(String key, Object value) {
+		return bondHandler(new NotLike(key, OR, value));
+	}	
 	/**
 	 * <p>对应的SQL为:
 	 * <p><code>and key = value</code>
@@ -103,7 +116,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager andEqual(String key, Object value) {
-		return paramHandler(new Equal(key, AND), value);
+		return bondHandler(new Equal(key, AND, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -113,7 +126,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager orEqual(String key, Object value) {
-		return paramHandler(new Equal(key, OR), value);
+		return bondHandler(new Equal(key, OR, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -123,7 +136,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager andGreaterThan(String key, Object value) {
-		return paramHandler(new GreaterThan(key, AND), value);
+		return bondHandler(new GreaterThan(key, AND, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -133,7 +146,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager orGreaterThan(String key, Object value) {
-		return paramHandler(new GreaterThan(key, OR), value);
+		return bondHandler(new GreaterThan(key, OR, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -143,7 +156,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager andLessThan(String key, Object value) {
-		return paramHandler(new LessThan(key, AND), value);
+		return bondHandler(new LessThan(key, AND, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -153,7 +166,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager orLessThan(String key, Object value) {
-		return paramHandler(new LessThan(key, OR), value);
+		return bondHandler(new LessThan(key, OR, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -163,7 +176,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager andIn(String key, Object value) {
-		return paramHandler(new In(key, AND), value);
+		return bondHandler(new In(key, AND, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -173,7 +186,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager orIn(String key, Object value) {
-		return paramHandler(new In(key, OR), value);
+		return bondHandler(new In(key, OR, value));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -183,7 +196,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager andNull(String key){
-		return paramHandler(new Null(key, AND), null);
+		return bondHandler(new Null(key, AND));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -193,7 +206,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager orNull(String key){
-		return paramHandler(new Null(key, OR), null);
+		return bondHandler(new Null(key, OR));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -203,7 +216,7 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager andNotNull(String key){
-		return paramHandler(new NotNull(key, AND), null);
+		return bondHandler(new NotNull(key, AND));
 	}
 	/**
 	 * <p>对应的SQL为:
@@ -213,27 +226,25 @@ public class BondManager {
 	 * @return this
 	 */
 	public BondManager orNotNull(String key){
-		return paramHandler(new NotNull(key, OR), null);
+		return bondHandler(new NotNull(key, OR));
 	}
 
 	public Map<Bond, Object> toMap(){
-		if(!bondsMap.containsKey(BOND_KEYS)){
+		/*if(!bondsMap.containsKey(BOND_KEYS)){
 			bondsMap.put(BOND_KEYS, keys);
 		}
-		return bondsMap;
+		return bondsMap;*/
+		return null;
 	}
 	
-	/**
-	 * <p>将键值关系做一个对应
-	 * <p>并在{@link BondManager#keys}中加入该key
-	 * @param bond 键
-	 * @param value 值
-	 * @return
-	 */
-	private BondManager paramHandler(Bond bond, Object value){
+	/*private BondManager paramHandler(Bond bond, Object value){
 		generateAlias(bond);
 		bondsMap.put(bond, value);
 		keys.add(bond);
+		return this;
+	}*/
+	
+	private BondManager bondHandler(Bond bond){
 		return this;
 	}
 	
@@ -241,8 +252,8 @@ public class BondManager {
 	 * 为Bond的key生成一个别名
 	 * @param bond
 	 */
-	private void generateAlias(Bond bond) {
-		String key = bond.getKey();
+	protected void generateAlias(Bond bond) {
+		/*String key = bond.getKey();
 		int keyTimes = 0;
 		if (keyContainer.containsKey(key)) {
 			keyTimes = keyContainer.get(key) + 1;
@@ -252,111 +263,109 @@ public class BondManager {
 		if (keyTimes > 0) {
 			alias += keyTimes;
 		}
-		((AbstractBond) bond).setAlias(alias);
+		((AbstractBond) bond).setAlias(alias);*/
+	}
+	
+	protected String generateTableAlias(String tableName) {
+		return String.valueOf(tableName.charAt(0)).toLowerCase() + tableName.substring(1);
 	}
 	
 	/**
 	 * 将用户的请求转化为SQL
 	 * @return
 	 */
-	private String toSQL(){
-		return null;
+	public String toSQL(){
+		String SQL = this.toPreparedSQL();
+		/*if(!SQL.equals(baseSQL)){
+			Iterator<Bond> it = bondsMap.keySet().iterator();
+			while (it.hasNext()) {
+				Bond bond = it.next();
+				if (SQL.contains(bond.getAlias())) {
+					System.out.println(SQL.replace(bond.getAlias(), bulidReplaceSQL(bond.getLogic(), bondsMap.get(bond))));
+				}
+			}
+			return SQL;
+		}*/
+		return SQL;
 	}
 	
+	private String bulidReplaceSQL(String logic, Object value) {
+		if (LIKE.equals(logic) || NOT_LIKE.equals(logic)) {
+			return "%" + value + "%";
+		}
+		if(IN.equals(logic) || NOT_IN.equals(logic)){
+			return inReplaceSQL(value);
+		}
+		if(value instanceof Calendar){
+			
+		}
+		return value + "";
+	}
+	
+	private String inReplaceSQL(Object value) {
+		if (value.getClass().isArray()) {
+
+		}
+		return null;
+	}
 	/**
 	 * 将用户的请求转化为准备语句
 	 * @return
 	 */
-	private String toPreparedSQL(){
-		for (Bond bond : keys) {
-			buildSQL(bond);
-		}
-		return null;
-	}
-	
-	private String buildSQL(Bond bond) {
-		String SQL = "";
-		String type = bond.getType() + " ";
-		String key = bond.getKey() + " ";
-		String alias = bond.getAlias() + " ";
-		String logic = bond.getLogic() + ":";
-		System.out.println(type + key + logic + alias);
-		if(NULL == logic || NOT_NULL == logic){
-			SQL = "";
-		}
-		return SQL;
-	}
-	
-	private String buildQL() {
-		Map<Bond, Object> params = toMap();
-		String qlString = "";
-		Iterator<Bond> bonds = params.keySet().iterator();
-		if (bonds.hasNext()) {
-			String condition = ""; 
-			if (params.containsKey(BOND_KEYS)) {
-				List<Bond> keys = (List<Bond>) params.get(BOND_KEYS);
-				for (Bond bond : keys) {
-					condition += buildQL(bond);
-				}
-			} else {
-				while(bonds.hasNext()){
-					condition += buildQL(bonds.next());
-				}
+	public String toPreparedSQL() {
+		/*if (!keys.isEmpty()) {
+			StringBuffer preparedSQL = new StringBuffer();
+			for (Bond bond : keys) {
+				preparedSQL.append(buildPreparedSQL(bond));
 			}
-			if(condition.startsWith("and")) {
-				qlString += "where " + condition.substring(4);
-			}else if(condition.startsWith("or")) {
-				qlString += "where " + condition.substring(3);
+			return baseSQL + " where " + subPrefix(preparedSQL.toString(), " and ,and ,and, or ,or ,or");
+		}*/
+		return baseSQL;
+	}
+	
+	private String subPrefix(String pattern, String prefixs) {
+		String[] split = prefixs.split(",");
+		for (String prefix : split) {
+			if(pattern.startsWith(prefix)){
+				return pattern.substring(prefix.length());
 			}
 		}
-		return qlString;
+		return pattern;
 	}
 	
-	private String buildQL(Bond bond) {
-		String condition = "and ";
-		if (OR.equals(bond.getType()))
-			condition = "or ";
-		String logic = bond.getLogic();
-		String key = bond.getKey();
-		String alias = bond.getAlias();
-		if (EQUAL.equals(logic)) {
-			condition += "o." + key + " =:" + alias + " ";
-		} else if (NOT_EQAUL.equals(logic)) {
-			condition += "o." + key + " <>:" + alias + " ";
-		} else if (IN.equals(logic)) {
-			condition += "o." + key + " in:" + alias + " ";
-		} else if (LIKE.equals(logic)) {
-			condition += "o." + key + " like:" + alias + " ";
-		} else if (GREATER_THAN.equals(logic)) {
-			condition += "o." + key + " >:" + alias + " ";
-		} else if (LESS_THAN.equals(logic)) {
-			condition += "o." + key + " <:" + alias + " ";
-		} else if (NOT_IN.equals(logic)) {
-			condition += "o." + key + " not in:" + alias + " ";
-		} else if (NULL.equals(logic)) {
-			condition += "o." + key + " is null ";
-		} else if (NOT_NULL.equals(logic)) {
-			condition += "o." + key + " is not null ";
-		} else if (GREATER_EQUAL.equals(logic)) {
-			condition += "o." + key + " >=:" + alias + " ";
-		} else if (LESS_EQUAL.equals(logic)) {
-			condition += "o." + key + " <=:" + alias + " ";
+	/**
+	 * 创建单条件准备语句
+	 * @param bond
+	 * @return
+	 */
+	protected String buildPreparedSQL(Bond bond) {
+		if(NULL == bond.getLogic() || NOT_NULL == bond.getLogic()){
+			return " " + bond.getType() + " " + tableAlias + "." + bond.getKey() + " is " + bond.getLogic();
 		}
-		return condition;
+		return " " + bond.getType() + " " + tableAlias + "." + bond.getKey() + " " + bond.getLogic() + ":" + bond.getAlias();
 	}
 
 	public static void main(String[] args) {
-		BondManager bondManager = new BondManager(User.class);
-		System.out.println(bondManager.baseSQL);
-		bondManager.andIn("name", "wuxin");
-		bondManager.toPreparedSQL();
-		/*ArrayList<Long> ids = new ArrayList<Long>();
-		ids.add(1l);
-		ids.add(2l);
-		bondManager.andIn("id", ids);
-		//bondManager.buildQL();
-		System.out.println(bondManager.buildQL());*/
-		//bondManager.buildSQL();
+		/*BondManager bondManager = new BondManager(User.class);
+		bondManager.andEqual("a", "ABC");
+		bondManager.andGreaterThan("b", "ABC");
+		bondManager.andIn("c", "ABC");
+		bondManager.andLessThan("d", "ABC");
+		bondManager.andLike("e", "ABC");
+		bondManager.andNotEqual("f", "ABC");
+		bondManager.andNotNull("g");
+		bondManager.andNull("h");
+		bondManager.andNotLike("q", "ABC");
+		bondManager.orEqual("i", "ABC");
+		bondManager.orGreaterThan("j", "ABC");
+		bondManager.orIn("k", "ABC");
+		bondManager.orLessThan("l", "ABC");
+		bondManager.orLike("m", "ABC");
+		bondManager.orNotEqual("n", "ABC");
+		bondManager.orNotNull("o");
+		bondManager.orNull("p");
+		bondManager.orNotLike("r", "ABC");
+		System.out.println(bondManager.toSQL());*/
 	}
 	
 }
