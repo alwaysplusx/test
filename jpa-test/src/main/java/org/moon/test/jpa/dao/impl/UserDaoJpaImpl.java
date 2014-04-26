@@ -11,11 +11,7 @@ public class UserDaoJpaImpl implements UserDao {
 	private EntityManager em;
 
 	public UserDaoJpaImpl() {
-		try {
-			this.em = DB.createEntityManager("moon");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		this.em = DB.createEntityManager("moon");
 	}
 
 	@Override

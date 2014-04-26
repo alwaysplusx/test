@@ -62,8 +62,4 @@ public abstract class AbstractBond implements Bond {
 		return " " + this.link + " " + tableAlias + "." + this.key +" "+ this.logic + ":" + this.alias;
 	}
 	
-	@Override
-	public String toString() {
-		return "AbstractBond [key=" + key + ", logic=" + logic + ", link=" + link + ", alias=" + alias + ", value=" + value + "]";
-	}
 }

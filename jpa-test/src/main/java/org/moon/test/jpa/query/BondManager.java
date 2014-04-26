@@ -3,7 +3,6 @@ package org.moon.test.jpa.query;
 import static org.moon.test.jpa.query.Bond.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,14 +25,6 @@ public class BondManager {
 	 * 存储用户所有KEY，并记录KEY所用次数
 	 */
 	private Map<String, Integer> keys = new HashMap<String, Integer>();
-	/**
-	 * 基础JPQL,HQL查询语句：select o from entityName o
-	 */
-	private String baseXQL;
-	/**
-	 * 基础SQL查询语句:select o.* from tableName o
-	 */
-	private String baseSQL;
 	/**
 	 * 表的别名
 	 */
@@ -172,7 +163,7 @@ public class BondManager {
 	 * <p>对应的SQL为:
 	 * <p><code>and key in (value)</code>
 	 * @param key 键的名称
-	 * @param value 键对应的值,in类型的值应为一个List&lt;FieldType&gt;,或者是一个基础数组类型,再或者是单个值
+	 * @param value 键对应的值,in类型的值应是一个基础数组类型,再或者是单个值
 	 * @return this
 	 */
 	public BondManager andIn(String key, Object value) {
@@ -182,7 +173,7 @@ public class BondManager {
 	 * <p>对应的SQL为:
 	 * <p><code>or key in (value)</code>
 	 * @param key 键的名称
-	 * @param value 键对应的值,in类型的值应为一个List&lt;FieldType&gt;,或者是一个基础数组类型,再或者是单个值
+	 * @param value 键对应的值,in类型的值应是一个基础数组类型,再或者是单个值
 	 * @return this
 	 */
 	public BondManager orIn(String key, Object value) {
@@ -257,8 +248,13 @@ public class BondManager {
 		((AbstractBond) bond).alias = alias;
 	}
 	
-	private String formatKey(String key){
-		return key.replace(".", "") + "_";
+	private String formatKey(String key) {
+		String[] split = key.split("\\.");
+		String alias = split[0];
+		for (int i = 1; i < split.length; i++) {
+			alias += String.valueOf(split[i].charAt(0)).toUpperCase() + split[i].substring(1);
+		}
+		return alias + "_";
 	}
 	
 	/**
@@ -266,25 +262,23 @@ public class BondManager {
 	 * @return
 	 */
 	public String toSQL() {
+		StringBuffer sb = new StringBuffer();
 		if (!bondList.isEmpty()) {
-			StringBuffer sb = new StringBuffer();
 			for (Bond bond : bondList) {
 				sb.append(bond.toSQL(this.tableAlias));
 			}
-			return buildQL(sb.toString(), false);
 		}
-		return baseSQL;
+		return buildQL(sb.toString(), false);
 	}
 	
 	public String toXQL() {
+		StringBuffer sb = new StringBuffer();
 		if (!bondList.isEmpty()) {
-			StringBuffer sb = new StringBuffer();
 			for (Bond bond : bondList) {
 				sb.append(bond.toXQL(this.tableAlias));
 			}
-			return buildQL(sb.toString(), true);
 		}
-		return baseXQL;
+		return buildQL(sb.toString(), true);
 	}
 	
 	protected String buildQL(String sql, boolean XQL) {
@@ -294,7 +288,7 @@ public class BondManager {
 		} else {
 			baseQL = "select " + this.tableAlias + ".* from " + this.tableName + " " + tableAlias;
 		}
-		return baseQL + " where " + subPrefix(sql, " and , or ");
+		return sql == null || sql.length() == 0 ? baseQL : baseQL + " where " + subPrefix(sql, " and , or "); 
 	}
 	
 	private String subPrefix(String pattern, String prefixs) {
@@ -319,11 +313,13 @@ public class BondManager {
 	
 	public static void main(String[] args) {
 		BondManager bm = new BondManager(User.class);
-		bm.andLike("username", "wuxin");
+		System.out.println(bm.formatKey("username"));
+		/*bm.andLike("username", "wuxin");
 		bm.orIn("userId", new Integer[]{1,2,3});
 		bm.andEqual("birthday", new Date());
 		System.out.println(bm.toSQL());
-		//System.out.println(bm.toXQL());
+		System.out.println(bm.toXQL());*/
+		
 	}
 	
 }
