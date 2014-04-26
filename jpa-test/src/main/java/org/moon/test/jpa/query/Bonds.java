@@ -4,17 +4,25 @@ package org.moon.test.jpa.query;
  * 对应sql<code> key like:keyAlias</code>
  */
 class Like extends AbstractBond {
+
 	Like(String key, String type, Object value) {
 		super(key, LIKE, type, value);
+	}
+
+	@Override
+	public String toSQL(String tableAlias) {
+		return " " + this.link + " " + this.key + " " + this.logic + " '" + this.sqlValue + "'";
 	}
 }
 
 /**
  * 对应sql<code> key not like:keyAlias</code>
  */
-class NotLike extends AbstractBond {
+class NotLike extends Like {
+
 	NotLike(String key, String type, Object value) {
-		super(key, NOT_LIKE, type, value);
+		super(key, type, value);
+		this.logic = NOT_LIKE;
 	}
 }
 
@@ -58,17 +66,24 @@ class LessEqual extends AbstractBond {
  * 对应sql<code> key in:keyAlias</code>
  */
 class In extends AbstractBond {
+	
 	In(String key, String type, Object value) {
 		super(key, IN, type, value);
+	}
+
+	@Override
+	public String toSQL(String tableAlias) {
+		return " " + this.link + " " + tableAlias + "." + this.key + " " + this.logic + " (" + this.sqlValue + ")";
 	}
 }
 
 /**
  * 对应sql<code> key not in:keyAlias</code>
  */
-class NotIn extends AbstractBond {
+class NotIn extends In {
 	NotIn(String key, String type, Object value) {
-		super(key, NOT_IN, type, value);
+		super(key, type, value);
+		this.logic = NOT_IN;
 	}
 }
 
@@ -84,9 +99,10 @@ class Equal extends AbstractBond {
 /**
  * 对应sql<code> key <>:keyAlias</code>
  */
-class NotEqual extends AbstractBond {
+class NotEqual extends Equal {
 	NotEqual(String key, String type, Object value) {
-		super(key, NOT_EQAUL, type, value);
+		super(key, type, value);
+		this.logic = NOT_EQAUL;
 	}
 }
 
@@ -95,15 +111,21 @@ class NotEqual extends AbstractBond {
  */
 class Null extends AbstractBond {
 	Null(String key, String type) {
-		super(key, NULL, type, "");
+		super(key, NULL, type, null);
+	}
+
+	@Override
+	public String toSQL(String tableAlias) {
+		return " " + this.link + " " + tableAlias + "." + this.key + " is " + this.logic;
 	}
 }
 
 /**
  * 对应sql<code> key is not null</code>
  */
-class NotNull extends AbstractBond {
+class NotNull extends Null {
 	NotNull(String key, String type) {
-		super(key, NOT_NULL, type, "");
+		super(key, type);
+		this.logic = NOT_NULL;
 	}
 }

@@ -1,17 +1,32 @@
 package org.moon.test.jpa.query;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public abstract class AbstractBond implements Bond {
 
-	private String key;
-	private String logic;
-	private String type;
-	private String alias;
-	private Object value;
+	protected String key;
+	protected String logic;
+	protected String link;
+	protected String alias;
+	protected Object value;
+	protected String sqlValue;
+	protected boolean isDate;
 
-	AbstractBond(String key, String logic, String type, Object value) {
+	AbstractBond(String key, String logic, String link, Object value) {
 		this.key = key;
 		this.logic = logic;
-		this.type = type;
+		this.link = link;
+		this.value = value;
+		this.sqlValue = value.toString();
+		this.isDate = isDate(value);
+	}
+
+	private boolean isDate(Object value) {
+		if (value instanceof Calendar || value instanceof Date) {
+			return true;
+		}
+		return false;
 	}
 
 	public String getKey() {
@@ -22,8 +37,8 @@ public abstract class AbstractBond implements Bond {
 		return logic;
 	}
 
-	public String getType() {
-		return type;
+	public String getLink() {
+		return link;
 	}
 
 	public String getAlias() {
@@ -33,14 +48,22 @@ public abstract class AbstractBond implements Bond {
 	public Object getValue() {
 		return value;
 	}
-
-	protected void setAlias(String alias) {
-		this.alias = alias;
+	
+	@Override
+	public String toSQL(String tableAlias) {
+		if(isDate){
+			return " " + this.link + " " + tableAlias + "." + this.key + " " + this.logic + " " + this.sqlValue;	
+		}
+		return " " + this.link + " " + tableAlias + "." + this.key + " " + this.logic + " '" + this.sqlValue + "'";
 	}
 
 	@Override
-	public String toString() {
-		return type + " " + key + " " + logic + " " + value;
+	public String toXQL(String tableAlias) {
+		return " " + this.link + " " + tableAlias + "." + this.key +" "+ this.logic + ":" + this.alias;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "AbstractBond [key=" + key + ", logic=" + logic + ", link=" + link + ", alias=" + alias + ", value=" + value + "]";
+	}
 }

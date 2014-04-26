@@ -11,7 +11,7 @@ public interface Bond {
 	 * 对应sql中的 and or
 	 * @return
 	 */
-	public String getType();
+	public String getLink();
 
 	/**
 	 * 对应sql中的逻辑如：等于、大于、小于等
@@ -29,21 +29,28 @@ public interface Bond {
 	 * @return
 	 */
 	public String getAlias();
-	
 	/**
 	 * 值
 	 * @return
 	 */
 	public Object getValue();
+	/**
+	 * @return
+	 */
+	public String toSQL(String tableAlias);
+	/**
+	 * @return
+	 */
+	public String toXQL(String tableAlias);
 	
-	//###### default sql type ######
+	//###### default SQL type ######
 	
 	/**
-	 * 对应于Bond的Type：and
+	 * 对应于Bond的Link：and
 	 */
 	public static final String AND = "and";
 	/**
-	 * 对应于Bond的Type：or
+	 * 对应于Bond的Link：or
 	 */
 	public static final String OR = "or";
 
@@ -95,49 +102,4 @@ public interface Bond {
 	 * sql中逻辑条件：小于等于
 	 */
 	public static final String LESS_EQUAL = "<=";
-	
-	/**
-	 * 代表一个BondManager中的所有key，用于map中
-	 * {@link Bond#BOND_KEYS}
-	 */
-	static final String ALL_KEYS = "org.moon.test.jpa.query.Bond.ALL_KEYS";
-	/**
-	 * 该值用于指定所有keys的List
-	 */
-	public static final Bond BOND_KEYS = new Bond(){
-		
-		@Override
-		public String getKey() {
-			return ALL_KEYS;
-		}
-
-		@Override
-		public String getType() {
-			return null;
-		}
-
-		@Override
-		public String getLogic() {
-			return null;
-		}
-
-		@Override
-		public String getAlias() {
-			return ALL_KEYS;
-		}
-		
-		public int hashCode(){
-			return ALL_KEYS.hashCode();
-		}
-		
-		public boolean equals(Object obj){
-			return obj == this;
-		}
-
-		@Override
-		public Object getValue() {
-			return null;
-		}
-	};	
-	
 }

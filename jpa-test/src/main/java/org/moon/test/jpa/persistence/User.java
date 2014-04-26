@@ -1,12 +1,15 @@
 package org.moon.test.jpa.persistence;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "t_user")
@@ -18,6 +21,9 @@ public class User implements Serializable {
 	private Long userId;
 	private String username;
 	private String password;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date birthday;
+	private String sex;
 
 	public User() {
 	}
@@ -51,9 +57,26 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + "]";
+		return "User [userId=" + userId + ", username=" + username + "]";
 	}
+
 
 }

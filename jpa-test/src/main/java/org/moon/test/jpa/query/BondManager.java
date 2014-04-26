@@ -3,51 +3,51 @@ package org.moon.test.jpa.query;
 import static org.moon.test.jpa.query.Bond.*;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Entity;
+import org.moon.test.jpa.persistence.User;
+import org.moon.test.jpa.util.JPAAnnotationUtil;
 
-@SuppressWarnings("unused")
 public class BondManager {
 
+	private List<BondListener> bondListeners = new ArrayList<BondListener>();
 	/**
 	 * 存储用户所有的SQL条件
 	 */
 	private List<Bond> bondList = new ArrayList<Bond>();
 	/**
+	 * 保存bond的键的别名与值
+	 */
+	private Map<String, Object> KVMap = new HashMap<String, Object>();
+	/**
 	 * 存储用户所有KEY，并记录KEY所用次数
 	 */
 	private Map<String, Integer> keys = new HashMap<String, Integer>();
 	/**
-	 * 基础查询语句：select o from Entity o
+	 * 基础JPQL,HQL查询语句：select o from entityName o
+	 */
+	private String baseXQL;
+	/**
+	 * 基础SQL查询语句:select o.* from tableName o
 	 */
 	private String baseSQL;
 	/**
 	 * 表的别名
 	 */
-	private String tableAlias;
-	
-	public BondManager(String tableName){
-		this.tableAlias = "o";
-	}
+	private String tableAlias = "o";
+	private String tableName;
+	private String entityName;
 	
 	public BondManager(Class<?> clazz) {
-		this.tableAlias = "o"; //generateTableAlias(clazz.getSimpleName());
-		Entity entityAnnotation = clazz.getAnnotation(Entity.class);
-		if (entityAnnotation == null) {
-			baseSQL = "select " + tableAlias + " from " + clazz.getSimpleName() + " " + tableAlias;
-		} else {
-			String entityName = entityAnnotation.name();
-			if ("".equals(entityName)) {
-				baseSQL = "select " + tableAlias + " from " + clazz.getSimpleName() + " " + tableAlias;
-			} else {
-				baseSQL = "select " + tableAlias + " from " + entityName + " " + tableAlias;
-			}
-		}
+		this.entityName = JPAAnnotationUtil.getEntityName(clazz);
+		this.tableName = JPAAnnotationUtil.getTableName(clazz);
+		this.addListener(new LogicBondListener());
+		this.addListener(new ValueBondListener());
 	}
+		
 	/**
 	 * <p>对应的SQL为:
 	 * <p><code>and key <> value</code>
@@ -229,98 +229,72 @@ public class BondManager {
 		return bondHandler(new NotNull(key, OR));
 	}
 
-	public Map<Bond, Object> toMap(){
-		/*if(!bondsMap.containsKey(BOND_KEYS)){
-			bondsMap.put(BOND_KEYS, keys);
-		}
-		return bondsMap;*/
-		return null;
+	public Map<String, Object> toMap() {
+		return KVMap;
 	}
 	
-	/*private BondManager paramHandler(Bond bond, Object value){
-		generateAlias(bond);
-		bondsMap.put(bond, value);
-		keys.add(bond);
-		return this;
-	}*/
-	
 	private BondManager bondHandler(Bond bond){
+		generateKeyAlias(bond);
+		bondList.add(bond);
+		notifyListenerBondAdded(bond);
+		KVMap.put(bond.getAlias(), bond.getValue());
 		return this;
 	}
 	
 	/**
-	 * 为Bond的key生成一个别名
+	 * <p>为Bond的key生成一个别名
+	 * <p>如果一个语句中会使用同一个key做多次判断，确保每次的别名都不相同
 	 * @param bond
 	 */
-	protected void generateAlias(Bond bond) {
-		/*String key = bond.getKey();
+	protected void generateKeyAlias(Bond bond) {
+		String key = bond.getKey();
 		int keyTimes = 0;
-		if (keyContainer.containsKey(key)) {
-			keyTimes = keyContainer.get(key) + 1;
+		if (keys.containsKey(key)) {
+			keyTimes = keys.get(key) + 1;
 		}
-		keyContainer.put(key, keyTimes);
-		String alias = key.replace(".", "") + "_";
-		if (keyTimes > 0) {
-			alias += keyTimes;
-		}
-		((AbstractBond) bond).setAlias(alias);*/
+		keys.put(key, keyTimes);
+		String alias = formatKey(bond.getKey()) + keyTimes;
+		((AbstractBond) bond).alias = alias;
 	}
 	
-	protected String generateTableAlias(String tableName) {
-		return String.valueOf(tableName.charAt(0)).toLowerCase() + tableName.substring(1);
+	private String formatKey(String key){
+		return key.replace(".", "") + "_";
 	}
 	
 	/**
 	 * 将用户的请求转化为SQL
 	 * @return
 	 */
-	public String toSQL(){
-		String SQL = this.toPreparedSQL();
-		/*if(!SQL.equals(baseSQL)){
-			Iterator<Bond> it = bondsMap.keySet().iterator();
-			while (it.hasNext()) {
-				Bond bond = it.next();
-				if (SQL.contains(bond.getAlias())) {
-					System.out.println(SQL.replace(bond.getAlias(), bulidReplaceSQL(bond.getLogic(), bondsMap.get(bond))));
-				}
+	public String toSQL() {
+		if (!bondList.isEmpty()) {
+			StringBuffer sb = new StringBuffer();
+			for (Bond bond : bondList) {
+				sb.append(bond.toSQL(this.tableAlias));
 			}
-			return SQL;
-		}*/
-		return SQL;
-	}
-	
-	private String bulidReplaceSQL(String logic, Object value) {
-		if (LIKE.equals(logic) || NOT_LIKE.equals(logic)) {
-			return "%" + value + "%";
+			return buildQL(sb.toString(), false);
 		}
-		if(IN.equals(logic) || NOT_IN.equals(logic)){
-			return inReplaceSQL(value);
-		}
-		if(value instanceof Calendar){
-			
-		}
-		return value + "";
-	}
-	
-	private String inReplaceSQL(Object value) {
-		if (value.getClass().isArray()) {
-
-		}
-		return null;
-	}
-	/**
-	 * 将用户的请求转化为准备语句
-	 * @return
-	 */
-	public String toPreparedSQL() {
-		/*if (!keys.isEmpty()) {
-			StringBuffer preparedSQL = new StringBuffer();
-			for (Bond bond : keys) {
-				preparedSQL.append(buildPreparedSQL(bond));
-			}
-			return baseSQL + " where " + subPrefix(preparedSQL.toString(), " and ,and ,and, or ,or ,or");
-		}*/
 		return baseSQL;
+	}
+	
+	public String toXQL() {
+		if (!bondList.isEmpty()) {
+			StringBuffer sb = new StringBuffer();
+			for (Bond bond : bondList) {
+				sb.append(bond.toXQL(this.tableAlias));
+			}
+			return buildQL(sb.toString(), true);
+		}
+		return baseXQL;
+	}
+	
+	protected String buildQL(String sql, boolean XQL) {
+		String baseQL;
+		if (XQL) {
+			baseQL = "select " + this.tableAlias + " from " + this.entityName + " " + tableAlias;
+		} else {
+			baseQL = "select " + this.tableAlias + ".* from " + this.tableName + " " + tableAlias;
+		}
+		return baseQL + " where " + subPrefix(sql, " and , or ");
 	}
 	
 	private String subPrefix(String pattern, String prefixs) {
@@ -333,39 +307,23 @@ public class BondManager {
 		return pattern;
 	}
 	
-	/**
-	 * 创建单条件准备语句
-	 * @param bond
-	 * @return
-	 */
-	protected String buildPreparedSQL(Bond bond) {
-		if(NULL == bond.getLogic() || NOT_NULL == bond.getLogic()){
-			return " " + bond.getType() + " " + tableAlias + "." + bond.getKey() + " is " + bond.getLogic();
+	private void notifyListenerBondAdded(Bond bond){
+		for(BondListener listener: bondListeners){
+			listener.bondAdded(bond);
 		}
-		return " " + bond.getType() + " " + tableAlias + "." + bond.getKey() + " " + bond.getLogic() + ":" + bond.getAlias();
 	}
-
+	
+	public boolean addListener(BondListener listener){
+		return bondListeners.add(listener);
+	}
+	
 	public static void main(String[] args) {
-		/*BondManager bondManager = new BondManager(User.class);
-		bondManager.andEqual("a", "ABC");
-		bondManager.andGreaterThan("b", "ABC");
-		bondManager.andIn("c", "ABC");
-		bondManager.andLessThan("d", "ABC");
-		bondManager.andLike("e", "ABC");
-		bondManager.andNotEqual("f", "ABC");
-		bondManager.andNotNull("g");
-		bondManager.andNull("h");
-		bondManager.andNotLike("q", "ABC");
-		bondManager.orEqual("i", "ABC");
-		bondManager.orGreaterThan("j", "ABC");
-		bondManager.orIn("k", "ABC");
-		bondManager.orLessThan("l", "ABC");
-		bondManager.orLike("m", "ABC");
-		bondManager.orNotEqual("n", "ABC");
-		bondManager.orNotNull("o");
-		bondManager.orNull("p");
-		bondManager.orNotLike("r", "ABC");
-		System.out.println(bondManager.toSQL());*/
+		BondManager bm = new BondManager(User.class);
+		bm.andLike("username", "wuxin");
+		bm.orIn("userId", new Integer[]{1,2,3});
+		bm.andEqual("birthday", new Date());
+		System.out.println(bm.toSQL());
+		//System.out.println(bm.toXQL());
 	}
 	
 }

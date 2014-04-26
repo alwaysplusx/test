@@ -12,6 +12,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.log4j.Logger;
 import org.moon.test.jpa.proxy.EntityManagerProxy;
+import org.moon.test.jpa.query.PersistenceUnitNameNotFindException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -34,11 +35,16 @@ public class DB {
 		}
 	}
 
-	public static EntityManager createEntityManager(String persistenceUnitName) throws Exception {
+	public static EntityManager createEntityManager(String persistenceUnitName) {
 		if (entityManagerFactory == null) {
 			synchronized (DB.class) {
 				if ((DB.persistenceUnitName = persistenceUnitName) == null) {
-					DB.persistenceUnitName = getDefaultPersistenceUnitName();
+					try {
+						DB.persistenceUnitName = getDefaultPersistenceUnitName();
+					} catch (PersistenceUnitNameNotFindException e) {
+						log.error("persistence unit name " + persistenceUnitName + " not find");
+						throw new PersistenceUnitNameNotFindException("persistence unit name " + persistenceUnitName + " not find");
+					}
 				}
 				entityManagerFactory = Persistence.createEntityManagerFactory(DB.persistenceUnitName);
 			}
@@ -55,7 +61,7 @@ public class DB {
 		return entityManagerList.get(current = (++current % maxSize));
 	}
 
-	private static String getDefaultPersistenceUnitName() throws Exception {
+	private static String getDefaultPersistenceUnitName() {
 		String classPath = Thread.currentThread().getContextClassLoader().getResource("").getFile();
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -68,9 +74,9 @@ public class DB {
 					return attr.getNodeValue();
 				}
 			}
-			throw new Exception("default persistence unit name not find!");
+			throw new PersistenceUnitNameNotFindException("default persistence unit name not find!");
 		} catch (Exception e) {
-			throw e;
+			throw new RuntimeException(e);
 		}
 	}
 
