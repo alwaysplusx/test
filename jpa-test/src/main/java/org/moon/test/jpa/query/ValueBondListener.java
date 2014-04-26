@@ -19,11 +19,11 @@ public class ValueBondListener implements BondListener{
 			/*
 			 * mysql
 			 */
-			((AbstractBond) bond).sqlValue = "str_to_date('" + dateStr + "','%Y-%m-%d %k:%i:%s')";
+			//((AbstractBond) bond).sqlValue = "str_to_date('" + dateStr + "','%Y-%m-%d %k:%i:%s')";
 			/*
 			 * oracle
 			 */
-			//((AbstractBond) bond).sqlValue = "to_date('" + dateStr + "','yyyy-mm-dd hh24:mi:ss')";
+			((AbstractBond) bond).sqlValue = "to_date('" + dateStr + "','yyyy-mm-dd hh24:mi:ss')";
 		}
 		
 	}

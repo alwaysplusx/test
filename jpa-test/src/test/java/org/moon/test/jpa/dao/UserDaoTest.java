@@ -25,4 +25,5 @@ public class UserDaoTest {
 		User u = (User) query.getSingleResult();
 		System.out.println(u);
 	}
+
 }

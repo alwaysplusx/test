@@ -16,6 +16,7 @@ import org.moon.test.jpa.query.PersistenceUnitNameNotFindException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class DB {
 
@@ -35,6 +36,11 @@ public class DB {
 		}
 	}
 
+	/**
+	 * @param persistenceUnitName
+	 * @return
+	 * @throws PersistenceUnitNameNotFindException
+	 */
 	public static EntityManager createEntityManager(String persistenceUnitName) {
 		if (entityManagerFactory == null) {
 			synchronized (DB.class) {
@@ -42,9 +48,12 @@ public class DB {
 					try {
 						DB.persistenceUnitName = getDefaultPersistenceUnitName();
 					} catch (PersistenceUnitNameNotFindException e) {
-						log.error("persistence unit name " + persistenceUnitName + " not find");
-						throw new PersistenceUnitNameNotFindException("persistence unit name " + persistenceUnitName + " not find");
+						log.error(e);
+						throw e;
 					}
+				} else {
+					if (!containPersistenceUnitName(persistenceUnitName))
+						throw new PersistenceUnitNameNotFindException("persistence unit name " + persistenceUnitName + " not find");
 				}
 				entityManagerFactory = Persistence.createEntityManagerFactory(DB.persistenceUnitName);
 			}
@@ -61,8 +70,31 @@ public class DB {
 		return entityManagerList.get(current = (++current % maxSize));
 	}
 
+	protected static boolean containPersistenceUnitName(String persistenceUnitName) {
+		String classPath = Thread.currentThread().getContextClassLoader().getResource("").getFile();
+		System.out.println(classPath);
+		try {
+			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document document = builder.parse(new File(classPath + "META-INF/persistence.xml"));
+			NodeList nodeList = document.getDocumentElement().getElementsByTagName("persistence-unit");
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				NamedNodeMap attributes = nodeList.item(i).getAttributes();
+				for (int j = 0; j < attributes.getLength(); j++) {
+					Node attr = attributes.item(j);
+					if ("name".equals(attr.getNodeName()) && persistenceUnitName.equals(attr.getNodeValue())) {
+						return true;
+					}
+				}
+			}
+		} catch (Exception e) {
+			log.error(e);
+		}
+		return false;
+	}
+	
 	private static String getDefaultPersistenceUnitName() {
 		String classPath = Thread.currentThread().getContextClassLoader().getResource("").getFile();
+		System.out.println(classPath);
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document document = builder.parse(new File(classPath + "META-INF/persistence.xml"));
