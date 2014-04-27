@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.moon.test.mybatis.repository.GroupRepository">
+
+	<insert id="save" parameterType="org.moon.test.mybatis.persistence.Group">
+		insert into t_group(id, groupName, createTime, createUser)
+		values (#{id},#{groupName},#{createTime},#{createUser})
+	</insert>
+
+	<update id="delete" parameterType="long">
+		delete from t_group where id = #{id}
+	</update>
+
+	<update id="update" parameterType="org.moon.test.mybatis.persistence.Group">
+		update t_user
+		<set>
+			<if test="groupName != null">groupName = #{groupName}</if>
+			<if test="createTime != null">createTime = #{createTime},</if>
+			<if test="createUser != null">createUser = #{createUser},</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<select id="findById" parameterType="long" resultType="org.moon.test.mybatis.persistence.Group">
+		select * from t_group u where id = #{id}
+	</select>
+
+	<select id="countAll" resultType="long">
+		select count(*) from t_group
+	</select>
+
+	<update id="deleteAll">
+		delete from t_group
+	</update>
+</mapper>

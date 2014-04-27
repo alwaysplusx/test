@@ -16,5 +16,7 @@
 	<mappers>
 		<mapper resource="mappers/persistence/User.xml"/>
 		<mapper resource="mappers/repository/UserRepository.xml"/>
+		<mapper resource="mappers/repository/CountryRepository.xml"/>
+		<mapper resource="mappers/repository/GroupRepository.xml"/>
 	</mappers>
 </configuration>

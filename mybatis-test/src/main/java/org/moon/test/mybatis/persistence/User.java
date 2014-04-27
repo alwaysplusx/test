@@ -1,28 +1,20 @@
 package org.moon.test.mybatis.persistence;
 
-public class User {
-	
-	private Long id;
+public class User extends BaseEntity {
+
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	private String status;
+	private Group group;
+	private Country country;
 
 	public User() {
 	}
 
-	public User(Long id, String username, String password, String status) {
-		this.id = id;
+	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.status = status;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getUsername() {
@@ -49,9 +41,20 @@ public class User {
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", status=" + status + "]";
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
 }

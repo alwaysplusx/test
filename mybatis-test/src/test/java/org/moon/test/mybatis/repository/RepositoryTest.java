@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
@@ -18,13 +19,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.moon.test.db.DataBaseManager;
+import org.moon.test.mybatis.persistence.Country;
+import org.moon.test.mybatis.persistence.Group;
 import org.moon.test.mybatis.persistence.User;
 
-public class UserRepositoryTest {
+public class RepositoryTest {
 
 	private SqlSessionFactory sqlSessionFactory;
 	private SqlSession sqlSession;
 	private UserRepository userRepository;
+	private GroupRepository groupRepository;
+	private CountryRepository countryRepository;
 
 	@Before
 	public void setUp() throws Exception {
@@ -46,21 +51,48 @@ public class UserRepositoryTest {
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis.xml"));
 		sqlSession = sqlSessionFactory.openSession();
 		userRepository = sqlSession.getMapper(UserRepository.class);
+		groupRepository = sqlSession.getMapper(GroupRepository.class);
+		countryRepository = sqlSession.getMapper(CountryRepository.class);
+		userRepository.deleteAll();
+		groupRepository.deleteAll();
+		countryRepository.deleteAll();
 	}
 
 	@Test
-	public void test() throws Exception {
-		userRepository.save(new User(1l,"test","abc123","OK"));
-		assertEquals("count users size is 1!", 1, userRepository.countAll());
-		User user = userRepository.getById(1l);
-		assertNotEquals("user is not null", null, user);
-		assertEquals("username is test!",user.getUsername(), "test");
-		assertEquals("password is abcc123", user.getPassword(), "abc123");
-		assertEquals("status is OK!", user.getStatus(), "OK");
+	public void testCRUD() throws Exception {
+		User user = new User("tester","abc123");
+		user.setId(1l);
+		user.setCreateTime(new Date());
+		user.setCreateUser("admin");
+		user.setStatus("A");
+		userRepository.save(user);
+		assertEquals(1, userRepository.countAll());
+		user.setStatus("B");
+		userRepository.update(user);
+		assertEquals("B", userRepository.findById(1l).getStatus());
 		userRepository.delete(1l);
-		assertEquals("delete user, user is null", null, userRepository.getById(1l));
+		assertEquals(0, userRepository.countAll());
 	}
 
+	@Test
+	public void testUserAndGroupMapper() {
+		Group group = new Group("Group A");
+		group.setId(1l);
+		groupRepository.save(group);
+		Country country = new Country("Chinese");
+		country.setId(1l);
+		countryRepository.save(country);
+		User user = new User("user1","abc123");
+		user.setId(1l);
+		user.setStatus("A");
+		user.setGroup(group);
+		user.setCountry(country);
+		userRepository.save(user);
+		User u = userRepository.findUserByIdFetchGroup(1l);
+		assertEquals("Group A", u.getGroup().getGroupName());
+		assertEquals("Chinese", u.getCountry().getCountryName());
+	}
+	
 	@After
 	public void tearDown() throws Exception {
 		sqlSession.close();

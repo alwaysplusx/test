@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.moon.test.mybatis.repository.CountryRepository">
+
+	<insert id="save" parameterType="org.moon.test.mybatis.persistence.Country">
+		insert into t_country(id, countryName, createTime, createUser)
+		values (#{id},#{countryName},#{createTime},#{createUser})
+	</insert>
+
+	<update id="deleteAll">
+		delete from t_country
+	</update>
+</mapper>

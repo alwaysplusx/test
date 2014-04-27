@@ -48,15 +48,18 @@ public class UserTest {
 	@Test
 	public void test() {
 		String namespace = User.class.getCanonicalName();
-		sqlSession.insert(namespace + ".save", new User(1l,"test","abc123","OK"));
+		User user = new User("test","abc123");
+		user.setId(1l);
+		user.setStatus("OK");
+		sqlSession.insert(namespace + ".save", user);
 		assertEquals("count user is 1!", 1, sqlSession.selectOne(namespace + ".countAll"));
-		User user = (User) sqlSession.selectOne(namespace + ".getById", 1l);
-		assertNotEquals("user is not null", null, user);
-		assertEquals("username is test!",user.getUsername(), "test");
-		assertEquals("password is abcc123", user.getPassword(), "abc123");
-		assertEquals("status is OK!", user.getStatus(), "OK");
+		User u = (User) sqlSession.selectOne(namespace + ".findById", 1l);
+		assertNotEquals("user is not null", null, u);
+		assertEquals("username is test!",u.getUsername(), "test");
+		assertEquals("password is abcc123", u.getPassword(), "abc123");
+		assertEquals("status is OK!", u.getStatus(), "OK");
 		sqlSession.update(namespace + ".delete", 1l); 
-		assertEquals("delete user, user is null!", null, sqlSession.selectOne(namespace + ".getById", 1l));
+		assertEquals("delete user, user is null!", null, sqlSession.selectOne(namespace + ".findById", 1l));
 	}
 
 	@After
