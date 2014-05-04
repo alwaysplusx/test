@@ -16,5 +16,6 @@
 		<module>proxy-test</module>
 		<module>file-test</module>
 		<module>jpa-test</module>
+		<module>pdfbox-test</module>
 	</modules>
 </project>
