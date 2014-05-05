@@ -10,17 +10,23 @@
 	<properties>
 		<pdfbox.version>1.8.5</pdfbox.version>
 		<itext.version>4.2.1</itext.version>
+		<junit.version>4.11</junit.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.lowagie</groupId>
 			<artifactId>itext</artifactId>
-			<version>4.2.1</version>
+			<version>${itext.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
 			<version>${pdfbox.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
 		</dependency>
 	</dependencies>
 </project>
