@@ -2,11 +2,11 @@ package org.moon.test.itext;
 
 import java.io.FileOutputStream;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.Font;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.BaseFont;
-import com.lowagie.text.pdf.PdfWriter;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class ITextTest {
 
