@@ -13,7 +13,7 @@ import com.itextpdf.text.pdf.PdfStamper;
 public class ITextCreatePDFromTemplateTest {
 
 	public static void main(String[] args) throws Exception {
-		String tempFile = "src/test/resources/userTemplate.pdf";
+		String tempFile = "src/test/resources/userTemplate-1.pdf";
 		PdfReader reader = new PdfReader(tempFile);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PdfStamper stamp = new PdfStamper(reader, baos);

@@ -12,7 +12,7 @@ import com.itextpdf.text.pdf.PdfStamper;
 public class PDFTemplateInfoTest {
 
 	public static void main(String[] args) throws Exception {
-		String templateFile = "src/test/resources/userTemplate-1.pdf";
+		String templateFile = "src/test/resources/PdfTemplate.pdf";
 		PdfReader reader = new PdfReader(templateFile);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PdfStamper stamp = new PdfStamper(reader, baos);
