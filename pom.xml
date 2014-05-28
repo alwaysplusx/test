@@ -18,5 +18,6 @@
 		<module>jpa-test</module>
 		<module>pdf-test</module>
 		<module>collection-test</module>
+		<module>report-test</module>
 	</modules>
 </project>
