@@ -44,7 +44,38 @@ public class JasperReportExportTest {
 	}
 	
 	@Test
-	public void materialExportTest() throws Exception{
+	//@Ignore
+	public void materialExportAsXLSTest() throws Exception{
+		List<Material> list = new ArrayList<Material>();
+		Material material1 = new Material("1002350TARC1", "正时皮带张紧轮合件");
+		material1.setFeedQuantity(new BigDecimal(41));
+		material1.setStation("275");
+		material1.setFeedDate(new Date());
+		material1.sethBox("1箱+6");
+		Material material2 = new Material("100239839TABC1", "测试零件1");
+		material2.setFeedQuantity(new BigDecimal(51));
+		material2.setStation("510");
+		material2.setFeedDate(new Date());
+		material2.sethBox("2箱+10");
+		list.add(material1);
+		list.add(material2);
+		JRBeanArrayDataSource dataSource = new JRBeanArrayDataSource(list.toArray());
+		@SuppressWarnings("unused")
+		JasperPrint print = JasperFillManager.fillReport("src/main/resources/resources/reports/material.jasper", new HashMap<String, Object>(), dataSource);
+		/*JExcelApiExporter exporter = new JExcelApiExporter();
+		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
+        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream("target/barcode.xls"));
+        exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
+        exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
+        exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
+        //exporter.setParameter(JRXlsExporterParameter.IS_AUTO_DETECT_CELL_TYPE, new Boolean(false));//去掉excel单元格自动变换
+        exporter.setParameter(JRXlsExporterParameter.IS_FONT_SIZE_FIX_ENABLED, new Boolean(true));//自动修正Excel每个栏位的大小
+        exporter.exportReport();*/
+	}
+	
+	@Test
+	@Ignore
+	public void materialExportAsPDFTest() throws Exception{
 		List<Material> list = new ArrayList<Material>();
 		Material material1 = new Material("1002350TARC1", "正时皮带张紧轮合件");
 		material1.setFeedQuantity(new BigDecimal(41));
