@@ -19,5 +19,6 @@
 		<module>pdf-test</module>
 		<module>collection-test</module>
 		<module>report-test</module>
+		<module>mail-test</module>
 	</modules>
 </project>
