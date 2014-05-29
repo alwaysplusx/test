@@ -10,12 +10,13 @@ public class Code128Test {
 
 	public static void main(String[] args) throws Exception {
 		Code128Bean barcode = new Code128Bean();
-		final int dpi = 150;
-		//barcode.setModuleWidth(UnitConv.in2mm(1.0f / dpi));
+		barcode.setBarHeight(5);
+		barcode.setFontSize(1.0);
+		final int dpi = 441;
 		//barcode.doQuietZone(false);
 		BitmapCanvasProvider canvas = new BitmapCanvasProvider(new FileOutputStream("target/barcode.png"), "image/png", dpi, BufferedImage.TYPE_BYTE_BINARY, false, 0);
-		barcode.generateBarcode(canvas, "abc123");
+		barcode.generateBarcode(canvas, "+_)(*&^%$#@!~");
 		canvas.finish();
 	}
-
+	
 }

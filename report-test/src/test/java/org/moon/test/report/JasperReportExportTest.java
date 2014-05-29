@@ -11,6 +11,9 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -44,7 +47,7 @@ public class JasperReportExportTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void materialExportAsXLSTest() throws Exception{
 		List<Material> list = new ArrayList<Material>();
 		Material material1 = new Material("1002350TARC1", "正时皮带张紧轮合件");
@@ -60,17 +63,10 @@ public class JasperReportExportTest {
 		list.add(material1);
 		list.add(material2);
 		JRBeanArrayDataSource dataSource = new JRBeanArrayDataSource(list.toArray());
-		@SuppressWarnings("unused")
 		JasperPrint print = JasperFillManager.fillReport("src/main/resources/resources/reports/material.jasper", new HashMap<String, Object>(), dataSource);
-		/*JExcelApiExporter exporter = new JExcelApiExporter();
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream("target/barcode.xls"));
-        exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
-        exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
-        exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
-        //exporter.setParameter(JRXlsExporterParameter.IS_AUTO_DETECT_CELL_TYPE, new Boolean(false));//去掉excel单元格自动变换
-        exporter.setParameter(JRXlsExporterParameter.IS_FONT_SIZE_FIX_ENABLED, new Boolean(true));//自动修正Excel每个栏位的大小
-        exporter.exportReport();*/
+		JRXlsExporter export = new JRXlsExporter();
+		export.setExporterInput(new SimpleExporterInput(print));
+		export.setExporterOutput(new SimpleOutputStreamExporterOutput("target/material.xls"));
 	}
 	
 	@Test
