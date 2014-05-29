@@ -65,6 +65,7 @@ public class ImgBarcodeExportTest {
 		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("target/imgMaterial.xls"));
 		exporter.exportReport();
+		JasperExportManager.exportReportToHtmlFile(jasperPrint, "target/imgMaterial.html");
 	}
 	
 	@Test
