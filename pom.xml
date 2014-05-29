@@ -20,5 +20,6 @@
 		<module>collection-test</module>
 		<module>report-test</module>
 		<module>mail-test</module>
+		<module>http-test</module>
 	</modules>
 </project>
