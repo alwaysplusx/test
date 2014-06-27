@@ -21,5 +21,6 @@
 		<module>report-test</module>
 		<module>mail-test</module>
 		<module>http-test</module>
+		<module>ehcache-test</module>
 	</modules>
 </project>
