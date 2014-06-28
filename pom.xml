@@ -22,5 +22,7 @@
 		<module>mail-test</module>
 		<module>http-test</module>
 		<module>ehcache-test</module>
+		<module>net-test</module>
+		<module>io-test</module>
 	</modules>
 </project>
