@@ -24,5 +24,8 @@
 		<module>ehcache-test</module>
 		<module>json-test</module>
 		<module>xml-test</module>
+		<module>net-test</module>
+		<module>io-test</module>
+		<module>jdbc-test</module>
 	</modules>
 </project>
