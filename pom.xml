@@ -13,7 +13,6 @@
 		<module>db-test</module>
 		<module>log-test</module>
 		<module>mybatis-test</module>
-		<module>proxy-test</module>
 		<module>file-test</module>
 		<module>jpa-test</module>
 		<module>pdf-test</module>
@@ -27,5 +26,6 @@
 		<module>net-test</module>
 		<module>io-test</module>
 		<module>jdbc-test</module>
+		<module>aop-parent</module>
 	</modules>
 </project>
