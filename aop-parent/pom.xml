@@ -9,6 +9,7 @@
 	<artifactId>aop-parent</artifactId>
 	<packaging>pom</packaging>
 	<modules>
+		<module>spring-aop-test</module>
 		<module>aspectj-test</module>
 		<module>proxy-test</module>
 	</modules>
