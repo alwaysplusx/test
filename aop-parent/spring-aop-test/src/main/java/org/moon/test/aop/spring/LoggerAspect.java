@@ -28,12 +28,12 @@ public class LoggerAspect {
 
 	/**
 	 * 切点执行前方法.
-	 * @param jp
-	 *            连接点
+	 * @param jp 连接点
+	 * @param account 账号
 	 */
-	@Before(value = "bankMethods()")
-	public void before(JoinPoint jp) {
-		log.info("execute method " + jp.getSignature().getName());
+	@Before(value = "bankMethods() && args(account, *)")
+	public void before(JoinPoint jp, Account account) {
+		log.info("execute method " + jp.getSignature().getName() + ", account is " + account);
 	}
 
 }
