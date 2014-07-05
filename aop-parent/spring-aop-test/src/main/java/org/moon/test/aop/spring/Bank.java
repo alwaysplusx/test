@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class Bank {
 
-	private float money = 1000.00f;
-	
-	public float deposit(Account account, float money) {
+	private float money;
+
+	public final float deposit(final Account account, final float money) {
 		// 日志记录
 		// 帐户验证
 		// Begin Transaction

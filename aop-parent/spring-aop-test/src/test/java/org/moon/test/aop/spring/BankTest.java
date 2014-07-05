@@ -16,6 +16,7 @@ public class BankTest {
 	@Test
 	public void test() {
 		bank.deposit(new Account("abc", "der"), 1f);
+		bank.withdraw(null, 1f);
 	}
 
 }
