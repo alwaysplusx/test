@@ -36,4 +36,12 @@ public class LoggerAspect {
 		log.info("execute method " + jp.getSignature().getName() + ", account is " + account);
 	}
 
+	/**
+	 * aspect使用注解标注在方法上.
+	 */
+	@Before("@annotation(org.moon.test.aop.spring.Loggable)")
+	public void logging() {
+		log.info("annotation logging called");
+	}
+
 }

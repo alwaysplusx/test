@@ -17,6 +17,7 @@ public class Bank {
 	 * @param money 金额
 	 * @return 帐户总金额
 	 */
+	@Loggable
 	public float deposit(final Account account, final float money) {
 		// 日志记录
 		// 帐户验证
