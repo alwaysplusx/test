@@ -1,6 +1,6 @@
 ## Java Collections Framework
 
-### java.util.List
+## java.util.List
 
 #### java.util.ArrayList
 
@@ -72,6 +72,12 @@ private E remove(Entry<E> e) {
 ```
 
 > 根据LinkedList的特性，可以发现。LinkedList删除，扩充简单对内存消耗小。但是查询速度不如ArrayList。
+
+## java.util.Set
+
+#### java.util.HashSet
+
+#### java.util.TreeSet
 
 
 
