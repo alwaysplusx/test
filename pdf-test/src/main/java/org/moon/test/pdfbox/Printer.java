@@ -67,14 +67,14 @@ public class Printer {
 		return print(PDFFile, defaultPrintService);
 	}
 
-	private static PrintService getPrintService(String printServuceName) throws Exception {
+	private static PrintService getPrintService(String printServiceName) throws Exception {
 		PrintService[] services = PrinterJob.lookupPrintServices();
 		for (PrintService service : services) {
-			if (service.getName().indexOf(printServuceName) != -1) {
+			if (service.getName().indexOf(printServiceName) != -1) {
 				return service;
 			}
 		}
-		throw new Exception("指定打印机" + printServuceName + "未找到");
+		throw new Exception("指定打印机" + printServiceName + "未找到");
 	}
 	
 }
