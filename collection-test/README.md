@@ -96,7 +96,7 @@ static class Entry<K, V> implements Map.Entry<K, V> {
 ```
 HashMap中保存了一个该Entry的数组
 
-	`transient Entry[] table;`
+	transient Entry[] table;
 	
 当添加一个K-V时候，将会比较K的hashCode。然后生成该K的在数组table中index，如果该index已经存在值则比较hashCode与equals的返回值确定是否相同对象。如果结果为非则继续与Entry.next比较。如果发现当前K的与某一K相同则替换。
 ```java
