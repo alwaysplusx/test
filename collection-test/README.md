@@ -6,9 +6,9 @@
 
 ArrayList采用数组实现对象存储。
 ```java	
-	private transient Object[] elementData;
+private transient Object[] elementData;
 ```
-当添加对象时达到数组容量上限时候将进行扩充，扩充为原数组的1.5倍(old*3)/2+1。原数组中的对象经过拷贝进入扩充后的数组中。
+当达到数组容量上限时候将进行扩充，扩充为原数组的1.5倍(oldCapacity*3)/2+1。原数组中的对象经过拷贝进入扩充后的新数组中。
 ```java
 public void ensureCapacity(int minCapacity) {
 	modCount++;
@@ -23,8 +23,7 @@ public void ensureCapacity(int minCapacity) {
 	}
 }
 ```
-
-删除对象时候，如果删除不是数组index最大的对象，那么每删除一个对象都要经过异常数组拷贝将原数据拷贝的新数组中。
+删除对象时候，如果删除不是数组index最大的对象，每删除一个对象，都要把原数组拷贝到新数组中。
 ```java
 public E remove(int index) {
 	RangeCheck(index);
@@ -38,11 +37,11 @@ public E remove(int index) {
 	return oldValue;
 }
 ```
-> 根据ArraryList的实现，可以发现。ArrayList查询速度快，对于删除，扩容等都需要进行数组的拷贝才能完成。因此使用时候应该避免对ArrayList进行频繁的删除，扩容。
+> 根据ArraryList的实现，可以发现。ArrayList查询速度快，对于删除，扩容等都需要进行数组的拷贝。因此使用时候应该避免对ArrayList进行频繁的删除，扩容。
 
 #### java.util.LinkedList
 
-LinkedList采用链表实现对象存储
+LinkedList采用链表实现对象存储。
 ```java
 private static class Entry<E> {
 	E element;
@@ -50,7 +49,7 @@ private static class Entry<E> {
 	Entry<E> previous;
 }
 ```
-当添加对象时，创建一个新对象添加到链表头部的下一个。
+添加对象时，创建一个新对象添加到链表头部的下一个。
 ```java
 private Entry<E> addBefore(E e, Entry<E> entry) {
 	Entry<E> newEntry = new Entry<E>(e, entry, entry.previous);
@@ -96,9 +95,9 @@ static class Entry<K, V> implements Map.Entry<K, V> {
 ```
 HashMap中保存了一个该Entry的数组
 
-	transient Entry[] table;
+	`transient Entry[] table;`
 	
-当添加一个K-V时候，将会比较K的hashCode。然后生成该K的在数组table中index，如果该index已经存在值则比较hashCode与equals的返回值确定是否相同对象。如果结果为非则继续与Entry.next比较。如果发现当前K的与某一K相同则替换。
+添加一个`K-V`时候，将会生成K的hash值，在根据这个hash值来确定K在数组table中的index，如果`table[index]! = null`则比较双方的`hashCode`与`equals`方法的返回值确定是否相同对象。如果结果为`false`则继续与`Entry.next`比较。如果发现当前K的与某一K相同则替换。
 ```java
 public V put(K key, V value) {
 	if (key == null)
