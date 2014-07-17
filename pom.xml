@@ -19,5 +19,6 @@
 		<module>net-parent</module>
 		<module>orm-parent</module>
 		<module>basic-parent</module>
+		<module>timer-parent</module>
 	</modules>
 </project>
