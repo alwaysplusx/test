@@ -8,14 +8,35 @@
 	</parent>
 	<artifactId>barcode-test</artifactId>
 	<properties>
+		<!-- 5.5.2/3.7.1 -->
 		<jasperreport.version>5.5.2</jasperreport.version>
 		<groovy.version>2.3.1</groovy.version>
-		<poi.version>3.10-FINAL</poi.version>
+		<!-- 3.10-FINAL/3.2-FINAL -->
+		<poi.version>3.7</poi.version>
 		<barcode4j.version>2.1</barcode4j.version>
 		<itextasian.version>1.0</itextasian.version>
 		<itext.version>4.2.1</itext.version>
+		<!-- jasper 3.7.1 require -->
+		<batik.version>1.6-1</batik.version>
+		<jxl.version>2.6.12</jxl.version>
 	</properties>
 	<dependencies>
+		<!-- 
+		############ jasperReport 3.7.1 require ###########
+		 -->
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>${jxl.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-bridge</artifactId>
+			<version>${batik.version}</version>
+		</dependency>
+		<!-- 
+		###################################################
+		 -->
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
