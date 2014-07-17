@@ -10,22 +10,18 @@
 		<moon.version>0.0.1-SNAPSHOT</moon.version>
 	</properties>
 	<modules>
-		<module>db-test</module>
 		<module>log-test</module>
 		<module>mybatis-test</module>
-		<module>file-test</module>
 		<module>jpa-test</module>
-		<module>pdf-test</module>
 		<module>collection-test</module>
-		<module>report-test</module>
 		<module>mail-test</module>
-		<module>http-test</module>
 		<module>ehcache-test</module>
-		<module>json-test</module>
-		<module>xml-test</module>
-		<module>net-test</module>
-		<module>io-test</module>
-		<module>jdbc-test</module>
 		<module>aop-parent</module>
+		<module>doc-parent</module>
+		<module>ii-parent</module>
+		<module>def-parent</module>
+		<module>io-parent</module>
+		<module>db-parent</module>
+		<module>net-parent</module>
 	</modules>
 </project>

@@ -8,16 +8,12 @@ public class PersistenceUnitNameNotFindException extends RuntimeException{
 		super();
 	}
 
-	public PersistenceUnitNameNotFindException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
 	public PersistenceUnitNameNotFindException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
 	public PersistenceUnitNameNotFindException(String message) {
-		super("persistence unit name not find");
+		super(message);
 	}
 
 	public PersistenceUnitNameNotFindException(Throwable cause) {
