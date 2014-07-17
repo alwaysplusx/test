@@ -6,15 +6,12 @@
 		<artifactId>test-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>collection-test</artifactId>
-	<properties>
-		<junit.version>4.11</junit.version>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-		</dependency>
-	</dependencies>
+	<artifactId>basic-parent</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>collection-test</module>
+		<module>ehcache-test</module>
+		<module>log-test</module>
+		<module>mail-test</module>
+	</modules>
 </project>

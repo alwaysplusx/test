@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.moon.test</groupId>
-		<artifactId>test-parent</artifactId>
+		<artifactId>orm-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>jpa-test</artifactId>

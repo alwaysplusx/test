@@ -10,12 +10,6 @@
 		<moon.version>0.0.1-SNAPSHOT</moon.version>
 	</properties>
 	<modules>
-		<module>log-test</module>
-		<module>mybatis-test</module>
-		<module>jpa-test</module>
-		<module>collection-test</module>
-		<module>mail-test</module>
-		<module>ehcache-test</module>
 		<module>aop-parent</module>
 		<module>doc-parent</module>
 		<module>ii-parent</module>
@@ -23,5 +17,7 @@
 		<module>io-parent</module>
 		<module>db-parent</module>
 		<module>net-parent</module>
+		<module>orm-parent</module>
+		<module>basic-parent</module>
 	</modules>
 </project>
