@@ -1,4 +1,4 @@
-package org.moon.test.report;
+package org.moon.test.barcode;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

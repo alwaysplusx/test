@@ -1,4 +1,4 @@
-package org.moon.test.report;
+package org.moon.test.barcode;
 
 import java.io.File;
 import java.math.BigDecimal;
