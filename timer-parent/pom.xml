@@ -13,6 +13,9 @@
 	</properties>
 	<modules>
 		<module>timer-test</module>
+		<module>quartz-timer-test</module>
+		<module>complex-timer-test</module>
+		<module>ejb-timer-test</module>
 	</modules>
 	<dependencies>
 		<dependency>
