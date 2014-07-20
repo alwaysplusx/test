@@ -12,7 +12,7 @@ public class SimpleAnnotationJob {
 
 	@Scheduled(fixedDelay = 10000)
 	public void handle() {
-		LOG.info("handle execute every 1 second");
+		LOG.info("handle execute every 10 second");
 	}
 
 }

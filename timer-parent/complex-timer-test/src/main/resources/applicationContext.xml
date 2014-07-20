@@ -11,10 +11,29 @@
 		http://www.springframework.org/schema/context/spring-context.xsd">
 		
 	<context:component-scan base-package="org.moon.test.timer" />
+	
 	<task:annotation-driven />
 	
 	<bean name="scheduleFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="configLocation" value="quartz.properties"/>
 	</bean>
+
+	<!-- <bean name="simpleJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="org.moon.test.timer.spring.quartz.SimpleQuartzJob"/>
+		<property name="durability" value="true" />
+	</bean>
+
+	<bean name="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="simpleJobDetail"/>
+		<property name="cronExpression" value="0/5 * * * * ?"/>
+	</bean>
+
+	<bean name="xmlScheduleFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger"/>
+			</list>
+		</property>
+	</bean> -->
 	
 </beans>
