@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean name="simpleBean" class="org.moon.test.ioc.SimpleBean" />
+</beans>

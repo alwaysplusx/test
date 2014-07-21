@@ -21,5 +21,6 @@
 		<module>basic-parent</module>
 		<module>timer-parent</module>
 		<module>web-parent</module>
+		<module>ioc-parent</module>
 	</modules>
 </project>
