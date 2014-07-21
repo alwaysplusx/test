@@ -22,6 +22,6 @@
 	<parent>
 		<groupId>org.moon.test</groupId>
 		<artifactId>test-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>${project.version}</version>
 	</parent>
 </project>
