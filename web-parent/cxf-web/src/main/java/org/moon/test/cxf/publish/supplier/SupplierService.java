@@ -10,5 +10,5 @@ import javax.jws.WebService;
 public interface SupplierService {
 
 	@WebMethod
-	public void saveOrUpdate(@WebParam(name = "suppliers") List<Supplier> suppliers);
+	public boolean saveOrUpdate(@WebParam(name = "suppliers") List<Supplier> suppliers);
 }
