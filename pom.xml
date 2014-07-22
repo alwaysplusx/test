@@ -20,7 +20,7 @@
 		<module>orm-parent</module>
 		<module>basic-parent</module>
 		<module>timer-parent</module>
-		<module>web-parent</module>
+		<module>framework-parent</module>
 		<module>ioc-parent</module>
 	</modules>
 </project>

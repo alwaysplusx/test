@@ -6,7 +6,7 @@
 		<artifactId>test-parent</artifactId>
 		<version>${project.version}</version>
 	</parent>
-	<artifactId>web-parent</artifactId>
+	<artifactId>framework-parent</artifactId>
 	<packaging>pom</packaging>
 	<modules>
 		<module>struts2-web</module>
