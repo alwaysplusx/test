@@ -1,4 +1,4 @@
-package org.moon.test.ioc.core.support;
+package org.moon.test.ioc.core.io;
 
 import java.io.File;
 import java.io.FileInputStream;

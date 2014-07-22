@@ -7,9 +7,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.moon.test.ioc.core.BeanDefinition;
+import org.moon.test.ioc.core.BeanDefinitionRegistry;
 import org.moon.test.ioc.core.BeanLoadException;
 import org.moon.test.ioc.core.Resource;
 import org.moon.test.ioc.core.support.AbstractBeanDefinitionReader;
+import org.moon.test.ioc.core.support.DefaultBeanDefinition;
+import org.moon.test.ioc.core.util.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -23,11 +26,25 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 	public static final String NESTED_BEANS_ELEMENT = "beans";
 
+	public static final String BEAN_ELEMENT = "bean";
+
 	public static final String NAME_ATTRIBUTE = "name";
 
 	public static final String ID_ATTRIBUTE = "id";
 
 	public static final String CLASS_ATTRIBUTE = "class";
+
+	public static final String SCOPE_ATTRIBUTE = "scope";
+
+	public static final String FACTORY_NAME_ATTRIBUTE = "factoryName";
+
+	public static final String FACTORY_METHOD_ATTRIBUTE = "factoryMethod";
+
+	protected BeanDefinitionRegistry registry;
+
+	public XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
+		this.registry = registry;
+	}
 
 	@Override
 	public int loadBeanDefinitions(Resource resource) throws BeanLoadException {
@@ -46,7 +63,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 			for (int i = 0; i < childNodes.getLength(); i++) {
 				Node item = childNodes.item(i);
 				if (item instanceof Element) {
-					processBeanDefinition((Element) item);
+					parseDefaultElement((Element) item);
 				}
 			}
 		} catch (ParserConfigurationException e) {
@@ -59,31 +76,39 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 		return 0;
 	}
 
-	private void processBeanDefinition(Element ele) {
+	protected void parseDefaultElement(Element ele) {
+		if (ele.getNodeName().equals(BEAN_ELEMENT)) {
+			processBeanDefinition(ele);
+		}
+	}
+
+	protected void processBeanDefinition(Element ele) {
 		BeanDefinition beanDefintion = createBeanDefinition(ele);
 		System.out.println(beanDefintion);
 	}
 
-	private BeanDefinition createBeanDefinition(Element ele) {
-		return null;
+	protected BeanDefinition createBeanDefinition(Element ele) {
+		String nameAttr = ele.getAttribute(NAME_ATTRIBUTE);
+		String className = ele.getAttribute(CLASS_ATTRIBUTE);
+		if (StringUtils.isBlank(nameAttr)) {
+			nameAttr = className;
+		}
+		DefaultBeanDefinition beanDefinition = new DefaultBeanDefinition(nameAttr, className);
+		return beanDefinition;
 	}
 
-	private Document loadDocument(InputSource inputSource) throws ParserConfigurationException, IOException, SAXException {
+	protected Document loadDocument(InputSource inputSource) throws ParserConfigurationException, IOException, SAXException {
 		DocumentBuilderFactory factory = createDocumentBuildFactory();
 		DocumentBuilder builder = createDocumentBuilder(factory);
 		return builder.parse(inputSource);
 	}
 
-	private DocumentBuilder createDocumentBuilder(DocumentBuilderFactory factory) throws ParserConfigurationException {
+	protected DocumentBuilder createDocumentBuilder(DocumentBuilderFactory factory) throws ParserConfigurationException {
 		return factory.newDocumentBuilder();
 	}
 
-	private DocumentBuilderFactory createDocumentBuildFactory() {
+	protected DocumentBuilderFactory createDocumentBuildFactory() {
 		return DocumentBuilderFactory.newInstance();
-	}
-
-	public static void main(String[] args) {
-		new XmlBeanDefinitionReader().loadBeanDefinitions("beans.xml");
 	}
 
 }

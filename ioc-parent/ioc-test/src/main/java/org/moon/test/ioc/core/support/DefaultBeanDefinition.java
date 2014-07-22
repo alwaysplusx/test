@@ -4,14 +4,30 @@ import org.moon.test.ioc.core.BeanDefinition;
 
 public class DefaultBeanDefinition implements BeanDefinition {
 
+	protected String beanName;
+	protected String beanClassName;
+
+	public DefaultBeanDefinition(String beanName, String beanClassName) {
+		this.beanName = beanName;
+		this.beanClassName = beanClassName;
+	}
+
+	public String getBeanName() {
+		return beanName;
+	}
+
+	public void setBeanName(String beanName) {
+		this.beanName = beanName;
+	}
+
 	@Override
 	public String getBeanClassName() {
-		return null;
+		return this.beanClassName;
 	}
 
 	@Override
 	public void setBeanClassName(String beanClassName) {
-		
+		this.beanClassName = beanClassName;
 	}
 
 	@Override
@@ -21,7 +37,7 @@ public class DefaultBeanDefinition implements BeanDefinition {
 
 	@Override
 	public void setFactoryBeanName(String factoryBeanName) {
-		
+
 	}
 
 	@Override
@@ -31,7 +47,7 @@ public class DefaultBeanDefinition implements BeanDefinition {
 
 	@Override
 	public void setFactoryMethodName(String factoryMethodName) {
-		
+
 	}
 
 	@Override
@@ -41,7 +57,7 @@ public class DefaultBeanDefinition implements BeanDefinition {
 
 	@Override
 	public void setScope(String scope) {
-		
+
 	}
 
 	@Override

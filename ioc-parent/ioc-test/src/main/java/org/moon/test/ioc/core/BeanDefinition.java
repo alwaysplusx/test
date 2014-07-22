@@ -6,6 +6,10 @@ public interface BeanDefinition {
 
 	static final String SCOPE_PROTOTYPE = "prototype";
 	
+	String getBeanName();
+	
+	void setBeanName(String beanName);
+	
 	String getBeanClassName();
 
 	void setBeanClassName(String beanClassName);
