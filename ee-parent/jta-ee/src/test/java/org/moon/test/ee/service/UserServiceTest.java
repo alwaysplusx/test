@@ -23,6 +23,8 @@ public class UserServiceTest {
 	private UserService serviceBean;
 	@EJB(beanName = "UserServiceContainerImpl")
 	private UserService serviceContainer;
+	@EJB(beanName = "UserServiceDefaultImpl")
+	private UserService serviceDefault;
 	@EJB
 	private UserRepository userRepository;
 	List<User> users = new ArrayList<User>();
@@ -61,6 +63,55 @@ public class UserServiceTest {
 		service.batchSave(users);
 		System.err.println("bean use " + (System.currentTimeMillis() - start) + "ms");
 		assertEquals(10000, userRepository.count());
+	}
+
+	@Test
+	public void testDefaultBatchSave() {
+		assertNotNull(serviceDefault);
+		final UserService service = serviceDefault;
+		long start = System.currentTimeMillis();
+		service.batchSave(users);
+		System.err.println("default use " + (System.currentTimeMillis() - start) + "ms");
+		assertEquals(10000, userRepository.count());
+	}
+
+	@Test
+	public void testDefaultThrowRuntimeAfterBatchSave() {
+		assertNotNull(serviceDefault);
+		final UserService service = serviceDefault;
+		long start = System.currentTimeMillis();
+		try {
+			service.throwRuntimeExceptionAfterBatchSave(users);
+		} catch (RuntimeException e) {
+		}
+		assertEquals(0, userRepository.count());
+		System.err.println("default throw use " + (System.currentTimeMillis() - start) + "ms");
+	}
+
+	@Test
+	public void testBeanThrowRuntimeAfterBatchSave() {
+		assertNotNull(serviceBean);
+		final UserService service = serviceBean;
+		long start = System.currentTimeMillis();
+		try {
+			service.throwRuntimeExceptionAfterBatchSave(users);
+		} catch (RuntimeException e) {
+		}
+		assertEquals(10000, userRepository.count());
+		System.err.println("bean throw use " + (System.currentTimeMillis() - start) + "ms");
+	}
+
+	@Test
+	public void testContainerThrowRuntimeAfterBatchSave() {
+		assertNotNull(serviceContainer);
+		final UserService service = serviceContainer;
+		long start = System.currentTimeMillis();
+		try {
+			service.throwRuntimeExceptionAfterBatchSave(users);
+		} catch (RuntimeException e) {
+		}
+		assertEquals(0, userRepository.count());
+		System.err.println("default throw use " + (System.currentTimeMillis() - start) + "ms");
 	}
 
 }

@@ -43,4 +43,54 @@ public class UserServiceBeanImpl implements UserService {
 		}
 	}
 
+	@Override
+	public String throwRuntimeExceptionAfterBatchSave(List<User> users) {
+		try {
+			ux.begin();
+			for (User u : users) {
+				userRepository.saveUser(u);
+			}
+			ux.commit();
+		} catch (Exception e) {
+			try {
+				ux.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
+		throw new RuntimeException("测试异常");
+	}
+
+	// TransactionManagementType.BEAN ejb容器将忽略TransactionAttribute
+	// @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	@Override
+	public String batchSaveWithTransactionAttributeRequestNew(List<User> users) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String batchSaveWithTransactionAttributeMandatory(List<User> users) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String batchSaveWithTransactionAttributeNever(List<User> users) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String batchSaveWithTransactionAttributeNotSupport(List<User> users) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String batchSaveWithTransactionAttributeRequired(List<User> users) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String batchSaveWithTransactionAttributeSupports(List<User> users) {
+		throw new UnsupportedOperationException();
+	}
+
 }

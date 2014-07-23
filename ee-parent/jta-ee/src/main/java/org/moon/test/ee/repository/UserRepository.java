@@ -12,6 +12,8 @@ public interface UserRepository {
 	
 	public void updateUser(User user);
 	
+	public void delete();
+
 	public long count();
 	
 	public User findUserById(Long id);

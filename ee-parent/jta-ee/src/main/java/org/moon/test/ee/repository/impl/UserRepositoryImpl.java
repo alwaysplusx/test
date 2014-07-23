@@ -46,4 +46,9 @@ public class UserRepositoryImpl implements UserRepository {
 		return em.createQuery("select o from User o where o.username = ?1").setParameter(1, username).getResultList();
 	}
 
+	@Override
+	public void delete() {
+		em.createQuery("delete from User").executeUpdate();
+	}
+
 }
