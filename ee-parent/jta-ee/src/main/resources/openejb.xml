@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<openejb>
+	<Resource id="jdbc/moon" type="javax.sql.DataSource">
+		JdbcDriver org.h2.Driver
+		JdbcUrl jdbc:h2:file:~/test/ee/data
+		UserName sa
+		Password 
+	</Resource>
+</openejb>
