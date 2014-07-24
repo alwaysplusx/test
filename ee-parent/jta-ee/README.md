@@ -158,3 +158,34 @@ TransactionAttributeType
 <li>REQUIRES_NEW:与NOT_SUPPORT相同
 <li>SUPPORTS：与REQUIRED相同
 </ul>
+
+一方面来说，EJB Bean的事务是具有传递性的，客户端的事务可以传递给服务端，从而达到客户端控制全局事务的作用。
+另一方面，服务端能规定客户端该如何使用事务来调用服务端的方法
+
+如一个嵌套多层的方法：
+	
+	methodA(){
+		methodB();
+	}
+	
+	methodB(){
+		methodC();
+	}
+	
+	methodC(){
+		// do work
+	}
+
+方法均为默认`REQUIRED`
+
+客户端不存在事务，client->创建(A-Transaction)->methodA->methodB->methodC，三个方法都是运行在methodA的(A-Transaction)事务上。
+
+客户端存在事务则，client(Client-Transaction)->methodA->methodB->methodC，三个方法都是运行在客户端(Client-Transaction)事务上。
+
+`REQUIRES_NEW`
+
+客户端不存在事务
+
+client->创建(A-Transaction)->methodA->挂起(A-Transaction)->创建(B-Transaction)->methodB->挂起(B-Transaction)->创建(C-Transaction)->methodC->提交(C-Transaction)->恢复(B-Transaction)->提交(B-Transaction)->恢复(A-Transaction)->提交(A-Transaction)->返回client
+
+

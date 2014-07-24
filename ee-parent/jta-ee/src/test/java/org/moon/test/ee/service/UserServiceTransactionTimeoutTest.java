@@ -3,13 +3,14 @@ package org.moon.test.ee.service;
 import static org.junit.Assert.*;
 import static javax.transaction.Status.*;
 
-import java.util.Calendar;
 import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.embeddable.EJBContainer;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.RollbackException;
 import javax.transaction.UserTransaction;
 
@@ -28,6 +29,8 @@ public class UserServiceTransactionTimeoutTest {
 	private UserTransaction ux;
 	@EJB
 	private UserRepository userRepository;
+	@PersistenceContext(unitName = "hibernate-moon")
+	private EntityManager em;
 
 	@Before
 	public void setUp() throws Exception {
@@ -47,23 +50,38 @@ public class UserServiceTransactionTimeoutTest {
 	@Test(expected = RollbackException.class)
 	public void testUserTransactionTimeout() throws Exception {
 		assertEquals(STATUS_NO_TRANSACTION, ux.getStatus());
-		ux.setTransactionTimeout(1);
+		// container defaultTransactionTimeout is 5 seconds, see setUp method
+		// also can use ux.setTransactionTimeout(seconds) change timeout seconds
 		ux.begin();
 		assertEquals(STATUS_ACTIVE, ux.getStatus());
-		Thread.sleep(1000 * 5);
+		em.persist(new User("test"));
+		Thread.sleep(1000 * 10);
 		try {
 			ux.commit();
 		} finally {
+			assertEquals(0, userRepository.count());
 			assertEquals(STATUS_NO_TRANSACTION, ux.getStatus());
 		}
 	}
 
 	@Test(expected = EJBTransactionRolledbackException.class)
-	public void testTimeout() {
+	public void testTimeoutWithTransaction() {
 		try {
-			service.sleepLongTimeWithTransaction(new User("double", 21, "F", "08678899876", Calendar.getInstance()), 1000 * 10);
+			service.sleepLongTimeWithTransaction(new User("double"), 1000 * 10);
 		} finally {
 			assertEquals(0, userRepository.count());
+		}
+	}
+
+	@Test
+	public void testTimeoutWithoutTransaction() {
+		// sleepLongTimeWithoutTransaction方法声明为TransactionAttributeType.NOT_SUPPORTED
+		// 即表示为sleepLongTimeWithoutTransaction方法不启动新事务，保存的事务被延迟到UserRepositorty中去
+		// 如果在UserRepository的方法中线程等待超过超时时间那么也将抛出异常，数据回滚
+		try {
+			service.sleepLongTimeWithoutTransaction(new User("double"), 1000 * 10);
+		} finally {
+			assertEquals(1, userRepository.count());
 		}
 	}
 
