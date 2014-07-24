@@ -16,6 +16,11 @@ public class StartContainerTest {
 	public void setUp() throws Exception {
 		Properties props = new Properties();
 		props.put("openejb.conf.file", "src/main/resources/openejb.xml");
+//		props.put("jdbc.moon", "new://Resource?type=DataSource");
+//		props.put("jdbc.moon.JdbcDriver", "org.h2.Driver");
+//		props.put("jdbc.moon.JdbcUrl", "jdbc:h2:file:~/test/ee/data");
+//		props.put("jdbc.moon.UserName", "sa");
+//		props.put("jdbc.moon.Password", "");
 		container = EJBContainer.createEJBContainer(props);
 	}
 
