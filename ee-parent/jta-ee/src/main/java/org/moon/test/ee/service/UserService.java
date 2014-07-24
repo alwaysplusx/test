@@ -24,4 +24,8 @@ public interface UserService {
 	String batchSaveWithTransactionAttributeSupports(List<User> users);
 
 	String batchSaveWithTransactionAttributeRequestNew(List<User> users);
+	
+	String sleepLongTimeWithTransaction(User user, long sleepTime);
+	
+	String sleepLongTimeWithoutTransaction(User user, long sleepTime);
 }

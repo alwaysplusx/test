@@ -93,4 +93,31 @@ public class UserServiceBeanImpl implements UserService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public String sleepLongTimeWithTransaction(User user, long sleepTime) {
+		try {
+			ux.begin();
+			Thread.sleep(Long.MAX_VALUE);
+			ux.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				ux.rollback();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		return SUCCESS;
+	}
+
+	@Override
+	public String sleepLongTimeWithoutTransaction(User user, long sleepTime) {
+		try {
+			Thread.sleep(Long.MAX_VALUE);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+
 }

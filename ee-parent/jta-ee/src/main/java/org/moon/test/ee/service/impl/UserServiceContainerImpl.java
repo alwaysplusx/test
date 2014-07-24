@@ -81,4 +81,14 @@ public class UserServiceContainerImpl implements UserService {
 		return null;
 	}
 
+	@Override
+	public String sleepLongTimeWithTransaction(User user, long sleepTime) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String sleepLongTimeWithoutTransaction(User user, long sleepTime) {
+		throw new UnsupportedOperationException();
+	}
+
 }

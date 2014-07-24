@@ -94,5 +94,29 @@ public class UserServiceDefaultImpl implements UserService {
 		}
 		return SUCCESS;
 	}
+
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public String sleepLongTimeWithTransaction(User user, final long sleepTime) {
+		userRepository.saveUser(user);
+		try {
+			Thread.sleep(sleepTime);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+
+	@Override
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public String sleepLongTimeWithoutTransaction(User user, final long sleepTime) {
+		userRepository.saveUser(user);
+		try {
+			Thread.sleep(sleepTime);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
 	
 }
