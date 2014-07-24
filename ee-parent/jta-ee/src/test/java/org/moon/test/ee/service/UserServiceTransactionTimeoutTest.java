@@ -1,15 +1,16 @@
 package org.moon.test.ee.service;
 
 import static org.junit.Assert.*;
+import static javax.transaction.Status.*;
 
 import java.util.Calendar;
 import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.embeddable.EJBContainer;
 import javax.transaction.RollbackException;
-import javax.transaction.Status;
 import javax.transaction.UserTransaction;
 
 import org.junit.After;
@@ -32,6 +33,8 @@ public class UserServiceTransactionTimeoutTest {
 	public void setUp() throws Exception {
 		Properties props = new Properties();
 		props.put("openejb.conf.file", "src/main/resources/openejb.xml");
+		props.put("jta.moon", "new://TransactionManager?type=TransactionManager");
+		props.put("jta.moon.defaultTransactionTimeout", "5 seconds");
 		container = EJBContainer.createEJBContainer(props);
 		container.getContext().bind("inject", this);
 	}
@@ -43,22 +46,25 @@ public class UserServiceTransactionTimeoutTest {
 
 	@Test(expected = RollbackException.class)
 	public void testUserTransactionTimeout() throws Exception {
-		assertEquals(Status.STATUS_NO_TRANSACTION, ux.getStatus());
+		assertEquals(STATUS_NO_TRANSACTION, ux.getStatus());
 		ux.setTransactionTimeout(1);
 		ux.begin();
-		assertEquals(Status.STATUS_ACTIVE, ux.getStatus());
+		assertEquals(STATUS_ACTIVE, ux.getStatus());
 		Thread.sleep(1000 * 5);
 		try {
 			ux.commit();
 		} finally {
-			assertEquals(Status.STATUS_NO_TRANSACTION, ux.getStatus());
+			assertEquals(STATUS_NO_TRANSACTION, ux.getStatus());
 		}
 	}
 
-	@Test
+	@Test(expected = EJBTransactionRolledbackException.class)
 	public void testTimeout() {
-		service.sleepLongTimeWithTransaction(new User("double", 21, "F", "08678899876", Calendar.getInstance()), 1000 * 600 + 1000 * 10);
-		assertEquals(1, userRepository.count());
+		try {
+			service.sleepLongTimeWithTransaction(new User("double", 21, "F", "08678899876", Calendar.getInstance()), 1000 * 10);
+		} finally {
+			assertEquals(0, userRepository.count());
+		}
 	}
 
 }

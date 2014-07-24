@@ -21,6 +21,8 @@ public class StartContainerTest {
 //		props.put("jdbc.moon.JdbcUrl", "jdbc:h2:file:~/test/ee/data");
 //		props.put("jdbc.moon.UserName", "sa");
 //		props.put("jdbc.moon.Password", "");
+//		props.put("jta.moon", "new://TransactionManager?type=TransactionManager");
+//		props.put("jta.moon.defaultTransactionTimeout", "10 seconds");
 		container = EJBContainer.createEJBContainer(props);
 	}
 

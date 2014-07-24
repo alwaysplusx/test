@@ -97,7 +97,7 @@ public class UserServiceBeanImpl implements UserService {
 	public String sleepLongTimeWithTransaction(User user, long sleepTime) {
 		try {
 			ux.begin();
-			Thread.sleep(Long.MAX_VALUE);
+			Thread.sleep(sleepTime);
 			ux.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,7 +113,7 @@ public class UserServiceBeanImpl implements UserService {
 	@Override
 	public String sleepLongTimeWithoutTransaction(User user, long sleepTime) {
 		try {
-			Thread.sleep(Long.MAX_VALUE);
+			Thread.sleep(sleepTime);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

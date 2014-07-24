@@ -142,3 +142,19 @@ public void testBatchSaveWithTransactionAttributeSupportsWithUx() throws Excepti
 }
 ```	
 ### [TransactionAttribute Test Case](https://github.com/wuxii/test-parent/blob/master/ee-parent/jta-ee/src/test/java/org/moon/test/ee/service/UserServiceTransactionAttributeTest.java)
+
+## Transaction Timeout Test
+
+[Tomee TransactionManager Configuration](http://tomee.apache.org/transactionmanager-config.html)
+
+## Summary
+
+TransactionAttributeType
+<ul>
+<li>MANDATORY:Bean的强制运行在客户端的事务。
+<li>NEVER：客户端中不能存在事务。
+<li>NOT_SUPPORTED：如果Bean运行在客户端事务中，客户端的事务回滚也回滚不了服务端的事务。
+<li>REQUIRED：如果Bean运行在客户端事务中，客户端的事务回滚了，服务的也跟着回滚。
+<li>REQUIRES_NEW:与NOT_SUPPORT相同
+<li>SUPPORTS：与REQUIRED相同
+</ul>

@@ -6,4 +6,7 @@
 		UserName sa
 		Password 
 	</Resource>
+	<!-- <TransactionManager id="jta/moon" type="TransactionManager">
+		defaultTransactionTimeout = 10 seconds
+	</TransactionManager> -->
 </openejb>
