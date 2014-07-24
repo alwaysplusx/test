@@ -43,9 +43,7 @@ public class UserServiceTransactionAttributeTest {
 		props.put("openejb.conf.file", "src/main/resources/openejb.xml");
 		container = EJBContainer.createEJBContainer(props);
 		container.getContext().bind("inject", this);
-		for (int i = 0; i < count; i++) {
-			users.add(new User("user_" + i, i, "F", "10024125125125" + i, Calendar.getInstance()));
-		}
+		reflushDate();
 	}
 
 	@After
@@ -110,7 +108,6 @@ public class UserServiceTransactionAttributeTest {
 	public void testBatchSaveWithTransactionAttributeNotSupportWithUx() throws Exception {
 		assertEquals(0, userRepository.count());
 		ux.begin();
-		// exception
 		serviceDefault.batchSaveWithTransactionAttributeNotSupport(users);
 		ux.commit();
 		assertEquals(count, userRepository.count());
