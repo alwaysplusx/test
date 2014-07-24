@@ -35,7 +35,7 @@ public class UserServiceTransactionAttributeTest {
 
 	private EJBContainer container;
 	List<User> users = new ArrayList<User>();
-	int count = 10;
+	static final int COUNT = 10;
 
 	@Before
 	public void setUp() throws Exception {
@@ -64,7 +64,7 @@ public class UserServiceTransactionAttributeTest {
 		try {
 			serviceDefault.batchSaveWithTransactionAttributeMandatory(users);
 		} finally {
-			assertEquals(0, userRepository.count());
+			assertEquals("batch save throw exception and rollback, users count is 0", 0, userRepository.count());
 		}
 	}
 
@@ -74,14 +74,14 @@ public class UserServiceTransactionAttributeTest {
 		ux.begin();
 		serviceDefault.batchSaveWithTransactionAttributeMandatory(users);
 		ux.commit();
-		assertEquals(count, userRepository.count());
+		assertEquals("save users success, users count equals user size", users.size(), userRepository.count());
 	}
 
 	@Test
 	public void testBatchSaveWithTransactionAttributeNever() throws Exception {
 		assertEquals(0, userRepository.count());
 		serviceDefault.batchSaveWithTransactionAttributeNever(users);
-		assertEquals(count, userRepository.count());
+		assertEquals("save success user count equals user size", users.size(), userRepository.count());
 	}
 
 	@Test(expected = EJBException.class)
@@ -93,7 +93,7 @@ public class UserServiceTransactionAttributeTest {
 			serviceDefault.batchSaveWithTransactionAttributeNever(users);
 			ux.commit();
 		} finally {
-			assertEquals(0, userRepository.count());
+			assertEquals("batchSave throw exception and rollback, users count is 0", 0, userRepository.count());
 		}
 	}
 
@@ -101,7 +101,7 @@ public class UserServiceTransactionAttributeTest {
 	public void testBatchSaveWithTransactionAttributeNotSupport() throws Exception {
 		assertEquals(0, userRepository.count());
 		serviceDefault.batchSaveWithTransactionAttributeNotSupport(users);
-		assertEquals(count, userRepository.count());
+		assertEquals("save success, users count equals users size", users.size(), userRepository.count());
 	}
 
 	@Test
@@ -110,14 +110,19 @@ public class UserServiceTransactionAttributeTest {
 		ux.begin();
 		serviceDefault.batchSaveWithTransactionAttributeNotSupport(users);
 		ux.commit();
-		assertEquals(count, userRepository.count());
+		assertEquals("save success, users count equals users size", users.size(), userRepository.count());
+		reflushDate();
+		ux.begin();
+		serviceDefault.batchSaveWithTransactionAttributeNotSupport(users);
+		ux.rollback();
+		assertEquals("can't rollback batchSave transaction, users count double than users size", users.size() * 2, userRepository.count());
 	}
 
 	@Test
 	public void testBatchSaveWithTransactionAttributeRequired() throws Exception {
 		assertEquals(0, userRepository.count());
 		serviceDefault.batchSaveWithTransactionAttributeRequired(users);
-		assertEquals(count, userRepository.count());
+		assertEquals("save success, users count equals users size", users.size(), userRepository.count());
 	}
 
 	@Test
@@ -126,14 +131,19 @@ public class UserServiceTransactionAttributeTest {
 		ux.begin();
 		serviceDefault.batchSaveWithTransactionAttributeRequired(users);
 		ux.commit();
-		assertEquals(count, userRepository.count());
+		assertEquals("save success, users count equals users size", users.size(), userRepository.count());
+		reflushDate();
+		ux.begin();
+		serviceDefault.batchSaveWithTransactionAttributeRequired(users);
+		ux.rollback();// roll back batch save transaction
+		assertEquals("ux has rollback, users count not change!", users.size(), userRepository.count());
 	}
 
 	@Test
 	public void testBatchSaveWithTransactionAttributeSupports() {
 		assertEquals(0, userRepository.count());
 		serviceDefault.batchSaveWithTransactionAttributeSupports(users);
-		assertEquals(count, userRepository.count());
+		assertEquals("save success, users count equals users size", users.size(), userRepository.count());
 	}
 
 	@Test
@@ -142,14 +152,19 @@ public class UserServiceTransactionAttributeTest {
 		ux.begin();
 		serviceDefault.batchSaveWithTransactionAttributeSupports(users);
 		ux.commit();
-		assertEquals(count, userRepository.count());
+		assertEquals("save success, users count equals users size", users.size(), userRepository.count());
+		reflushDate();
+		ux.begin();
+		serviceDefault.batchSaveWithTransactionAttributeSupports(users);
+		ux.rollback();
+		assertEquals("rollback batchSave transaction success, users count not change", users.size(), userRepository.count());
 	}
 
 	@Test
 	public void testBatchSaveWithTransactionAttributeRequestNew() {
 		assertEquals(0, userRepository.count());
 		serviceDefault.batchSaveWithTransactionAttributeRequestNew(users);
-		assertEquals(count, userRepository.count());
+		assertEquals("save success, users count equals users size", users.size(), userRepository.count());
 	}
 
 	@Test
@@ -158,19 +173,19 @@ public class UserServiceTransactionAttributeTest {
 		ux.begin();
 		serviceDefault.batchSaveWithTransactionAttributeRequestNew(users);
 		ux.commit();
-		assertEquals(count, userRepository.count());
+		assertEquals("save success, users count equals users size", users.size(), userRepository.count());
 		reflushDate();
 		ux.begin();
 		serviceDefault.batchSaveWithTransactionAttributeRequestNew(users);
 		em.persist(new User("defualt_01", 30, "F", "08678899876", Calendar.getInstance()));
-		// roll back this entityManager transaction, but can't roll back batch save transaction
+		// roll back this entityManager transaction, but can't roll back batchSave transaction
 		ux.rollback();
-		assertEquals(count * 2, userRepository.count());
+		assertEquals("rollback client transaction, but can't roll back batchSave transaction", users.size() * 2, userRepository.count());
 	}
 
 	private void reflushDate() {
 		users.clear();
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < COUNT; i++) {
 			users.add(new User("double_" + i, 2 * (i + 1), "F", "08678899876" + i, Calendar.getInstance()));
 		}
 	}
