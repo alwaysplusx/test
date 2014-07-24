@@ -141,3 +141,4 @@ public void testBatchSaveWithTransactionAttributeSupportsWithUx() throws Excepti
 	assertEquals("rollback batchSave transaction success, users count not change", users.size(), userRepository.count());
 }
 ```	
+### [TransactionAttribute Test Case](https://github.com/wuxii/test-parent/blob/master/ee-parent/jta-ee/src/test/java/org/moon/test/ee/service/UserServiceTransactionAttributeTest.java)
