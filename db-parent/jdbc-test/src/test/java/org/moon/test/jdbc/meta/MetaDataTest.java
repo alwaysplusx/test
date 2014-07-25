@@ -1,7 +1,10 @@
 package org.moon.test.jdbc.meta;
 
+import static org.moon.test.jdbc.meta.PrintUtils.*;
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
@@ -21,53 +24,39 @@ public class MetaDataTest {
 		metaData = conn.getMetaData();
 	}
 
-	@Test
-	public void print() throws Exception {
-		System.out.println("Database Name    : " + metaData.getDatabaseProductName());
-		System.out.println("Database Version : " + metaData.getDatabaseProductVersion());
-		System.out.println("Driver Name      : " + metaData.getDriverName());
-		System.out.println("Driver Version   : " + metaData.getDriverVersion());
-	}
-
-	@Test
-	public void testGetTableMetaData() throws Exception {
-		StringBuffer o = new StringBuffer();
-		Statement statement = conn.createStatement();
-		ResultSetMetaData data = statement.executeQuery("select * from t_user").getMetaData();
-		o.append("-------------------------------------------------------------------------------------------------").append("\n")
-				.append("|    Name    |    TypeName    |    ClassName    |    Size    |").append("\n")
-				.append("-------------------------------------------------------------------------------------------------").append("\n");
-		for (int i = 1; i <= data.getColumnCount(); i++) {
-			o.append("|    ").append(data.getColumnName(i)).append("	|	").append(data.getColumnType(i)).append("	|	").append(data.getColumnClassName(i)).append("	|	")
-					.append(data.getColumnDisplaySize(i)).append("	|	").append(data.getColumnTypeName(i)).append("	|").append("\n");
-
-		}
-		o.append("-------------------------------------------------------------------------------------------------");
-		System.out.println(o.toString());
-		statement.close();
-	}
-
-	private static final int LEFT = 1;
-	private static final int RIGHT = -1;
-
-	public String appendToLength(String str, int length, int left) {
-		if (str.length() < length) {
-			if (LEFT == left) {
-				str = appendToLength(" " + str, length, left * -1);
-			} else {
-				str = appendToLength(str + " ", length, left * -1);
-			}
-		}
-		return str;
-	}
-
-	public static void main(String[] args) {
-		String string = new MetaDataTest().appendToLength("def", 100, RIGHT);
-		System.out.println(string);
-	}
-
 	@After
 	public void tearDown() throws Exception {
 		conn.close();
 	}
+
+	@Test
+	public void printDatabaseMetaData() throws Exception {
+		System.out.println("Database Name    : " + metaData.getDatabaseProductName());
+		System.out.println("Database Version : " + metaData.getDatabaseProductVersion());
+		System.out.println("Driver Name      : " + metaData.getDriverName());
+		System.out.println("Driver Version   : " + metaData.getDriverVersion());
+		ResultSet tables = metaData.getTables(conn.getCatalog(), "PUBLIC", null, new String[]{"TABLE"});
+		ResultSetMetaData data = tables.getMetaData();
+		System.out.println("Table Name       : " + data.getTableName(1));
+		printTableStruts(data);
+	}
+
+	@Test
+	public void testGetTableInfo() throws Exception {
+		Statement statement = conn.createStatement();
+		ResultSetMetaData data = statement.executeQuery("select * from t_user").getMetaData();
+		printTableStruts(data);
+		statement.close();
+	}
+
+	@Test
+	public void testGetConstraint() throws Exception {
+		ResultSet primaryKeys = metaData.getPrimaryKeys(conn.getCatalog(), "PUBLIC", "T_USER");
+		System.out.println("Table `t_user` primary keys:");
+		printRecord(primaryKeys);
+		ResultSet importedKeys = metaData.getImportedKeys(conn.getCatalog(), "PUBLIC", "T_USER");
+		System.out.println("Table `t_user` imported keys");
+		printRecord(importedKeys);
+	}
+	
 }

@@ -1,7 +1,7 @@
 create table t_user(
-	id int,
-	usercode varchar(20),
-	username varchar(20),
+	id int primary key,
+	usercode varchar(20) unique,
+	username varchar(20) unique,
 	password varchar(20),
 	level char(2),
 	groupId int
