@@ -75,8 +75,7 @@ public class DBPrintUtils {
 class Pad {
 
 	public static final int Center = -1;
-	public static final int Left = 0;
-	public static final int Right = 2;
+	public static final int Left = 1;
 
 	public static String appendToLength(String str, int length) {
 		return appendToLength(str, length, Center);
@@ -89,9 +88,7 @@ class Pad {
 	public static String appendToLength(StringBuffer sb, int length, int align, String appendStr) {
 		if (sb.length() < length) {
 			if (Left == align) {
-				return appendToLength(sb.append(appendStr), length, Left, appendStr);
-			} else if (Right == align) {
-				return appendToLength(sb.insert(0, appendStr), length, Right, appendStr);
+				return appendToLength(sb.append(appendStr), length, align * Center, appendStr);
 			} else {
 				return appendToLength(sb.insert(0, appendStr), length, align * Center, appendStr);
 			}
