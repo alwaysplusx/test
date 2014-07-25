@@ -4,6 +4,7 @@ create table t_user(
 	username varchar(20) unique,
 	password varchar(20),
 	level char(2),
+	img blob,
 	groupId int
 );
 

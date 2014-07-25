@@ -4,12 +4,13 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-class PrintUtils {
+import static org.moon.test.jdbc.meta.Pad.*;
+
+public class DBPrintUtils {
 	
 	public static final int W = 20;
 	public static final String B = "\n";
 	public static final String S = "|";
-	private static final int LEFT = 1;
 
 	public static void printTableStruts(ResultSetMetaData tableMetaData) throws Exception{
 		StringBuffer t = new StringBuffer();
@@ -17,7 +18,7 @@ class PrintUtils {
 		 .append(S).append(appendToLength("Type", W))
 		 .append(S).append(appendToLength("className", W))
 		 .append(S).append(appendToLength("Size", W)).append(S);
-		String hr = appendToLength("", t.length(), LEFT, "-");
+		String hr = appendToLength(new StringBuffer("-"), t.length(), Center, "-");
 		
 		StringBuffer o = new StringBuffer();
 		o.append(hr).append(B).append(t.toString()).append(B).append(hr).append(B);
@@ -31,31 +32,13 @@ class PrintUtils {
 		System.out.println(o.append(hr).toString());
 	}
 	
-	public static String appendToLength(String str, int length) {
-		return appendToLength(str, length, LEFT);
-	}
-
-	public static String appendToLength(String str, int length, int left) {
-		return appendToLength(str, length, left, " ");
-	}
-
-	public static String appendToLength(String str, int length, int left, String appendStr) {
-		if (str.length() < length) {
-			if (LEFT == left) {
-				str = appendToLength(appendStr + str, length, left * -1, appendStr);
-			} else {
-				str = appendToLength(str + appendStr, length, left * -1, appendStr);
-			}
-		}
-		return str;
-	}
-
 	public static void printResultSet(ResultSet set) throws SQLException {
 		while (set.next()) {
 			for (int i = 1;; i++) {
 				try {
-					System.out.println(set.getObject(i));
+					System.out.print(set.getObject(i)+ "	");
 				} catch (Exception e) {
+					System.out.println();
 					break;
 				}
 			}
@@ -70,7 +53,7 @@ class PrintUtils {
 			t.append(appendToLength(data.getColumnName(i), W)).append(S);
 		}
 		StringBuffer o = new StringBuffer();
-		String hr = appendToLength("-", t.length(), LEFT, "-");
+		String hr = appendToLength(new StringBuffer("-"), t.length(), Center, "-");
 		o.append(hr).append(B).append(t).append(B).append(hr).append(B);
 		while (record.next()) {
 			o.append(S);
@@ -87,4 +70,32 @@ class PrintUtils {
 		System.out.println(o.toString());
 	}
 	
+}
+
+class Pad {
+
+	public static final int Center = -1;
+	public static final int Left = 0;
+	public static final int Right = 2;
+
+	public static String appendToLength(String str, int length) {
+		return appendToLength(str, length, Center);
+	}
+
+	public static String appendToLength(String str, int length, int align) {
+		return appendToLength(new StringBuffer(str), length, align, " ");
+	}
+
+	public static String appendToLength(StringBuffer sb, int length, int align, String appendStr) {
+		if (sb.length() < length) {
+			if (Left == align) {
+				return appendToLength(sb.append(appendStr), length, Left, appendStr);
+			} else if (Right == align) {
+				return appendToLength(sb.insert(0, appendStr), length, Right, appendStr);
+			} else {
+				return appendToLength(sb.insert(0, appendStr), length, align * Center, appendStr);
+			}
+		}
+		return sb.toString();
+	}
 }

@@ -1,6 +1,6 @@
 package org.moon.test.jdbc.meta;
 
-import static org.moon.test.jdbc.meta.PrintUtils.*;
+import static org.moon.test.jdbc.meta.DBPrintUtils.*;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -54,9 +54,9 @@ public class MetaDataTest {
 		ResultSet primaryKeys = metaData.getPrimaryKeys(conn.getCatalog(), "PUBLIC", "T_USER");
 		System.out.println("Table `t_user` primary keys:");
 		printRecord(primaryKeys);
-		ResultSet importedKeys = metaData.getImportedKeys(conn.getCatalog(), "PUBLIC", "T_USER");
-		System.out.println("Table `t_user` imported keys");
-		printRecord(importedKeys);
+		//ResultSet importedKeys = metaData.getImportedKeys(conn.getCatalog(), "PUBLIC", "T_USER");
+		//System.out.println("Table `t_user` imported keys");
+		//printRecord(importedKeys);
 	}
 	
 }
