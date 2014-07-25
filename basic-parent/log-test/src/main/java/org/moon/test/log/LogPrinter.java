@@ -8,7 +8,7 @@ public class LogPrinter {
 	private Logger log = LogManager.getLogger();
 
 	public void print() {
-		log.info("simple log info message! {0}");
+		log.info("simple log info message! result is {}", "success");
 	}
 
 	public static void main(String[] args) {
