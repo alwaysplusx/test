@@ -6,12 +6,10 @@
 		<artifactId>ee-parent</artifactId>
 		<version>${project.version}</version>
 	</parent>
-	<artifactId>jta-ee</artifactId>
+	<artifactId>jms-ee</artifactId>
 	<packaging>war</packaging>
 	<properties>
 		<openejb.version>4.6.0</openejb.version>
-		<hibernate.version>4.2.5.Final</hibernate.version>
-		<h2.version>1.4.177</h2.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -19,18 +17,12 @@
 			<artifactId>openejb-core</artifactId>
 			<version>${openejb.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>${h2.version}</version>
-			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-jdk14</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>

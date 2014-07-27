@@ -15,6 +15,7 @@
 	<modules>
 		<module>jta-ee</module>
 		<module>intercept-ee</module>
+		<module>jms-ee</module>
 	</modules>
 	<dependencies>
 		<dependency>
@@ -32,7 +33,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
+			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 			<scope>test</scope>
 		</dependency>
