@@ -6,26 +6,29 @@
 		<artifactId>plugin-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>ejb-plugin</artifactId>
-	<packaging>ejb</packaging>
+	<artifactId>ear-plugin</artifactId>
+	<packaging>ear</packaging>
 	<dependencies>
 		<dependency>
-			<groupId>javax.ejb</groupId>
-			<artifactId>javax.ejb-api</artifactId>
-			<version>3.2</version>
+			<groupId>org.moon.test</groupId>
+			<artifactId>ejb-plugin</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
 		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ejb-plugin</artifactId>
-				<version>2.3</version>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.9.1</version>
 				<configuration>
-					<ejbVersion>3.0</ejbVersion>
-					<!-- default fasle <generateClient>true</generateClient> -->
-					<!-- <clientIncludes> <clientInclude>org/moon/*Client.class</clientInclude> 
-						</clientIncludes> -->
+					<generateApplicationXml>true</generateApplicationXml>
+					<jarModule>
+						<groupId>org.moon.test</groupId>
+						<artifactId>ejb-plugin</artifactId>
+						<includeInApplicationXml>true</includeInApplicationXml>
+					</jarModule>
 				</configuration>
 			</plugin>
 		</plugins>
