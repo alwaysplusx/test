@@ -6,6 +6,7 @@
 	<modules>
 		<module>ejb-plugin</module>
 		<module>ear-plugin</module>
+		<module>war-plugin</module>
 	</modules>
 	<parent>
 		<groupId>org.moon.test</groupId>
