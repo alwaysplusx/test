@@ -3,10 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.moon.test</groupId>
 	<artifactId>test-parent</artifactId>
-	<version>${project.version}</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<project.version>0.0.1-SNAPSHOT</project.version>
 		<junit.version>4.11</junit.version>
 	</properties>
 	<modules>

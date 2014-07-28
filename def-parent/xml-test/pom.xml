@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.moon.test</groupId>
 		<artifactId>def-parent</artifactId>
-		<version>${project.version}</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>xml-test</artifactId>
 	<properties>
