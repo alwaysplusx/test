@@ -1,4 +1,4 @@
-package org.moon.test.hc;
+package org.moon.test.http.hc;
 
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
