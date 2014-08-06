@@ -27,7 +27,7 @@ public class MessageHandlerTest {
 
 	@After
 	public void tearDown() throws Exception {
-		container.close();
+		// container.close();
 	}
 
 	@Test
