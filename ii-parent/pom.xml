@@ -8,6 +8,7 @@
 		<module>concurrent-ii</module>
 		<module>rmi-ii</module>
 		<module>jmx-ii</module>
+		<module>jvm-ii</module>
 	</modules>
 	<properties>
 		<junit.version>4.11</junit.version>
