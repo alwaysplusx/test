@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:jms="http://www.springframework.org/schema/jms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/jms
+		http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean id="queue" class="org.apache.activemq.command.ActiveMQQueue" autowire="constructor">
+		<constructor-arg value="moon.inbondMessage" />
+	</bean>
+
+	<bean id="brokerService" class="org.apache.activemq.broker.BrokerService" init-method="start" destroy-method="stop" scope="singleton">
+		<property name="useJmx" value="true"/>
+		<property name="persistent" value="true"/>
+		<property name="brokerName" value="localhost"/>
+		<property name="dataDirectoryFile" value="./target/activemq-data"/>
+		<property name="transportConnectors">
+			<list>
+				<bean class="org.apache.activemq.broker.TransportConnector">
+					<property name="uri" value="tcp://localhost:61616"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+</beans>
