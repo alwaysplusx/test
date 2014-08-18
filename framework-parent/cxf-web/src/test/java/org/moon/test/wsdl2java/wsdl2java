@@ -1,0 +1,7 @@
+wsdl2java -d <output-directory> -p <package-name> <uri>
+
+wsdl2java -d <output-directory> -p <package-name> -asyncMethods <uri>
+
+wsdl2java -d d:\proxy -p com.moon.test.wsdj2java -encoding utf-8 -asyncMethods http://localhost:8080/test?wsdl
+
+
