@@ -15,7 +15,7 @@
 		
 		<amq:persistenceAdapter>
 			<!-- <amq:jdbcPersistenceAdapter dataSource="#dataSourceName"/> -->	
-			<amq:kahaDB directory="./target/activqma-data"/>
+			<amq:kahaDB directory="./target/activemq-data"/>
 		</amq:persistenceAdapter>
 	
 		<amq:shutdownHooks>

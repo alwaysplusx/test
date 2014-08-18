@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/activemq.xml")
+@ContextConfiguration("classpath:/spring-activemq.xml")
 public class ActiveMQXmlTest {
 
 	@Autowired
