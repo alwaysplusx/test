@@ -25,6 +25,11 @@
 				</bean>
 			</list>
 		</property>
+		<property name="shutdownHooks">
+			<list>
+				<bean class="org.apache.activemq.hooks.SpringContextHook"/>
+			</list>
+		</property>
 	</bean>
 
 </beans>
