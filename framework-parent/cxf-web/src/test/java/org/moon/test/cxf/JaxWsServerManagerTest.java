@@ -1,7 +1,7 @@
 package org.moon.test.cxf;
 
+import org.moon.test.cxf.JaxWsServerManager;
 import org.moon.test.cxf.Simple;
-import org.moon.test.cxf.client.JaxWsServerManager;
 
 public class JaxWsServerManagerTest {
 

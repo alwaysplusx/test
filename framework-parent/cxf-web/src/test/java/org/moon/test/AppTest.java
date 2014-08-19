@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.moon.test.cxf.JaxWsClientManager;
 import org.moon.test.cxf.Simple;
-import org.moon.test.cxf.client.JaxWsClientManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;

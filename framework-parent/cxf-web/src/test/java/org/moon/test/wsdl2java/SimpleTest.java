@@ -9,8 +9,8 @@ import javax.xml.ws.Response;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.moon.test.cxf.client.JaxWsClientManager;
-import org.moon.test.cxf.client.JaxWsServerManager;
+import org.moon.test.cxf.JaxWsClientManager;
+import org.moon.test.cxf.JaxWsServerManager;
 
 public class SimpleTest {
 

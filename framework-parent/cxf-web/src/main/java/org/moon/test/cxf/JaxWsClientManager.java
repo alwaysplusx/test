@@ -1,4 +1,4 @@
-package org.moon.test.cxf.client;
+package org.moon.test.cxf;
 
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
