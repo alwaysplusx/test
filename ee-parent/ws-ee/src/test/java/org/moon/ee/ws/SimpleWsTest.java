@@ -27,7 +27,7 @@ public class SimpleWsTest {
 
 	@Test
 	public void testStart() throws Exception {
-		Thread.sleep(Long.MAX_VALUE);
+		// Thread.sleep(Long.MAX_VALUE);
 	}
 
 	@Test
