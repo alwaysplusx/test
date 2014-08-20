@@ -1,0 +1,21 @@
+<ehcache xmlns="http://ehcache.org/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ehcache.org http://ehcache.org/ehcache.xml">
+
+	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+	                                 properties="peerDiscovery=manual, rmiUrls=//192.168.1.102:51000/myCache1|//192.168.1.102:51001/myCache1"/>
+	
+	<cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+	                                 properties="hostName=192.168.1.102,port=51001,socketTimeoutMillis=2000"/>
+	
+	<diskStore path="java.io.tmpdir"/>
+	
+	<cache name="myCache1"
+	       maxEntriesLocalHeap="10000"
+	       timeToIdleSeconds="300"
+	       timeToLiveSeconds="600"
+	       memoryStoreEvictionPolicy="LFU"
+	       transactionalMode="off">
+	    <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+	</cache>
+
+</ehcache>
