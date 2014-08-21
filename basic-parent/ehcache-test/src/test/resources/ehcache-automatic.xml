@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	<!-- 
+		peerDiscovery=automatic
+	    timeToLive - specify a value between 0 and 255 which determines how far the packets will propagate.
+	      By convention, the restrictions are:
+	      0   - the same host
+	      1   - the same subnet
+	      32  - the same site
+	      64  - the same region
+	      128 - the same continent
+	      255 - unrestricted
+	-->
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=automatic, 
+					multicastGroupAddress=230.0.0.255,
+					multicastGroupPort=4446, 
+					timeToLive=1" />
+
+	<cacheManagerPeerListenerFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+		properties="hostname=localhost,
+					port=40001,
+					socketTimeoutMillis=5000" />
+
+	<cache name="myCache" eternal="true" maxEntriesLocalHeap="10000">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=true,
+						replicateUpdates=true,
+						replicateUpdatesViaCopy=true,
+						replicateRemovals=true " />
+	</cache>
+
+</ehcache>    
