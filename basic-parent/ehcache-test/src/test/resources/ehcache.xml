@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	<!-- 
+		peerDiscovery=manual
+		The hostname is the hostname of the remote CacheManager peer. The port is the listening
+    	port of the RMICacheManagerPeerListener of the remote CacheManager peer.
+     -->	
+	<cacheManagerPeerProviderFactory 
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+        properties="peerDiscovery=manual,
+                    rmiUrls=//192.168.0.122:40001/myCache"/>
+
+	<cacheManagerPeerListenerFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+		properties="hostname=localhost,
+					port=40001,
+					socketTimeoutMillis=5000" />
+
+	<cache name="myCache" eternal="true" maxEntriesLocalHeap="10000">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=true,
+						replicateUpdates=true,
+						replicateUpdatesViaCopy=true,
+						replicateRemovals=true " />
+	</cache>
+
+</ehcache>    
