@@ -102,6 +102,7 @@ Configuration of Log4j 2 can be accomplished in 1 of 4 ways:
 以邮件形式发送异常信息
 
 >smtpUsername在验证授权时必填
+
 ```xml
 <!-- 收件人可以用逗号隔开 -->
 <SMTP name="SMTP" subject="Error Log" to="yyy@126.com" smtpHost="smtp.126.com"
