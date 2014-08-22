@@ -23,5 +23,6 @@
 		<module>ioc-parent</module>
 		<module>ee-parent</module>
 		<module>plugin-parent</module>
+		<module>logger-parent</module>
 	</modules>
 </project>
