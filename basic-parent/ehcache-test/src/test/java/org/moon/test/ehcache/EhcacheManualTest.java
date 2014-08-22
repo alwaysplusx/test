@@ -20,7 +20,7 @@ public class EhcacheManualTest {
 		Scanner scan = new Scanner(System.in);
 		while (true) {
 			System.out.println("******************************************************");
-			System.out.println("*  ehcache use manual please input                   *");
+			System.out.println("*  Ehcache Manual Peer Discovery Test                *");
 			System.out.println("*   - use 'get [*]' get element from cache           *");
 			System.out.println("*   - use 'put [*]' put element into cache           *");
 			System.out.println("*   - use 'remove [*]' remove element from cache     *");

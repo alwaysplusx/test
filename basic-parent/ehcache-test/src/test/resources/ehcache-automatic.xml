@@ -20,9 +20,7 @@
 
 	<cacheManagerPeerListenerFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-		properties="hostname=localhost,
-					port=40001,
-					socketTimeoutMillis=5000" />
+		properties="socketTimeoutMillis=5000" />
 
 	<cache name="myCache" eternal="true" maxEntriesLocalHeap="10000">
 		<cacheEventListenerFactory

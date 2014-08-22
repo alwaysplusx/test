@@ -16,7 +16,7 @@ public class EhcacheAutomaticTest {
 		Scanner scan = new Scanner(System.in);
 		while (true) {
 			System.out.println("******************************************************");
-			System.out.println("*  ehcache use automatic please input                *");
+			System.out.println("*  Ehcache Automatic Peer Discovery Test             *");
 			System.out.println("*   - use 'get [*]' get element from cache           *");
 			System.out.println("*   - use 'put [*]' put element into cache           *");
 			System.out.println("*   - use 'remove [*]' remove element from cache     *");
@@ -28,7 +28,7 @@ public class EhcacheAutomaticTest {
 				String ele = next.substring(3).trim();
 				cache.put(new Element(ele, ele));
 				System.out.println("------------------------------------------------------");
-				System.out.println(">> put ele " + ele + " to cache                     ");
+				System.out.println(">> put " + ele + " to cache                     ");
 				System.out.println("------------------------------------------------------\n");
 			} else if (next.startsWith("get")) {
 				String ele = next.substring(3).trim();
