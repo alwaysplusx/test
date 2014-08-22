@@ -2,6 +2,8 @@
 <ehcache>
 	<!-- 
 		peerDiscovery=automatic
+		multicastGroupAddress (mandatory) - specify a valid multicast group address
+    	multicastGroupPort (mandatory) - specify a dedicated port for the multicast heart beat traffic
 	    timeToLive - specify a value between 0 and 255 which determines how far the packets will propagate.
 	      By convention, the restrictions are:
 	      0   - the same host
@@ -14,7 +16,7 @@
 	<cacheManagerPeerProviderFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
 		properties="peerDiscovery=automatic, 
-					multicastGroupAddress=230.0.0.255,
+					multicastGroupAddress=230.0.0.1,
 					multicastGroupPort=4446, 
 					timeToLive=1" />
 
