@@ -9,6 +9,6 @@
 	<artifactId>logger-parent</artifactId>
 	<packaging>pom</packaging>
 	<modules>
-		<module>log-test</module>
+		<module>log4j2-test</module>
 	</modules>
 </project>
