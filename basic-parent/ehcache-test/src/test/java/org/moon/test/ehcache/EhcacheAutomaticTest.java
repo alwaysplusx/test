@@ -1,5 +1,6 @@
 package org.moon.test.ehcache;
 
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
 import net.sf.ehcache.Cache;
@@ -8,11 +9,21 @@ import net.sf.ehcache.Element;
 
 public class EhcacheAutomaticTest {
 
-	@SuppressWarnings("resource")
-	public static void main(String[] args) {
+	private static CacheManager manager = null;
+	private static Cache cache = null;
+
+	static {
 		System.setProperty("net.sf.ehcache.skipUpdateCheck", "true");
-		CacheManager manager = CacheManager.newInstance("./src/test/resources/ehcache-automatic.xml");
-		Cache cache = manager.getCache("myCache");
+		try {
+			manager = CacheManager.newInstance("./src/test/resources/ehcache-automatic.xml");
+			cache = EhCacheUtils.getCacheInstance(manager, "myCache");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("resource")
+	public static void main(String[] args) throws RemoteException {
 		Scanner scan = new Scanner(System.in);
 		while (true) {
 			System.out.println("******************************************************");
@@ -40,7 +51,7 @@ public class EhcacheAutomaticTest {
 				System.out.println("------------------------------------------------------");
 				System.out.println(">> remove " + ele + " from cache " + cache.remove(ele));
 				System.out.println("------------------------------------------------------\n");
-			}			
+			}
 		}
 
 	}

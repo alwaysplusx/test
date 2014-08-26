@@ -14,7 +14,7 @@
 	<cacheManagerPeerProviderFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
 		properties="peerDiscovery=automatic, 
-					multicastGroupAddress=230.0.0.255,
+					multicastGroupAddress=230.0.0.1,
 					multicastGroupPort=4446, 
 					timeToLive=1" />
 	<!-- 
@@ -37,10 +37,12 @@
 	<cache name="myCache" eternal="true" maxEntriesLocalHeap="10000">
 		<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicatePuts=true,
-						replicateUpdates=true,
-						replicateUpdatesViaCopy=true,
-						replicateRemovals=true " />
+			properties="replicateAsynchronously=true,
+                       	replicatePuts=true,
+                     	replicateUpdates=true,
+                      	replicateUpdatesViaCopy=true,
+                       	replicateRemovals=true,
+                       	asynchronousReplicationIntervalMillis=1000" />
 	</cache>
 
-</ehcache>    
+</ehcache>
