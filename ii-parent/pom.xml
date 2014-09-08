@@ -10,6 +10,7 @@
 		<module>jmx-ii</module>
 		<module>jvm-ii</module>
 		<module>socket-ii</module>
+		<module>rxtx-ii</module>
 	</modules>
 	<properties>
 		<junit.version>4.11</junit.version>
