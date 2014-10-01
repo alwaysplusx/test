@@ -24,5 +24,6 @@
 		<module>ee-parent</module>
 		<module>plugin-parent</module>
 		<module>logger-parent</module>
+		<module>tomee-parent</module>
 	</modules>
 </project>
