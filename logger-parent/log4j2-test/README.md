@@ -110,6 +110,19 @@ Configuration of Log4j 2 can be accomplished in 1 of 4 ways:
 	smtpPassword="xxx" smtpDebug="false">
 </SMTP>
 ```
+
+#### SocketAppender
+
+将日志通过socket发送到目标socket服务
+
+> 注意：使用时先开启服务，确保能联通服务端
+
+```xml
+<Socket name="socket" host="localhost" port="9090">
+  <PatternLayout pattern="${ConsolePattern}" />
+</Socket>
+```
+
 ### More Other Appender
 <ul>
 <li>NoSQLAppender
