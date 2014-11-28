@@ -10,5 +10,6 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>log4j2-test</module>
+		<module>log4j-test</module>
 	</modules>
 </project>
