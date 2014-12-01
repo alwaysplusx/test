@@ -14,6 +14,7 @@
 		<module>shiro-web</module>
 		<module>jsf-web</module>
 		<module>activemq-web</module>
+		<module>jaxrs-web</module>
 	</modules>
 	<properties>
 		<junit.version>4.11</junit.version>
