@@ -13,9 +13,9 @@ public class EhCacheUtils {
 
 	
 	/**
-	 * 根据缓存名称获取缓存,获取后会初始化缓存数据即同步其他节点上的数据到本地当前缓存中
+	 * 鏍规嵁缂撳瓨鍚嶇О鑾峰彇缂撳瓨,鑾峰彇鍚庝細鍒濆鍖栫紦瀛樻暟鎹嵆鍚屾鍏朵粬鑺傜偣涓婄殑鏁版嵁鍒版湰鍦板綋鍓嶇紦瀛樹腑
 	 * @param manager	{@link CacheManager}
-	 * @param cacheName 缓存名称
+	 * @param cacheName 缂撳瓨鍚嶇О
 	 * @return
 	 * @throws RemoteException {@link CachePeer#getElements(List)}
 	 */

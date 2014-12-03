@@ -65,7 +65,7 @@ public class HeartbeatReceiver {
 	}
 
 	public static void main(String[] args) throws Exception {
-		HeartbeatReceiver receiver = new HeartbeatReceiver(InetAddress.getByName("230.0.0.1"), 4446, null);
+		HeartbeatReceiver receiver = new HeartbeatReceiver(InetAddress.getByName("230.0.0.1"), 40001, null);
 		receiver.init();
 		Thread.sleep(Long.MAX_VALUE);
 	}

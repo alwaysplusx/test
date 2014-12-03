@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
-	<!-- 
-		peerDiscovery=automatic
-	    timeToLive - specify a value between 0 and 255 which determines how far the packets will propagate.
-	      By convention, the restrictions are:
-	      0   - the same host
-	      1   - the same subnet
-	      32  - the same site
-	      64  - the same region
-	      128 - the same continent
-	      255 - unrestricted
-	-->
+	<!--	peerDiscovery=automatic	-->
+	<!--    timeToLive - specify a value between 0 and 255 which determines how far the packets will propagate. -->
+	<!--      By convention, the restrictions are:	-->
+	<!--      0   - the same host			-->
+	<!--      1   - the same subnet			-->
+	<!--      32  - the same site			-->
+	<!--      64  - the same region			-->
+	<!--      128 - the same continent		-->
+	<!--      255 - unrestricted 			-->
 	<cacheManagerPeerProviderFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
 		properties="peerDiscovery=automatic, 
