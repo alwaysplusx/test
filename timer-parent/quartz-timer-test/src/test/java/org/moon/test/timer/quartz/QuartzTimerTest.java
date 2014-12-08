@@ -24,7 +24,7 @@ public class QuartzTimerTest {
 	public void setUp() throws Exception {
 		scheduler = StdSchedulerFactory.getDefaultScheduler();
 		jobDetail = JobBuilder.newJob(defaultJob).withIdentity("SimpleJobDetail").build();
-		trigger = TriggerBuilder.newTrigger().withIdentity("SimpleTrigger").withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5)).build();
+		trigger = TriggerBuilder.newTrigger().withIdentity("SimpleTrigger").withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(5)).build();
 	}
 
 	@Test
@@ -32,7 +32,7 @@ public class QuartzTimerTest {
 		scheduler.scheduleJob(jobDetail, trigger);
 		scheduler.start();
 
-		Thread.sleep(1000 * 3);
+		Thread.sleep(1000 * 20);
 	}
 
 	@After
