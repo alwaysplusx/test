@@ -12,5 +12,6 @@
 		<module>collection-test</module>
 		<module>ehcache-test</module>
 		<module>mail-test</module>
+		<module>dozer-test</module>
 	</modules>
 </project>
