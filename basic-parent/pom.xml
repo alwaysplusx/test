@@ -14,4 +14,5 @@
 		<module>mail-test</module>
 		<module>dozer-test</module>
 	</modules>
+	<version>../pom.xml</version>
 </project>
