@@ -5,6 +5,7 @@
 		<groupId>org.moon.test</groupId>
 		<artifactId>timer-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>quartz-timer-test</artifactId>
 	<properties>

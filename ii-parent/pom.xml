@@ -11,6 +11,7 @@
 		<module>jvm-ii</module>
 		<module>socket-ii</module>
 		<module>rxtx-ii</module>
+		<module>netty-ii</module>
 	</modules>
 	<properties>
 		<junit.version>4.11</junit.version>

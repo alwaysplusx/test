@@ -5,6 +5,7 @@
 		<groupId>org.moon.tomee</groupId>
 		<artifactId>tomee-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>client-test</artifactId>
 	<properties>

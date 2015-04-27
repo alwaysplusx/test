@@ -4,6 +4,7 @@
 		<groupId>org.moon.ii</groupId>
 		<artifactId>ii-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jvm-ii</artifactId>
 </project>

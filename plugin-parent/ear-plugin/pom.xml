@@ -5,6 +5,7 @@
 		<groupId>org.moon.test</groupId>
 		<artifactId>plugin-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>ear-plugin</artifactId>
 	<packaging>ear</packaging>

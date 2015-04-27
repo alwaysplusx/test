@@ -5,6 +5,7 @@
 		<groupId>org.moon.test</groupId>
 		<artifactId>doc-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>pdf-test</artifactId>
 	<properties>
