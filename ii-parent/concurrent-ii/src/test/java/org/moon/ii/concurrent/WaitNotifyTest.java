@@ -28,15 +28,16 @@ public class WaitNotifyTest {
     private int deep;
 
     @Test
-    public void test() {
+    public void test() throws Exception {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 synchronized (lockObject) {
                     loop();
+                    lockObject.notify();
                 }
             }
-        }).start();
+        }, "Sub-Thread-loop").start();
         // main thread
         long start = System.currentTimeMillis();
         try {
@@ -47,9 +48,15 @@ public class WaitNotifyTest {
                     System.out.println(">>> main thread be notified");
                 }
                 stop = true;
+                lockObject.notify();
             }
         } catch (InterruptedException e) {
         }
+        // while (deep != 0) {
+        // System.out.println(">>> wait sub destory");
+        // Thread.sleep(1000);
+        // }
+        // Thread.sleep(Long.MAX_VALUE);
     }
 
     public void loop() {
@@ -60,6 +67,8 @@ public class WaitNotifyTest {
             if (stop) {
                 return;
             }
+            if (deep > 3)
+                return;
             lockObject.wait();
             System.out.println(">> sun thread be notified");
             Thread.sleep(1000);
