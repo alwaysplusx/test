@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2015 wuxii@foxmail.com.
+ * Copyright 2002-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.moon.ii.netty;
+package org.moon.ii.netty.obj;
 
-import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerContext;
+import java.io.Serializable;
 
 /**
  * @author wuxii@foxmail.com
  */
-public class EchoServerHandler extends ChannelHandlerAdapter {
+public class SerialObj implements Serializable {
 
-	@Override
-	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		ctx.writeAndFlush(msg);
-	}
+    private static final long serialVersionUID = 6071393059865771216L;
+
+    public final String name;
+
+    public SerialObj(String name) {
+        this.name = name;
+    }
 
 }
