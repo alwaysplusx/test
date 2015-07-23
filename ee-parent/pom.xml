@@ -18,6 +18,7 @@
 		<module>intercept-ee</module>
 		<module>jms-ee</module>
 		<module>ws-ee</module>
+		<module>openejb-ee</module>
 	</modules>
 	<dependencies>
 		<dependency>
