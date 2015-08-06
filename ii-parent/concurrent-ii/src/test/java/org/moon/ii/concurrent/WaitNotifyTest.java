@@ -15,11 +15,13 @@
  */
 package org.moon.ii.concurrent;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author wuxii@foxmail.com
  */
+@Ignore
 public class WaitNotifyTest {
 
     private static final Object lockObject = new Object();

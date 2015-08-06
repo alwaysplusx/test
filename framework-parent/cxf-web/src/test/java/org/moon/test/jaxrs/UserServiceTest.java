@@ -6,7 +6,10 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +21,15 @@ public class UserServiceTest {
     String user2 = "<user><id>2</id><username>test</username><age>23</age></user>";
     Logger log = LoggerFactory.getLogger(UserServiceTest.class);
     HttpClient client;
+
+    @BeforeClass
+    public static void beforeClass() {
+        JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
+        sf.setResourceClasses(UserService.class);
+        sf.setResourceProvider(UserService.class, new SingletonResourceProvider(new UserService()));
+        sf.setAddress("http://localhost:9000");
+        sf.create();
+    }
 
     @Before
     public void setUp() {

@@ -8,6 +8,7 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import net.sf.ehcache.distribution.CachePeer;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class EhcacheManualTest {
@@ -49,6 +50,7 @@ public class EhcacheManualTest {
     }
 
     @Test
+    @Ignore
     public void testUseRmiPutElement() throws Exception {
         CachePeer cachePeer = (CachePeer) Naming.lookup("rmi://localhost:40001/myCache");
         cachePeer.put(new Element("$", (int) (Math.random() * 1000)));

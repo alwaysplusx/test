@@ -8,10 +8,12 @@ import javax.xml.ws.AsyncHandler;
 import javax.xml.ws.Response;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.moon.test.cxf.JaxWsClientManager;
 import org.moon.test.cxf.JaxWsServerManager;
 
+@Ignore
 public class SimpleTest {
 
     @BeforeClass

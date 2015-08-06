@@ -5,20 +5,20 @@ public class Bank {
     private float money = 1000.00f;
     
     public float deposit(Account account, float money) {
-        // 日志记录
-        // 帐户验证
+        // 鏃ュ織璁板綍
+        // 甯愭埛楠岃瘉
         // Begin Transaction
-        // 增加帐户金额
+        // 澧炲姞甯愭埛閲戦
         this.money += money;
         // Commit Transaction
         return this.money;
     }
 
     public float withdraw(Account account, float money) {
-        // 日志记录
-        // 帐户验证
+        // 鏃ュ織璁板綍
+        // 甯愭埛楠岃瘉
         // Begin Transaction
-        // 减少帐户金额
+        // 鍑忓皯甯愭埛閲戦
         this.money -= money;
         // Commit Transaction
         return this.money;

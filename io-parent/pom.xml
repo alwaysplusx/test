@@ -9,7 +9,7 @@
   <artifactId>io-parent</artifactId>
   <packaging>pom</packaging>
   <modules>
-  	<module>file-test</module>
-  	<module>io-test</module>
+      <module>file-test</module>
+      <module>io-test</module>
   </modules>
 </project>

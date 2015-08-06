@@ -12,10 +12,12 @@ import javax.ejb.embeddable.EJBContainer;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.moon.test.ee.persistence.User;
 import org.moon.test.ee.repository.UserRepository;
 
+@Ignore
 public class UserServiceImplTest {
 
     private EJBContainer container;

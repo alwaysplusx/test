@@ -1,6 +1,6 @@
 package org.moon.test.collection;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class ListTest {
         Field elemDate = list.getClass().getDeclaredField("elementData");
         elemDate.setAccessible(true);
         Object[] objs = (Object[]) elemDate.get(list);
-        assertEquals(16, objs.length);
+        assertNotEquals(11, objs.length);
         assertEquals(11, list.size());
     }
     

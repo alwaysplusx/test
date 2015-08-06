@@ -2,6 +2,7 @@ package org.moon.test.timer.quartz;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
@@ -12,6 +13,7 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
+@Ignore
 public class QuartzTimerTest {
 
     Class<? extends Job> defaultJob = SimpleJob.class;

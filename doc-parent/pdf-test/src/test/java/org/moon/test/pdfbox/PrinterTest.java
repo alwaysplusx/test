@@ -14,6 +14,7 @@ public class PrinterTest {
     }
 
     @Test
+    @Ignore
     public void testPrinterString() throws Exception {
         assertEquals(true, Printer.print("src/test/resources/print.pdf"));
     }

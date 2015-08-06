@@ -18,10 +18,12 @@ import javax.transaction.UserTransaction;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.moon.test.ee.persistence.User;
 import org.moon.test.ee.repository.UserRepository;
 
+@Ignore
 public class UserServiceTransactionAttributeTest {
 
     @EJB(beanName = "UserServiceDefaultImpl")
@@ -178,7 +180,8 @@ public class UserServiceTransactionAttributeTest {
         ux.begin();
         serviceDefault.batchSaveWithTransactionAttributeRequestNew(users);
         em.persist(new User("defualt_01", 30, "F", "08678899876", Calendar.getInstance()));
-        // roll back this entityManager transaction, but can't roll back batchSave transaction
+        // roll back this entityManager transaction, but can't roll back
+        // batchSave transaction
         ux.rollback();
         assertEquals("rollback client transaction, but can't roll back batchSave transaction", users.size() * 2, userRepository.count());
     }

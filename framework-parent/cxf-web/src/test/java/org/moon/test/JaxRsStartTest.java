@@ -2,12 +2,14 @@ package org.moon.test;
 
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.moon.test.jaxrs.UserService;
 
 public class JaxRsStartTest {
 
     @Test
+    @Ignore
     public void test() throws Exception {
         JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
         sf.setResourceClasses(UserService.class);

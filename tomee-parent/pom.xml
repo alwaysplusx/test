@@ -9,7 +9,7 @@
   <artifactId>tomee-parent</artifactId>
   <packaging>pom</packaging>
   <modules>
-  	<module>client-test</module>
+      <module>client-test</module>
   </modules>
   <groupId>org.moon.tomee</groupId>
 </project>

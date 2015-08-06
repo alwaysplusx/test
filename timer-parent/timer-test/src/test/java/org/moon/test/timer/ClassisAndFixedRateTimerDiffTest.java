@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ public class ClassisAndFixedRateTimerDiffTest {
     static long period = 1000 * 2;
 
     @Test
+    @Ignore
     public void avgSleepTimes() {
         int count = 0;
         for (Long l : sleepTimes) {

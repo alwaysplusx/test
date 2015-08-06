@@ -9,9 +9,11 @@ import javax.ejb.embeddable.EJBContainer;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.moon.test.ee.persistence.User;
 
+@Ignore
 public class UserRepositoryTest {
 
     private EJBContainer container;
@@ -38,5 +40,5 @@ public class UserRepositoryTest {
         userRepository.saveUser(user);
         assertEquals(1, userRepository.count());
     }
-    
+
 }
