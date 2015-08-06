@@ -11,25 +11,25 @@ import org.slf4j.LoggerFactory;
 @Stateless
 public class SimpleService {
 
-	private String text = "abc";
-	static Logger log = LoggerFactory.getLogger(SimpleService.class);
+    private String text = "abc";
+    static Logger log = LoggerFactory.getLogger(SimpleService.class);
 
-	@Interceptors({ LoggingInterceptor.class })
-	public void execute() {
-		log.info("execute");
-	}
+    @Interceptors({ LoggingInterceptor.class })
+    public void execute() {
+        log.info("execute");
+    }
 
-	@Log
-	public void executeWithAnnotation() {
-		log.info("execute with annotation");
-	}
+    @Log
+    public void executeWithAnnotation() {
+        log.info("execute with annotation");
+    }
 
-	public String getText() {
-		return text;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 
 }

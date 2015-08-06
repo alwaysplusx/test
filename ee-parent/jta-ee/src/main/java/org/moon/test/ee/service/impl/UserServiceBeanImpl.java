@@ -18,106 +18,106 @@ import org.moon.test.ee.service.UserService;
 @TransactionManagement(TransactionManagementType.BEAN)
 public class UserServiceBeanImpl implements UserService {
 
-	@Resource
-	UserTransaction ux;
-	@EJB
-	UserRepository userRepository;
+    @Resource
+    UserTransaction ux;
+    @EJB
+    UserRepository userRepository;
 
-	@Override
-	public String batchSave(List<User> users) {
-		try {
-			ux.begin();
-			for (User u : users) {
-				userRepository.saveUser(u);
-			}
-			ux.commit();
-			return SUCCESS;
-		} catch (Exception e) {
-			e.printStackTrace();
-			try {
-				ux.rollback();
-			} catch (IllegalStateException | SecurityException | SystemException e1) {
-				e1.printStackTrace();
-			}
-			return ERROR;
-		}
-	}
+    @Override
+    public String batchSave(List<User> users) {
+        try {
+            ux.begin();
+            for (User u : users) {
+                userRepository.saveUser(u);
+            }
+            ux.commit();
+            return SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                ux.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            return ERROR;
+        }
+    }
 
-	@Override
-	public String throwRuntimeExceptionAfterBatchSave(List<User> users) {
-		try {
-			ux.begin();
-			for (User u : users) {
-				userRepository.saveUser(u);
-			}
-			ux.commit();
-		} catch (Exception e) {
-			try {
-				ux.rollback();
-			} catch (IllegalStateException | SecurityException | SystemException e1) {
-				e1.printStackTrace();
-			}
-		}
-		throw new RuntimeException("测试异常");
-	}
+    @Override
+    public String throwRuntimeExceptionAfterBatchSave(List<User> users) {
+        try {
+            ux.begin();
+            for (User u : users) {
+                userRepository.saveUser(u);
+            }
+            ux.commit();
+        } catch (Exception e) {
+            try {
+                ux.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+        throw new RuntimeException("测试异常");
+    }
 
-	// TransactionManagementType.BEAN ejb容器将忽略TransactionAttribute
-	// @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	@Override
-	public String batchSaveWithTransactionAttributeRequestNew(List<User> users) {
-		throw new UnsupportedOperationException();
-	}
+    // TransactionManagementType.BEAN ejb容器将忽略TransactionAttribute
+    // @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
+    public String batchSaveWithTransactionAttributeRequestNew(List<User> users) {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public String batchSaveWithTransactionAttributeMandatory(List<User> users) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public String batchSaveWithTransactionAttributeMandatory(List<User> users) {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public String batchSaveWithTransactionAttributeNever(List<User> users) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public String batchSaveWithTransactionAttributeNever(List<User> users) {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public String batchSaveWithTransactionAttributeNotSupport(List<User> users) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public String batchSaveWithTransactionAttributeNotSupport(List<User> users) {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public String batchSaveWithTransactionAttributeRequired(List<User> users) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public String batchSaveWithTransactionAttributeRequired(List<User> users) {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public String batchSaveWithTransactionAttributeSupports(List<User> users) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public String batchSaveWithTransactionAttributeSupports(List<User> users) {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public String sleepLongTimeWithTransaction(User user, long sleepTime) {
-		try {
-			ux.begin();
-			Thread.sleep(sleepTime);
-			ux.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			try {
-				ux.rollback();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		}
-		return SUCCESS;
-	}
+    @Override
+    public String sleepLongTimeWithTransaction(User user, long sleepTime) {
+        try {
+            ux.begin();
+            Thread.sleep(sleepTime);
+            ux.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                ux.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+        return SUCCESS;
+    }
 
-	@Override
-	public String sleepLongTimeWithoutTransaction(User user, long sleepTime) {
-		try {
-			Thread.sleep(sleepTime);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return SUCCESS;
-	}
+    @Override
+    public String sleepLongTimeWithoutTransaction(User user, long sleepTime) {
+        try {
+            Thread.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
 
 }

@@ -14,27 +14,27 @@ import org.moon.test.ee.SimpleService;
 @Stateless
 public class LoggerInterceptorTest {
 
-	private EJBContainer container;
-	@EJB
-	private SimpleService test;
+    private EJBContainer container;
+    @EJB
+    private SimpleService test;
 
-	@Before
-	public void setUp() throws Exception {
-		Properties props = new Properties();
-		container = EJBContainer.createEJBContainer(props);
-		container.getContext().bind("inject", this);
-	}
+    @Before
+    public void setUp() throws Exception {
+        Properties props = new Properties();
+        container = EJBContainer.createEJBContainer(props);
+        container.getContext().bind("inject", this);
+    }
 
-	@Test
-	public void testInterceptor() {
-		test.execute();
-		// must exists classPath/META-INF/beans.xml
-		test.executeWithAnnotation();
-	}
+    @Test
+    public void testInterceptor() {
+        test.execute();
+        // must exists classPath/META-INF/beans.xml
+        test.executeWithAnnotation();
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		container.close();
-	}
+    @After
+    public void tearDown() throws Exception {
+        container.close();
+    }
 
 }

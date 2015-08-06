@@ -6,8 +6,8 @@ import org.moon.ii.jmx.persistence.User;
 
 @MXBean
 public interface ServiceMXBean {
-	
-	User getUser();
+    
+    User getUser();
 
-	void setUser(User user);
+    void setUser(User user);
 }

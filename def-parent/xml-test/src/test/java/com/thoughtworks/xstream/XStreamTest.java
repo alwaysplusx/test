@@ -10,35 +10,35 @@ import org.junit.Test;
 import org.moon.test.xml.persistence.User;
 
 public class XStreamTest {
-	XStream xStream;
+    XStream xStream;
 
-	@Before
-	public void setUp() throws Exception {
-		xStream = new XStream();
-	}
+    @Before
+    public void setUp() throws Exception {
+        xStream = new XStream();
+    }
 
-	@Test
-	public void objectToXmlTest() {
-		xStream.processAnnotations(User.class);
-		List<User> users = new ArrayList<User>();
-		User user = new User("David", "abc123");
-		users.add(user);
-		users.add(user);
-		users.add(user);
-		xStream.setMode(XStream.NO_REFERENCES);
-		System.out.println(xStream.toXML(users));
-	}
-	
-	@Test
-	public void fileToObjectTest(){
-		xStream.alias("user", User.class);
-		xStream.alias("users", User.class);
-		Object obj = xStream.fromXML(new File("src/main/resources/users.xml"));
-		System.out.println(obj);
-	}
+    @Test
+    public void objectToXmlTest() {
+        xStream.processAnnotations(User.class);
+        List<User> users = new ArrayList<User>();
+        User user = new User("David", "abc123");
+        users.add(user);
+        users.add(user);
+        users.add(user);
+        xStream.setMode(XStream.NO_REFERENCES);
+        System.out.println(xStream.toXML(users));
+    }
+    
+    @Test
+    public void fileToObjectTest(){
+        xStream.alias("user", User.class);
+        xStream.alias("users", User.class);
+        Object obj = xStream.fromXML(new File("src/main/resources/users.xml"));
+        System.out.println(obj);
+    }
 
-	@After
-	public void tearDown() throws Exception {
-	}
+    @After
+    public void tearDown() throws Exception {
+    }
 
 }

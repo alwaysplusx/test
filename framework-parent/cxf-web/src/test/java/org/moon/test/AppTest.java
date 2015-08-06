@@ -15,26 +15,26 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration("classpath:/applicationContext.xml")
 public class AppTest {
 
-	@Autowired
-	private ApplicationContext context;
+    @Autowired
+    private ApplicationContext context;
 
-	@Test
-	public void testServer() throws Exception {
-		assertNotNull(context);
-		Simple simple = JaxWsClientManager.getInstance().create(Simple.class, "http://localhost:8080/test");
-		assertEquals("Hi wuxii", simple.sayHi("wuxii"));
-	}
+    @Test
+    public void testServer() throws Exception {
+        assertNotNull(context);
+        Simple simple = JaxWsClientManager.getInstance().create(Simple.class, "http://localhost:8080/test");
+        assertEquals("Hi wuxii", simple.sayHi("wuxii"));
+    }
 
-	@Test
-	public void testClient() {
-		Simple simple = (Simple) context.getBean("client");
-		assertEquals("Hi wuxii", simple.sayHi("wuxii"));
-	}
+    @Test
+    public void testClient() {
+        Simple simple = (Simple) context.getBean("client");
+        assertEquals("Hi wuxii", simple.sayHi("wuxii"));
+    }
 
-	@Test
-	public void testSimpleClient() {
-		Simple simple = (Simple) context.getBean("simpleClient");
-		assertEquals("Hi wuxii", simple.sayHi("wuxii"));
-	}
+    @Test
+    public void testSimpleClient() {
+        Simple simple = (Simple) context.getBean("simpleClient");
+        assertEquals("Hi wuxii", simple.sayHi("wuxii"));
+    }
 
 }

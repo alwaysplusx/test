@@ -10,30 +10,30 @@ import org.junit.Test;
 
 public class StartContainerTest {
 
-	private EJBContainer container;
+    private EJBContainer container;
 
-	@Before
-	public void setUp() throws Exception {
-		Properties props = new Properties();
-		props.put("openejb.conf.file", "src/main/resources/openejb.xml");
-//		props.put("jdbc.moon", "new://Resource?type=DataSource");
-//		props.put("jdbc.moon.JdbcDriver", "org.h2.Driver");
-//		props.put("jdbc.moon.JdbcUrl", "jdbc:h2:file:~/test/ee/data");
-//		props.put("jdbc.moon.UserName", "sa");
-//		props.put("jdbc.moon.Password", "");
-//		props.put("jta.moon", "new://TransactionManager?type=TransactionManager");
-//		props.put("jta.moon.defaultTransactionTimeout", "10 seconds");
-		container = EJBContainer.createEJBContainer(props);
-	}
+    @Before
+    public void setUp() throws Exception {
+        Properties props = new Properties();
+        props.put("openejb.conf.file", "src/main/resources/openejb.xml");
+//        props.put("jdbc.moon", "new://Resource?type=DataSource");
+//        props.put("jdbc.moon.JdbcDriver", "org.h2.Driver");
+//        props.put("jdbc.moon.JdbcUrl", "jdbc:h2:file:~/test/ee/data");
+//        props.put("jdbc.moon.UserName", "sa");
+//        props.put("jdbc.moon.Password", "");
+//        props.put("jta.moon", "new://TransactionManager?type=TransactionManager");
+//        props.put("jta.moon.defaultTransactionTimeout", "10 seconds");
+        container = EJBContainer.createEJBContainer(props);
+    }
 
-	@Test
-	public void testStart() {
+    @Test
+    public void testStart() {
 
-	}
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		container.close();
-	}
+    @After
+    public void tearDown() throws Exception {
+        container.close();
+    }
 
 }

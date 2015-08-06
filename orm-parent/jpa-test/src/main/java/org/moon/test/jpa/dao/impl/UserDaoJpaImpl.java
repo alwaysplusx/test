@@ -8,25 +8,25 @@ import org.moon.test.jpa.persistence.User;
 
 public class UserDaoJpaImpl implements UserDao {
 
-	private EntityManager em;
+    private EntityManager em;
 
-	public UserDaoJpaImpl() {
-		this.em = DB.createEntityManager("moon");
-	}
+    public UserDaoJpaImpl() {
+        this.em = DB.createEntityManager("moon");
+    }
 
-	@Override
-	public void save(User user) {
-		em.persist(user);
-	}
+    @Override
+    public void save(User user) {
+        em.persist(user);
+    }
 
-	@Override
-	public void delete(User user) {
-		em.remove(find(user.getUserId()));
-	}
+    @Override
+    public void delete(User user) {
+        em.remove(find(user.getUserId()));
+    }
 
-	@Override
-	public User find(Long userId) {
-		return em.find(User.class, userId);
-	}
+    @Override
+    public User find(Long userId) {
+        return em.find(User.class, userId);
+    }
 
 }

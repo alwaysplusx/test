@@ -2,6 +2,6 @@ package com.moon.tomee;
 
 public interface SimpleRemote {
 
-	String sayHi(String name);
+    String sayHi(String name);
 
 }

@@ -5,33 +5,33 @@ import java.util.Date;
 
 public class BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private Long id;
-	private Date createTime;
-	private String createUser;
+    private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date createTime;
+    private String createUser;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public String getCreateUser() {
-		return createUser;
-	}
+    public String getCreateUser() {
+        return createUser;
+    }
 
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
 
 }

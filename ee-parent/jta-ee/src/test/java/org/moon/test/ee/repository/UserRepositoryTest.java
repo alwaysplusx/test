@@ -14,29 +14,29 @@ import org.moon.test.ee.persistence.User;
 
 public class UserRepositoryTest {
 
-	private EJBContainer container;
-	@EJB
-	private UserRepository userRepository;
+    private EJBContainer container;
+    @EJB
+    private UserRepository userRepository;
 
-	@Before
-	public void setUp() throws Exception {
-		Properties props = new Properties();
-		props.put("openejb.conf.file", "src/main/resources/openejb.xml");
-		container = EJBContainer.createEJBContainer(props);
-		container.getContext().bind("inject", this);
-	}
+    @Before
+    public void setUp() throws Exception {
+        Properties props = new Properties();
+        props.put("openejb.conf.file", "src/main/resources/openejb.xml");
+        container = EJBContainer.createEJBContainer(props);
+        container.getContext().bind("inject", this);
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		container.close();
-	}
+    @After
+    public void tearDown() throws Exception {
+        container.close();
+    }
 
-	@Test
-	public void testSaveUser() {
-		assertNotNull(userRepository);
-		User user = new User("admin");
-		userRepository.saveUser(user);
-		assertEquals(1, userRepository.count());
-	}
-	
+    @Test
+    public void testSaveUser() {
+        assertNotNull(userRepository);
+        User user = new User("admin");
+        userRepository.saveUser(user);
+        assertEquals(1, userRepository.count());
+    }
+    
 }

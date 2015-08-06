@@ -2,6 +2,6 @@ package org.moon.test.ioc.core;
 
 public interface BeanDefinitionRegistry {
 
-	void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) throws BeanLoadException;
+    void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) throws BeanLoadException;
 
 }

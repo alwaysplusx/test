@@ -10,16 +10,16 @@ import org.moon.test.aop.spring.LoggerAspect;
  */
 public class BankProxy extends Bank {
 
-	@Override
-	public float deposit(Account account, float money) {
-		new LoggerAspect().logging();
-		return super.deposit(account, money);
-	}
+    @Override
+    public float deposit(Account account, float money) {
+        new LoggerAspect().logging();
+        return super.deposit(account, money);
+    }
 
-	@Override
-	public float withdraw(Account account, float money) {
-		new LoggerAspect().logging();
-		return super.withdraw(account, money);
-	}
+    @Override
+    public float withdraw(Account account, float money) {
+        new LoggerAspect().logging();
+        return super.withdraw(account, money);
+    }
 
 }

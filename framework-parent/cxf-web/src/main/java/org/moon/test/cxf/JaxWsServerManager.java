@@ -9,36 +9,36 @@ import org.slf4j.LoggerFactory;
 
 public class JaxWsServerManager {
 
-	static Logger log = LoggerFactory.getLogger(JaxWsServerManager.class);
+    static Logger log = LoggerFactory.getLogger(JaxWsServerManager.class);
 
-	private JaxWsServerManager() {
-	}
+    private JaxWsServerManager() {
+    }
 
-	public static JaxWsServerManager getInstance() {
-		return InstanceHolder.instance;
-	}
+    public static JaxWsServerManager getInstance() {
+        return InstanceHolder.instance;
+    }
 
-	public Server publish(Class<?> serviceClass, String address, Object serviceBean) {
-		JaxWsServerFactoryBean factory = createServerFactory(serviceClass, address, serviceBean);
-		return factory.create();
-	}
+    public Server publish(Class<?> serviceClass, String address, Object serviceBean) {
+        JaxWsServerFactoryBean factory = createServerFactory(serviceClass, address, serviceBean);
+        return factory.create();
+    }
 
-	protected JaxWsServerFactoryBean createServerFactory(Class<?> serviceClass, String address, Object serviceBean) {
-		JaxWsServerFactoryBean factory = new JaxWsServerFactoryBean();
-		factory.setServiceClass(serviceClass);
-		factory.setAddress(address);
-		factory.setServiceBean(serviceBean);
-		// factory.setDataBinding(null);
-		// if (log.isDebugEnabled()) {
-		factory.getInInterceptors().add(new LoggingInInterceptor());
-		factory.getOutInterceptors().add(new LoggingOutInterceptor());
-		// }
-		return factory;
-	}
+    protected JaxWsServerFactoryBean createServerFactory(Class<?> serviceClass, String address, Object serviceBean) {
+        JaxWsServerFactoryBean factory = new JaxWsServerFactoryBean();
+        factory.setServiceClass(serviceClass);
+        factory.setAddress(address);
+        factory.setServiceBean(serviceBean);
+        // factory.setDataBinding(null);
+        // if (log.isDebugEnabled()) {
+        factory.getInInterceptors().add(new LoggingInInterceptor());
+        factory.getOutInterceptors().add(new LoggingOutInterceptor());
+        // }
+        return factory;
+    }
 
 
-	private static class InstanceHolder {
-		private final static JaxWsServerManager instance = new JaxWsServerManager();
-	}
+    private static class InstanceHolder {
+        private final static JaxWsServerManager instance = new JaxWsServerManager();
+    }
 
 }

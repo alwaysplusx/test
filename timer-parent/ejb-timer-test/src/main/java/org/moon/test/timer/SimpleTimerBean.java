@@ -20,29 +20,29 @@ import org.slf4j.LoggerFactory;
 @Singleton
 public class SimpleTimerBean {
 
-	private static Logger LOG = LoggerFactory.getLogger(SimpleTimerBean.class);
-	@Resource
-	TimerService timerService;
-	
-	@PostConstruct
-	public void postConstruct() {
-		LOG.debug("postConstruct");
-		TimerConfig timerConfig = new TimerConfig("default_task", false);
-		ScheduleExpression schedule = new ScheduleExpression().year("*").month("*").dayOfMonth("*").hour("*").minute("*/1");
-		timerService.createCalendarTimer(schedule, timerConfig);
-	}
+    private static Logger LOG = LoggerFactory.getLogger(SimpleTimerBean.class);
+    @Resource
+    TimerService timerService;
+    
+    @PostConstruct
+    public void postConstruct() {
+        LOG.debug("postConstruct");
+        TimerConfig timerConfig = new TimerConfig("default_task", false);
+        ScheduleExpression schedule = new ScheduleExpression().year("*").month("*").dayOfMonth("*").hour("*").minute("*/1");
+        timerService.createCalendarTimer(schedule, timerConfig);
+    }
 
-	@Timeout
-	public void timeout(Timer timer) {
-		Serializable task = timer.getInfo();
-		if ("default_task".equals(task)) {
-			LOG.info("default task execute");
-		}
-	}
+    @Timeout
+    public void timeout(Timer timer) {
+        Serializable task = timer.getInfo();
+        if ("default_task".equals(task)) {
+            LOG.info("default task execute");
+        }
+    }
 
-	@PreDestroy
-	public void perDestroy() {
-		LOG.debug("preDestroy");
-	}
+    @PreDestroy
+    public void perDestroy() {
+        LOG.debug("preDestroy");
+    }
 
 }

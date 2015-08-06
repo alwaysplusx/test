@@ -14,24 +14,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = { "classpath:/applicationContext.xml" })
 public class BankTest {
 
-	@Autowired
-	private Bank bank;
+    @Autowired
+    private Bank bank;
 
-	/**
-	 * 存款测试方法.
-	 */
-	@Test
-	public void depositTest() {
-		bank.deposit(new Account("abc", "der"), 1f);
-	}
+    /**
+     * 存款测试方法.
+     */
+    @Test
+    public void depositTest() {
+        bank.deposit(new Account("abc", "der"), 1f);
+    }
 
-	/**
-	 * 取款测试方法.
-	 */
-	@Test
-	public void withdrawTest() {
-		Account account = new Account("david", "password");
-		bank.withdraw(account, 1f);
-	}
+    /**
+     * 取款测试方法.
+     */
+    @Test
+    public void withdrawTest() {
+        Account account = new Account("david", "password");
+        bank.withdraw(account, 1f);
+    }
 
 }

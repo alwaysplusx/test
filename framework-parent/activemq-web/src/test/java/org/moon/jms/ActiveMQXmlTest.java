@@ -13,14 +13,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration("classpath:/spring-activemq.xml")
 public class ActiveMQXmlTest {
 
-	@Autowired
-	private ApplicationContext context;
+    @Autowired
+    private ApplicationContext context;
 
-	@Test
-	public void test() {
-		assertNotNull(context);
-		Object bean = context.getBean("brokerService");
-		System.out.println(bean);
-	}
+    @Test
+    public void test() {
+        assertNotNull(context);
+        Object bean = context.getBean("brokerService");
+        System.out.println(bean);
+    }
 
 }

@@ -7,10 +7,10 @@ import net.sf.ehcache.distribution.CachePeer;
 
 public class RMIEhcacheTest {
 
-	public static void main(String[] args) throws Exception {
-		CachePeer peer = (CachePeer) Naming.lookup("//192.168.0.130:3060/myCache");
-		peer.put(new Element("cachePeer", "cachePeer"));
-		peer.getQuiet("");
-	}
+    public static void main(String[] args) throws Exception {
+        CachePeer peer = (CachePeer) Naming.lookup("//192.168.0.130:3060/myCache");
+        peer.put(new Element("cachePeer", "cachePeer"));
+        peer.getQuiet("");
+    }
 
 }

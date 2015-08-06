@@ -11,21 +11,21 @@ import org.junit.Test;
 
 public class EntityManagerFactoryTest {
 
-	private EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
-	@Before
-	public void setUp() throws Exception {
-		emf = Persistence.createEntityManagerFactory("moon");
-	}
+    @Before
+    public void setUp() throws Exception {
+        emf = Persistence.createEntityManagerFactory("moon");
+    }
 
-	@Test
-	public void test() {
-		assertNotEquals("EntityManagerFactory is not null !", null, emf);
-		assertNotEquals("EntityManager is not null !", null, emf.createEntityManager());
-	}
+    @Test
+    public void test() {
+        assertNotEquals("EntityManagerFactory is not null !", null, emf);
+        assertNotEquals("EntityManager is not null !", null, emf.createEntityManager());
+    }
 
-	@After
-	public void tearDown() throws Exception {
-	}
+    @After
+    public void tearDown() throws Exception {
+    }
 
 }

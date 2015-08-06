@@ -7,15 +7,15 @@ import org.junit.Test;
 
 public class PrinterTest {
 
-	@Test
-	@Ignore
-	public void testPrinterStringString() {
-		
-	}
+    @Test
+    @Ignore
+    public void testPrinterStringString() {
+        
+    }
 
-	@Test
-	public void testPrinterString() throws Exception {
-		assertEquals(true, Printer.print("src/test/resources/print.pdf"));
-	}
+    @Test
+    public void testPrinterString() throws Exception {
+        assertEquals(true, Printer.print("src/test/resources/print.pdf"));
+    }
 
 }

@@ -14,30 +14,30 @@ import org.quartz.impl.StdSchedulerFactory;
 
 public class QuartzTimerTest {
 
-	Class<? extends Job> defaultJob = SimpleJob.class;
-	
-	Scheduler scheduler;
-	JobDetail jobDetail;
-	Trigger trigger;
+    Class<? extends Job> defaultJob = SimpleJob.class;
+    
+    Scheduler scheduler;
+    JobDetail jobDetail;
+    Trigger trigger;
 
-	@Before
-	public void setUp() throws Exception {
-		scheduler = StdSchedulerFactory.getDefaultScheduler();
-		jobDetail = JobBuilder.newJob(defaultJob).withIdentity("SimpleJobDetail").build();
-		trigger = TriggerBuilder.newTrigger().withIdentity("SimpleTrigger").withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(5)).build();
-	}
+    @Before
+    public void setUp() throws Exception {
+        scheduler = StdSchedulerFactory.getDefaultScheduler();
+        jobDetail = JobBuilder.newJob(defaultJob).withIdentity("SimpleJobDetail").build();
+        trigger = TriggerBuilder.newTrigger().withIdentity("SimpleTrigger").withSchedule(SimpleScheduleBuilder.repeatSecondlyForever(5)).build();
+    }
 
-	@Test
-	public void testQuartzTimer() throws Exception {
-		scheduler.scheduleJob(jobDetail, trigger);
-		scheduler.start();
+    @Test
+    public void testQuartzTimer() throws Exception {
+        scheduler.scheduleJob(jobDetail, trigger);
+        scheduler.start();
 
-		Thread.sleep(1000 * 20);
-	}
+        Thread.sleep(1000 * 20);
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		scheduler.shutdown();
-	}
+    @After
+    public void tearDown() throws Exception {
+        scheduler.shutdown();
+    }
 
 }

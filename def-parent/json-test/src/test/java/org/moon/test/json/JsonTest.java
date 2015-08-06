@@ -9,21 +9,21 @@ import org.junit.Test;
 
 public class JsonTest {
 
-	private JSONObject jsonObject;
+    private JSONObject jsonObject;
 
-	@Before
-	public void setUp() throws Exception {
-		jsonObject = new JSONObject();
-	}
+    @Before
+    public void setUp() throws Exception {
+        jsonObject = new JSONObject();
+    }
 
-	@Test
-	public void test() {
-		jsonObject.put("name", "david");
-		assertEquals("{\"name\":\"david\"}", jsonObject.toString());
-	}
+    @Test
+    public void test() {
+        jsonObject.put("name", "david");
+        assertEquals("{\"name\":\"david\"}", jsonObject.toString());
+    }
 
-	@After
-	public void tearDown() throws Exception {
-	}
+    @After
+    public void tearDown() throws Exception {
+    }
 
 }

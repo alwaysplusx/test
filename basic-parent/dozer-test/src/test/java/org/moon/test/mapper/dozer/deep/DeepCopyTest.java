@@ -31,33 +31,33 @@ import org.moon.test.mapper.vo.deep.SubSubDest;
  */
 public class DeepCopyTest {
 
-	@Test
-	public void testDeepCopyNormal() {
-		// 普通map无法深层复制
-		DozerBeanMapper mapper = new DozerBeanMapper();
-		Src src = new Src("wuxii");
-		Dest dest = new Dest(new SubDest(new SubSubDest()));
-		mapper.map(src, dest);
-		assertNull(dest.getSubDest().getSubSubDest().getName());
-		dest = mapper.map(src, Dest.class);
-		assertNull(dest.getSubDest());
-	}
+    @Test
+    public void testDeepCopyNormal() {
+        // 普通map无法深层复制
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        Src src = new Src("wuxii");
+        Dest dest = new Dest(new SubDest(new SubSubDest()));
+        mapper.map(src, dest);
+        assertNull(dest.getSubDest().getSubSubDest().getName());
+        dest = mapper.map(src, Dest.class);
+        assertNull(dest.getSubDest());
+    }
 
-	@Test
-	public void testDeepCopyFromXMLFile() {
-		DozerBeanMapper mapper = new DozerBeanMapper(Arrays.asList("mapping.xml"));
-		Src src = new Src("wuxii");
-		Dest dest = new Dest();
-		mapper.map(src, dest, "deepCopy");
-		assertNotNull(dest.getSubDest());
-		assertNotNull(dest.getSubDest().getSubSubDest());
-		assertNotNull(dest.getSubDest().getSubSubDest().getName());
-		System.out.println("type one -> " + dest);
-		dest = mapper.map(src, Dest.class, "deepCopy");
-		assertNotNull(dest.getSubDest());
-		assertNotNull(dest.getSubDest().getSubSubDest());
-		assertNotNull(dest.getSubDest().getSubSubDest().getName());
-		System.out.println("type second -> " + dest);
-	}
+    @Test
+    public void testDeepCopyFromXMLFile() {
+        DozerBeanMapper mapper = new DozerBeanMapper(Arrays.asList("mapping.xml"));
+        Src src = new Src("wuxii");
+        Dest dest = new Dest();
+        mapper.map(src, dest, "deepCopy");
+        assertNotNull(dest.getSubDest());
+        assertNotNull(dest.getSubDest().getSubSubDest());
+        assertNotNull(dest.getSubDest().getSubSubDest().getName());
+        System.out.println("type one -> " + dest);
+        dest = mapper.map(src, Dest.class, "deepCopy");
+        assertNotNull(dest.getSubDest());
+        assertNotNull(dest.getSubDest().getSubSubDest());
+        assertNotNull(dest.getSubDest().getSubSubDest().getName());
+        System.out.println("type second -> " + dest);
+    }
 
 }

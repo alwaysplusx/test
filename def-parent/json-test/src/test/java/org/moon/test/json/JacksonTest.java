@@ -13,29 +13,29 @@ import com.fasterxml.jackson.core.JsonGenerator;
 
 public class JacksonTest {
 
-	private JsonFactory jsonFactory;
-	private JsonGenerator jsonGenerator;
+    private JsonFactory jsonFactory;
+    private JsonGenerator jsonGenerator;
 
-	@Before
-	public void setUp() throws Exception {
-		jsonFactory = new JsonFactory();
-		jsonGenerator = jsonFactory.createGenerator(new FileOutputStream("target/jackson.json"));
-	}
+    @Before
+    public void setUp() throws Exception {
+        jsonFactory = new JsonFactory();
+        jsonGenerator = jsonFactory.createGenerator(new FileOutputStream("target/jackson.json"));
+    }
 
-	@Test
-	public void testWriteJson() throws Exception {
-		assertNotEquals(null, jsonFactory);
-		assertNotEquals(null, jsonGenerator);
-		jsonGenerator.writeStartObject();
-		jsonGenerator.writeObjectField("name", "david");
-		jsonGenerator.writeEndObject();
-		jsonGenerator.close();
-		System.out.println(jsonGenerator);
-	}
+    @Test
+    public void testWriteJson() throws Exception {
+        assertNotEquals(null, jsonFactory);
+        assertNotEquals(null, jsonGenerator);
+        jsonGenerator.writeStartObject();
+        jsonGenerator.writeObjectField("name", "david");
+        jsonGenerator.writeEndObject();
+        jsonGenerator.close();
+        System.out.println(jsonGenerator);
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		jsonGenerator.close();
-	}
+    @After
+    public void tearDown() throws Exception {
+        jsonGenerator.close();
+    }
 
 }

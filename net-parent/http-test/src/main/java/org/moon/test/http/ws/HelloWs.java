@@ -12,22 +12,22 @@ import javax.xml.ws.handler.MessageContext;
 @WebService(targetNamespace = "http://soap.moon.test/ws/")
 public class HelloWs implements Hello {
 
-	@Resource
-	WebServiceContext wsctx;
+    @Resource
+    WebServiceContext wsctx;
 
-	@Override
-	public String sayHi(@WebParam(name = "name") String name) {
-		MessageContext msctx = wsctx.getMessageContext();
-		Map<?, ?> header = (Map<?, ?>) msctx.get(MessageContext.HTTP_REQUEST_HEADERS);
-		showProperties(header);
-		return "Hi " + name;
-	}
+    @Override
+    public String sayHi(@WebParam(name = "name") String name) {
+        MessageContext msctx = wsctx.getMessageContext();
+        Map<?, ?> header = (Map<?, ?>) msctx.get(MessageContext.HTTP_REQUEST_HEADERS);
+        showProperties(header);
+        return "Hi " + name;
+    }
 
-	public static void showProperties(Map<?, ?> map) {
-		Iterator<?> it = map.keySet().iterator();
-		while (it.hasNext()) {
-			Object key = it.next();
-			System.out.println(String.format("%s	%s", key, map.get(key)));
-		}
-	}
+    public static void showProperties(Map<?, ?> map) {
+        Iterator<?> it = map.keySet().iterator();
+        while (it.hasNext()) {
+            Object key = it.next();
+            System.out.println(String.format("%s    %s", key, map.get(key)));
+        }
+    }
 }

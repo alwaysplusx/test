@@ -7,7 +7,7 @@ import javax.jws.WebService;
 @WebService(serviceName = "Simple", targetNamespace = "http://www.moon.com/simple")
 public interface Simple {
 
-	@WebMethod
-	String sayHi(@WebParam(name = "name") String name);
-	
+    @WebMethod
+    String sayHi(@WebParam(name = "name") String name);
+    
 }

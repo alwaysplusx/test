@@ -10,22 +10,22 @@ import org.junit.Test;
 
 public class StartEJBContainerTest {
 
-	EJBContainer container;
+    EJBContainer container;
 
-	@Before
-	public void setUp() throws Exception {
-		container = EJBContainer.createEJBContainer();
-	}
+    @Before
+    public void setUp() throws Exception {
+        container = EJBContainer.createEJBContainer();
+    }
 
-	@Test
-	public void testStartContainer() throws Exception {
-		assertNotNull(container);
-		Thread.sleep(Long.MAX_VALUE);
-	}
+    @Test
+    public void testStartContainer() throws Exception {
+        assertNotNull(container);
+        Thread.sleep(Long.MAX_VALUE);
+    }
 
-	@After
-	public void tearDown() {
-		container.close();
-	}
+    @After
+    public void tearDown() {
+        container.close();
+    }
 
 }

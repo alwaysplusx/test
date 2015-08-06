@@ -6,5 +6,5 @@ import javax.jws.WebService;
 @WebService(serviceName = "Simple", targetNamespace = "http://www.moon.com/simple")
 public interface Simple {
 
-	String sayHi(@WebParam(name = "name") String name);
+    String sayHi(@WebParam(name = "name") String name);
 }

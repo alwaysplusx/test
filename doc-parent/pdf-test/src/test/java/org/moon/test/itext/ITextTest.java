@@ -10,18 +10,18 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class ITextTest {
 
-	public static void main(String[] args) throws Exception {
-		Document doc = new Document();
-		PdfWriter.getInstance(doc, new FileOutputStream("target/itext.pdf"));
-		BaseFont bfChinese = BaseFont.createFont( "STSongStd-Light" ,  "UniGB-UCS2-H" ,  false );  
-		Font fontChinese = new Font(bfChinese); 
-		doc.open();
-		Paragraph paragraph = new Paragraph("Hello 我是中文",fontChinese);
-		doc.add(paragraph);
-		doc.close();
-	}
-	
-	
-	
-	
+    public static void main(String[] args) throws Exception {
+        Document doc = new Document();
+        PdfWriter.getInstance(doc, new FileOutputStream("target/itext.pdf"));
+        BaseFont bfChinese = BaseFont.createFont( "STSongStd-Light" ,  "UniGB-UCS2-H" ,  false );  
+        Font fontChinese = new Font(bfChinese); 
+        doc.open();
+        Paragraph paragraph = new Paragraph("Hello 我是中文",fontChinese);
+        doc.add(paragraph);
+        doc.close();
+    }
+    
+    
+    
+    
 }

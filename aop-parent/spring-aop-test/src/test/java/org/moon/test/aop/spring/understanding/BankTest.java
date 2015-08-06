@@ -12,29 +12,29 @@ import org.moon.test.aop.spring.Bank;
  */
 public class BankTest {
 
-	private Bank bank;
+    private Bank bank;
 
-	/**
-	 * @throws Exception 异常
-	 */
-	@Before
-	public void setUp() throws Exception {
-		bank = (Bank) BankFactory.getBean("bank");
-	}
+    /**
+     * @throws Exception 异常
+     */
+    @Before
+    public void setUp() throws Exception {
+        bank = (Bank) BankFactory.getBean("bank");
+    }
 
-	/**
-	 * @throws Exception 异常
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
+    /**
+     * @throws Exception 异常
+     */
+    @After
+    public void tearDown() throws Exception {
+    }
 
-	/**
-	 * 测试方法.
-	 */
-	@Test
-	public void proxyTest() {
-		bank.deposit(new Account("abc", "def"), 1f);
-	}
+    /**
+     * 测试方法.
+     */
+    @Test
+    public void proxyTest() {
+        bank.deposit(new Account("abc", "def"), 1f);
+    }
 
 }

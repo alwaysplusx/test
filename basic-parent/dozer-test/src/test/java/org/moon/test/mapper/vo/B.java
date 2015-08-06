@@ -20,21 +20,21 @@ package org.moon.test.mapper.vo;
  */
 public class B extends VoSupport {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private C c;
+    private C c;
 
-	public C getC() {
-		return c;
-	}
+    public C getC() {
+        return c;
+    }
 
-	public void setC(C c) {
-		this.c = c;
-	}
+    public void setC(C c) {
+        this.c = c;
+    }
 
-	@Override
-	public String toString() {
-		return getClass().getName() + ":{\"c\":\"" + c + "\"}";
-	}
+    @Override
+    public String toString() {
+        return getClass().getName() + ":{\"c\":\"" + c + "\"}";
+    }
 
 }

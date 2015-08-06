@@ -6,11 +6,11 @@ import java.io.InputStream;
 
 public interface Resource {
 
-	boolean exists();
+    boolean exists();
 
-	String getFilename();
+    String getFilename();
 
-	File getFile() throws IOException;
+    File getFile() throws IOException;
 
-	InputStream getInputStream() throws IOException;
+    InputStream getInputStream() throws IOException;
 }

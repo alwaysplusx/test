@@ -4,10 +4,10 @@ import org.moon.test.jpa.persistence.User;
 
 public interface UserDao {
 
-	public void save(User user);
+    public void save(User user);
 
-	public void delete(User user);
+    public void delete(User user);
 
-	public User find(Long userId);
+    public User find(Long userId);
 
 }

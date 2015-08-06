@@ -5,27 +5,27 @@ import java.util.Date;
 
 public class Model {
 
-	private Calendar birthday;
-	private Date submitDate;
+    private Calendar birthday;
+    private Date submitDate;
 
-	public Calendar getBirthday() {
-		return birthday;
-	}
+    public Calendar getBirthday() {
+        return birthday;
+    }
 
-	public void setBirthday(Calendar birthday) {
-		this.birthday = birthday;
-	}
+    public void setBirthday(Calendar birthday) {
+        this.birthday = birthday;
+    }
 
-	public Date getSubmitDate() {
-		return submitDate;
-	}
+    public Date getSubmitDate() {
+        return submitDate;
+    }
 
-	public void setSubmitDate(Date submitDate) {
-		this.submitDate = submitDate;
-	}
+    public void setSubmitDate(Date submitDate) {
+        this.submitDate = submitDate;
+    }
 
-	@Override
-	public String toString() {
-		return birthday + ",\n" + submitDate + "";
-	}
+    @Override
+    public String toString() {
+        return birthday + ",\n" + submitDate + "";
+    }
 }

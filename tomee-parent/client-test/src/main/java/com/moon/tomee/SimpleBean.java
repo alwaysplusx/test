@@ -7,9 +7,9 @@ import javax.ejb.Stateless;
 @Remote(SimpleRemote.class)
 public class SimpleBean implements SimpleRemote {
 
-	@Override
-	public String sayHi(String name) {
-		return "Hi " + name;
-	}
+    @Override
+    public String sayHi(String name) {
+        return "Hi " + name;
+    }
 
 }

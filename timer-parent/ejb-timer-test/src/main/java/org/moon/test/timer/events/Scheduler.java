@@ -15,39 +15,39 @@ import javax.enterprise.inject.spi.BeanManager;
 @Singleton
 public class Scheduler {
 
-	@Resource
-	TimerService timerService;
-	@Resource
-	BeanManager beanManager;
+    @Resource
+    TimerService timerService;
+    @Resource
+    BeanManager beanManager;
 
-	public void scheduleEvent(ScheduleExpression schedule, Object event, Annotation... qualifiers) {
-		timerService.createCalendarTimer(schedule, new TimerConfig(new Event(event, qualifiers), false));
-	}
+    public void scheduleEvent(ScheduleExpression schedule, Object event, Annotation... qualifiers) {
+        timerService.createCalendarTimer(schedule, new TimerConfig(new Event(event, qualifiers), false));
+    }
 
-	@Timeout
-	public void timeout(Timer timer) {
-		Event task = (Event) timer.getInfo();
-		beanManager.fireEvent(task.getEvent(), task.getQualifiers());
-	}
+    @Timeout
+    public void timeout(Timer timer) {
+        Event task = (Event) timer.getInfo();
+        beanManager.fireEvent(task.getEvent(), task.getQualifiers());
+    }
 
-	private final class Event implements Serializable {
+    private final class Event implements Serializable {
 
-		private static final long serialVersionUID = 1L;
-		private final Object event;
-		private final Annotation[] qualifiers;
+        private static final long serialVersionUID = 1L;
+        private final Object event;
+        private final Annotation[] qualifiers;
 
-		public Event(Object event, Annotation... qualifiers) {
-			this.event = event;
-			this.qualifiers = qualifiers;
-		}
+        public Event(Object event, Annotation... qualifiers) {
+            this.event = event;
+            this.qualifiers = qualifiers;
+        }
 
-		public Object getEvent() {
-			return event;
-		}
+        public Object getEvent() {
+            return event;
+        }
 
-		public Annotation[] getQualifiers() {
-			return qualifiers;
-		}
-	}
+        public Annotation[] getQualifiers() {
+            return qualifiers;
+        }
+    }
 
 }

@@ -9,10 +9,10 @@ import javax.jws.WebService;
 @WebService(serviceName = "Simple", targetNamespace = "http://www.moon.com/simple")
 public class SimpleWs implements Simple {
 
-	@Override
-	@WebMethod
-	public String sayHi(@WebParam(name = "name") String name) {
-		return "Hi " + name;
-	}
+    @Override
+    @WebMethod
+    public String sayHi(@WebParam(name = "name") String name) {
+        return "Hi " + name;
+    }
 
 }

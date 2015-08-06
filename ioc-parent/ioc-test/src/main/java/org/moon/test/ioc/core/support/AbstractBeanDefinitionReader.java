@@ -6,9 +6,9 @@ import org.moon.test.ioc.core.io.ClassPathResource;
 
 public abstract class AbstractBeanDefinitionReader implements BeanDefinitionReader {
 
-	@Override
-	public int loadBeanDefinitions(String location) throws BeanLoadException {
-		return loadBeanDefinitions(new ClassPathResource(location, null));
-	}
+    @Override
+    public int loadBeanDefinitions(String location) throws BeanLoadException {
+        return loadBeanDefinitions(new ClassPathResource(location, null));
+    }
 
 }

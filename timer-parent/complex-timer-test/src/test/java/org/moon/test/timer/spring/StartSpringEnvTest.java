@@ -13,13 +13,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = { "classpath:/applicationContext.xml" })
 public class StartSpringEnvTest {
 
-	@Autowired
-	ApplicationContext context;
+    @Autowired
+    ApplicationContext context;
 
-	@Test
-	public void testStart() throws Exception {
-		assertNotNull(context);
-		Thread.sleep(Long.MAX_VALUE);
-	}
+    @Test
+    public void testStart() throws Exception {
+        assertNotNull(context);
+        Thread.sleep(Long.MAX_VALUE);
+    }
 
 }

@@ -5,14 +5,14 @@ import org.apache.logging.log4j.Logger;
 
 public class LogPrinter {
 
-	private Logger log = LogManager.getLogger();
+    private Logger log = LogManager.getLogger();
 
-	public void print() {
-		log.info("simple log info message! result is {}", "success");
-	}
+    public void print() {
+        log.info("simple log info message! result is {}", "success");
+    }
 
-	public static void main(String[] args) {
-		new LogPrinter().print();
-	}
+    public static void main(String[] args) {
+        new LogPrinter().print();
+    }
 
 }

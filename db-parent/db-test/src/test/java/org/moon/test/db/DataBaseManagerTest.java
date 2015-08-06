@@ -7,24 +7,24 @@ import org.junit.Test;
 
 public class DataBaseManagerTest {
 
-	@Before
-	public void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
 
-	}
+    }
 
-	@Test
-	@Ignore
-	public void testInitializeHSQLDataBase() throws Exception {
-		DataBaseManager.initializeHSQLDataBase();
-	}
+    @Test
+    @Ignore
+    public void testInitializeHSQLDataBase() throws Exception {
+        DataBaseManager.initializeHSQLDataBase();
+    }
 
-	@Test
-	public void testInitializeH2DataBase() throws Exception {
-		DataBaseManager.initializeH2DataBase();
-	}
+    @Test
+    public void testInitializeH2DataBase() throws Exception {
+        DataBaseManager.initializeH2DataBase();
+    }
 
-	@After
-	public void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
 
-	}
+    }
 }

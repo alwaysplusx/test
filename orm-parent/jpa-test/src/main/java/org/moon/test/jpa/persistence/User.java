@@ -15,68 +15,68 @@ import javax.persistence.TemporalType;
 @Table(name = "t_user")
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
-	private String username;
-	private String password;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date birthday;
-	private String sex;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
+    private String username;
+    private String password;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthday;
+    private String sex;
 
-	public User() {
-	}
+    public User() {
+    }
 
-	public User(String username, String password) {
-		this.username = username;
-		this.password = password;
-	}
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
-	public Long getUserId() {
-		return userId;
-	}
+    public Long getUserId() {
+        return userId;
+    }
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public Date getBirthday() {
-		return birthday;
-	}
+    public Date getBirthday() {
+        return birthday;
+    }
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
-	public String getSex() {
-		return sex;
-	}
+    public String getSex() {
+        return sex;
+    }
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + "]";
-	}
+    @Override
+    public String toString() {
+        return "User [userId=" + userId + ", username=" + username + "]";
+    }
 
 
 }

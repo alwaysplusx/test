@@ -32,68 +32,68 @@ import org.moon.test.mapper.vo.deep.Src;
  */
 public class DozerMapperTest {
 
-	@Test(expected = MappingException.class)
-	public void testDynamicAddMapping() throws Exception {
-		DozerBeanMapper mapper = new DozerBeanMapper();
-		mapper.map(new Src("wuxii"), Dest.class);
-		// 不能动态添加
-		mapper.addMapping(new FileInputStream(new File("src/test/resources/mapping.xml")));
-	}
+    @Test(expected = MappingException.class)
+    public void testDynamicAddMapping() throws Exception {
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        mapper.map(new Src("wuxii"), Dest.class);
+        // 不能动态添加
+        mapper.addMapping(new FileInputStream(new File("src/test/resources/mapping.xml")));
+    }
 
-	@Test
-	public void testMapper() {
-		DozerBeanMapper mapper = new DozerBeanMapper(Arrays.asList("mapping.xml"));
-		B b = mapper.map(new A("a"), B.class);
-		assertNotNull(b);
-		assertNotNull(b.name);
-	}
+    @Test
+    public void testMapper() {
+        DozerBeanMapper mapper = new DozerBeanMapper(Arrays.asList("mapping.xml"));
+        B b = mapper.map(new A("a"), B.class);
+        assertNotNull(b);
+        assertNotNull(b.name);
+    }
 
-	public static class A {
-		private String name;
+    public static class A {
+        private String name;
 
-		public A() {
-		}
+        public A() {
+        }
 
-		public A(String name) {
-			this.name = name;
-		}
+        public A(String name) {
+            this.name = name;
+        }
 
-		 public String getName() {
-		 return name;
-		 }
-		
-		 public void setName(String name) {
-		 this.name = name;
-		 }
+         public String getName() {
+         return name;
+         }
+        
+         public void setName(String name) {
+         this.name = name;
+         }
 
-		@Override
-		public String toString() {
-			return getClass().getName() + ":{\"name\":\"" + name + "\"}";
-		}
-	}
+        @Override
+        public String toString() {
+            return getClass().getName() + ":{\"name\":\"" + name + "\"}";
+        }
+    }
 
-	public static class B {
-		private String name;
+    public static class B {
+        private String name;
 
-		public B() {
-		}
+        public B() {
+        }
 
-		public String getName() {
-			return name;
-		}
+        public String getName() {
+            return name;
+        }
 
-		public void setName(String name) {
-			this.name = name;
-		}
+        public void setName(String name) {
+            this.name = name;
+        }
 
-		public B(String name) {
-			this.name = name;
-		}
+        public B(String name) {
+            this.name = name;
+        }
 
-		@Override
-		public String toString() {
-			return getClass().getName() + ":{\"name\":\"" + name + "\"}";
-		}
-	}
+        @Override
+        public String toString() {
+            return getClass().getName() + ":{\"name\":\"" + name + "\"}";
+        }
+    }
 
 }

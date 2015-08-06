@@ -16,32 +16,32 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoggerAspect {
 
-	private Logger log = LoggerFactory.getLogger("CommonLogger");
+    private Logger log = LoggerFactory.getLogger("CommonLogger");
 
-	/**
-	 * 定义的日志切点.
-	 */
-	@Pointcut("execution(* org.moon.test.aop.spring.*.deposit(..))")
-	public void bankMethods() {
+    /**
+     * 定义的日志切点.
+     */
+    @Pointcut("execution(* org.moon.test.aop.spring.*.deposit(..))")
+    public void bankMethods() {
 
-	}
+    }
 
-	/**
-	 * 切点执行前方法.
-	 * @param jp 连接点
-	 * @param account 账号
-	 */
-	@Before(value = "bankMethods() && args(account, *)")
-	public void before(JoinPoint jp, Account account) {
-		log.info("execute method " + jp.getSignature().getName() + ", account is " + account);
-	}
+    /**
+     * 切点执行前方法.
+     * @param jp 连接点
+     * @param account 账号
+     */
+    @Before(value = "bankMethods() && args(account, *)")
+    public void before(JoinPoint jp, Account account) {
+        log.info("execute method " + jp.getSignature().getName() + ", account is " + account);
+    }
 
-	/**
-	 * aspect使用注解标注在方法上.
-	 */
-	@Before("@annotation(org.moon.test.aop.spring.Loggable)")
-	public void logging() {
-		log.info("annotation logging called");
-	}
+    /**
+     * aspect使用注解标注在方法上.
+     */
+    @Before("@annotation(org.moon.test.aop.spring.Loggable)")
+    public void logging() {
+        log.info("annotation logging called");
+    }
 
 }

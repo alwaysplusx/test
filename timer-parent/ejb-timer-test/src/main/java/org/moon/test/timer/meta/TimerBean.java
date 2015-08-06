@@ -8,11 +8,11 @@ import org.slf4j.LoggerFactory;
 @Organic
 public class TimerBean {
 
-	static Logger LOG = LoggerFactory.getLogger(TimerBean.class);
+    static Logger LOG = LoggerFactory.getLogger(TimerBean.class);
 
-	@Secondly
-	public void handle() {
-		LOG.info("timer bean handle every second");
-	}
+    @Secondly
+    public void handle() {
+        LOG.info("timer bean handle every second");
+    }
 
 }
