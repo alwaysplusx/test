@@ -1,4 +1,4 @@
-package org.moon.test.model;
+package org.moon.test.struts2.model;
 
 import java.util.Calendar;
 import java.util.Date;

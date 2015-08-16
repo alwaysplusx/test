@@ -1,11 +1,11 @@
-package org.moon.test.struts2;
+package org.moon.test.struts2.action;
 
 import java.util.Calendar;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
-import org.moon.test.model.Model;
+import org.moon.test.struts2.model.Model;
 
 import com.opensymphony.xwork2.ActionSupport;
 

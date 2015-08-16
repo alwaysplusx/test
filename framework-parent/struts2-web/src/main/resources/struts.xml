@@ -3,9 +3,20 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN" 
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<package name="root" extends="struts-default" namespace="/">
-		<action name="test" class="org.moon.test.struts2.TestAction" method="test">
-			<result name="success">/success.jsp</result>
-		</action>
-	</package>
+  <package name="root" extends="struts-default" namespace="/">
+
+    <interceptors>
+      <interceptor name="urlInterceptor" class="org.moon.test.struts2.interceptor.UrlInterceptor" />
+      <interceptor-stack name="urlStack">
+        <interceptor-ref name="urlInterceptor" />
+        <interceptor-ref name="defaultStack" />
+      </interceptor-stack>
+    </interceptors>
+
+    <action name="*_*" class="org.moon.test.struts2.action.{1}Action" method="{2}">
+      <interceptor-ref name="urlInterceptor" />
+      <result name="success">/success.jsp</result>
+    </action>
+
+  </package>
 </struts>
