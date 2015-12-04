@@ -26,6 +26,7 @@
     <module>plugin-parent</module>
     <module>timer-parent</module>
     <module>tomee-parent</module>
+    <module>web-parent</module>
   </modules>
   <dependencies>
     <dependency>
