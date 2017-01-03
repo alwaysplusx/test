@@ -2,21 +2,21 @@ package org.harmony.test.javaee.jpa.dao.impl;
 
 import javax.persistence.EntityManager;
 
-import org.harmony.test.javaee.jpa.DB;
 import org.harmony.test.javaee.jpa.dao.UserDao;
 import org.harmony.test.javaee.jpa.persistence.User;
 
-public class UserDaoJpaImpl implements UserDao {
+public class UserDaoImpl implements UserDao {
 
     private EntityManager em;
 
-    public UserDaoJpaImpl() {
-        this.em = DB.createEntityManager("moon");
+    public UserDaoImpl(EntityManager entityManager) {
+        this.em = entityManager;
     }
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         em.persist(user);
+        return user;
     }
 
     @Override

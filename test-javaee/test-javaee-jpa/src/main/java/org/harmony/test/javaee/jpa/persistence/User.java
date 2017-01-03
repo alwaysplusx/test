@@ -7,12 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "t_user")
+@Table(name = "T_USER")
+@NamedQuery(//
+        name = "findById", //
+        query = "SELECT o FROM User o WHERE o.userId = :userId"//
+)
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,7 +28,6 @@ public class User implements Serializable {
     private String password;
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthday;
-    private String sex;
 
     public User() {
     }
@@ -65,18 +69,9 @@ public class User implements Serializable {
         this.birthday = birthday;
     }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
     @Override
     public String toString() {
-        return "User [userId=" + userId + ", username=" + username + "]";
+        return "{userId:" + userId + ", username:" + username + "}";
     }
-
 
 }
