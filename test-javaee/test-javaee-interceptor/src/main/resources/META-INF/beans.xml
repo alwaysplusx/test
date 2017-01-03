@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <beans>
-	<!-- Container Dependency Inject(CDI) Feature -->
-	<interceptors>
-		<class>org.moon.test.ee.interceptor.LoggingInterceptor</class>
-	</interceptors>
+  <!-- Container Dependency Inject(CDI) Feature -->
+  <interceptors>
+    <class>org.harmony.test.javaee.interceptor.interceptor.LoggingInterceptor</class>
+  </interceptors>
 </beans>

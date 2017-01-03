@@ -16,6 +16,7 @@
     <h2.version>1.4.193</h2.version>
     <eclipselink.version>2.6.4</eclipselink.version>
     <hibernate.version>5.2.5.Final</hibernate.version>
+    <openejb.version>4.7.4</openejb.version>
   </properties>
   <dependencies>
     <dependency>
@@ -35,6 +36,11 @@
         <groupId>javax</groupId>
         <artifactId>javaee-api</artifactId>
         <version>${javaee.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.openejb</groupId>
+        <artifactId>openejb-core</artifactId>
+        <version>${openejb.version}</version>
       </dependency>
       <dependency>
         <groupId>junit</groupId>
