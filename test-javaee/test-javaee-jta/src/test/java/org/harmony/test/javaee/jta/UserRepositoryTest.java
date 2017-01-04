@@ -1,4 +1,4 @@
-package org.harmony.test.javaee.jta.repository;
+package org.harmony.test.javaee.jta;
 
 import static org.junit.Assert.*;
 
@@ -11,10 +11,8 @@ import org.harmony.test.javaee.jta.persistence.User;
 import org.harmony.test.javaee.jta.repository.UserRepository;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
 public class UserRepositoryTest {
 
     private EJBContainer container;
@@ -27,6 +25,7 @@ public class UserRepositoryTest {
         props.put("openejb.conf.file", "src/main/resources/openejb.xml");
         container = EJBContainer.createEJBContainer(props);
         container.getContext().bind("inject", this);
+        userRepository.delete();
     }
 
     @After
@@ -37,8 +36,7 @@ public class UserRepositoryTest {
     @Test
     public void testSaveUser() {
         assertNotNull(userRepository);
-        User user = new User("admin");
-        userRepository.saveUser(user);
+        userRepository.saveUser(new User("admin"));
         assertEquals(1, userRepository.count());
     }
 

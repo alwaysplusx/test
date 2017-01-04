@@ -1,36 +1,48 @@
 package org.harmony.test.javaee.jta;
 
+import static org.junit.Assert.*;
+
+import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.annotation.Resource;
 import javax.ejb.embeddable.EJBContainer;
+import javax.sql.DataSource;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-@Ignore
 public class StartContainerTest {
 
-    private EJBContainer container;
+    private static EJBContainer container;
 
-    @Before
-    public void setUp() throws Exception {
+    @Resource
+    private DataSource datasource;
+
+    @BeforeClass
+    public static void beforeClass() {
         Properties props = new Properties();
-        props.put("openejb.conf.file", "src/main/resources/openejb.xml");
-//        props.put("jdbc.moon", "new://Resource?type=DataSource");
-//        props.put("jdbc.moon.JdbcDriver", "org.h2.Driver");
-//        props.put("jdbc.moon.JdbcUrl", "jdbc:h2:file:~/test/ee/data");
-//        props.put("jdbc.moon.UserName", "sa");
-//        props.put("jdbc.moon.Password", "");
-//        props.put("jta.moon", "new://TransactionManager?type=TransactionManager");
-//        props.put("jta.moon.defaultTransactionTimeout", "10 seconds");
+        props.put("jdbc.harmony", "new://Resource?type=DataSource");
+        props.put("jdbc.harmony.JdbcDriver", "org.h2.Driver");
+        props.put("jdbc.harmony.JdbcUrl", "jdbc:h2:file:~/.h2/harmony");
+        props.put("jdbc.harmony.UserName", "sa");
+        props.put("jdbc.harmony.Password", "");
+        // props.put("jta.harmony", "new://TransactionManager?type=TransactionManager");
+        // props.put("jta.harmony.defaultTransactionTimeout", "10 seconds");
         container = EJBContainer.createEJBContainer(props);
     }
 
-    @Test
-    public void testStart() {
+    @Before
+    public void before() throws Exception {
+        container.getContext().bind("inject", this);
+        assertNotNull(datasource);
+    }
 
+    @Test
+    public void testStart() throws SQLException {
+        assertNotNull(datasource.getConnection().getMetaData().getDatabaseProductName());
     }
 
     @After

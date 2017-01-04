@@ -6,11 +6,11 @@ import org.harmony.test.javaee.jta.persistence.User;
 
 public interface UserRepository {
 
-    public void saveUser(User user);
+    public User saveUser(User user);
     
     public void deleteUser(User user);
     
-    public void updateUser(User user);
+    public User updateUser(User user);
     
     public void delete();
 

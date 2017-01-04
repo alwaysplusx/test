@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <openejb>
-    <Resource id="jdbc/moon" type="javax.sql.DataSource">
-        JdbcDriver org.h2.Driver
-        JdbcUrl jdbc:h2:file:~/test/ee/data
-        UserName sa
-        Password 
-    </Resource>
-    <!-- <TransactionManager id="jta/moon" type="TransactionManager">
-        defaultTransactionTimeout = 10 seconds
-    </TransactionManager> -->
+  <Resource id="jdbc/harmony" type="javax.sql.DataSource">
+    JdbcDriver org.h2.Driver
+    JdbcUrl jdbc:h2:file:~/.h2/harmony
+    UserName sa
+    Password
+  </Resource>
+  <TransactionManager id="jta/harmony" type="TransactionManager">
+    defaultTransactionTimeout = 10 seconds
+  </TransactionManager>
 </openejb>

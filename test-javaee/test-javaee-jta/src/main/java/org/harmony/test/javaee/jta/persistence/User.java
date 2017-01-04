@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "t_user")
+@Table(name = "T_USER")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,19 +21,15 @@ public class User implements Serializable {
     private Long userId;
     private String username;
     private int age;
-    private String sex;
-    private String idCard;
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar birthday;
 
     public User() {
     }
 
-    public User(String username, int age, String sex, String idCard, Calendar birthday) {
+    public User(String username, int age, Calendar birthday) {
         this.username = username;
         this.age = age;
-        this.sex = sex;
-        this.idCard = idCard;
         this.birthday = birthday;
     }
 
@@ -65,22 +61,6 @@ public class User implements Serializable {
         this.age = age;
     }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
-
     public Calendar getBirthday() {
         return birthday;
     }
@@ -91,7 +71,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User [userId=" + userId + ", username=" + username + "]";
+        return "{userId:" + userId + ", username:" + username + "}";
     }
 
 }
