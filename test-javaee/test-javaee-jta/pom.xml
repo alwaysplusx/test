@@ -7,15 +7,30 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>test-javaee-jta</artifactId>
-  <dependencies>
+  <dependencies>    
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.apache.openejb</groupId>
       <artifactId>openejb-core</artifactId>
       <scope>test</scope>
       <exclusions>
         <exclusion>
-          <artifactId>slf4j-jdk14</artifactId>
           <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-jdk14</artifactId>
         </exclusion>
         <exclusion>
           <groupId>org.apache.openejb</groupId>
@@ -24,13 +39,14 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

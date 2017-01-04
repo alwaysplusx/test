@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.harmony.test.javaee.jpa.EntityManagerUtils.JPAType;
 import org.harmony.test.javaee.jpa.manytoone.Order;
 import org.harmony.test.javaee.jpa.manytoone.OrderItem;
 import org.junit.Before;
@@ -25,7 +24,7 @@ public class ManyToOneTest {
 
     @BeforeClass
     public static void beforeClass() {
-        entityManager = EntityManagerUtils.getEntityManager(JPAType.Hibernate);
+        entityManager = EntityManagerUtils.getEntityManager();
     }
 
     @Before

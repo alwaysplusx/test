@@ -12,8 +12,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceUtil;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.registry.infomodel.User;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
@@ -55,8 +57,8 @@ public class EntityManagerUtils {
         }
     }
 
-    public static EntityManager getEntityManager(JPAType type) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("harmony-" + type.name);
+    public static EntityManager getEntityManager() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("harmony");
         return proxyEntityManager(emf.createEntityManager());
     }
 
@@ -70,6 +72,8 @@ public class EntityManagerUtils {
 
     public static void main(String[] args) {
         System.out.println(persistenceUnitNames);
+        PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
+        persistenceUtil.isLoaded(User.class);
     }
 
     public static class EntityManagerProxy implements InvocationHandler {
@@ -89,6 +93,7 @@ public class EntityManagerUtils {
                 tx.begin();
                 try {
                     result = method.invoke(target, args);
+                    target.flush();
                     tx.commit();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -102,14 +107,4 @@ public class EntityManagerUtils {
 
     }
 
-    public static enum JPAType {
-
-        Eclipselink("eclipselink"), Hibernate("hibernate");
-
-        private String name;
-
-        private JPAType(String name) {
-            this.name = name;
-        }
-    }
 }

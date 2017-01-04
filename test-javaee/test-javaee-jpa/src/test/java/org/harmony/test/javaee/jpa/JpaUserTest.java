@@ -2,7 +2,6 @@ package org.harmony.test.javaee.jpa;
 
 import static org.junit.Assert.*;
 
-import org.harmony.test.javaee.jpa.EntityManagerUtils.JPAType;
 import org.harmony.test.javaee.jpa.dao.UserDao;
 import org.harmony.test.javaee.jpa.dao.impl.UserDaoImpl;
 import org.harmony.test.javaee.jpa.persistence.User;
@@ -18,7 +17,7 @@ public class JpaUserTest {
 
     @BeforeClass
     public static void beforeClass() {
-        userDao = new UserDaoImpl(EntityManagerUtils.getEntityManager(JPAType.Eclipselink));
+        userDao = new UserDaoImpl(EntityManagerUtils.getEntityManager());
     }
 
     @Test
