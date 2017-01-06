@@ -6,8 +6,8 @@ import javax.ejb.Remote;
  * @author wuxii@foxmail.com
  */
 @Remote
-public interface FooRemote {
+public interface BarRemote {
 
     int getAndIncrement();
-
+    
 }

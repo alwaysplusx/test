@@ -63,7 +63,6 @@
     </dependencies>
   </dependencyManagement>
   <modules>
-    <module>test-javase</module>
     <module>test-javaee</module>
   </modules>
 </project>

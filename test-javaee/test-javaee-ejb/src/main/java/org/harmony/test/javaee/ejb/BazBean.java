@@ -2,20 +2,20 @@ package org.harmony.test.javaee.ejb;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.ejb.Stateless;
+import javax.ejb.Singleton;
 
 /**
  * @author wuxii@foxmail.com
  */
-@Stateless
-public class FooBean implements FooRemote {
+@Singleton
+public class BazBean implements BazRemote {
 
     private AtomicInteger count = new AtomicInteger();
 
-    public static final AtomicInteger fooBeanCount = new AtomicInteger();
+    public static final AtomicInteger bazBeanCount = new AtomicInteger();
 
-    public FooBean() {
-        fooBeanCount.incrementAndGet();
+    public BazBean() {
+        bazBeanCount.incrementAndGet();
     }
 
     @Override
