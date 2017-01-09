@@ -1,6 +1,6 @@
-package org.moon.test.jdbc.meta;
+package org.harmony.test.jdbc;
 
-import static org.moon.test.jdbc.meta.DBPrintUtils.*;
+import static org.harmony.test.jdbc.DBPrintUtils.*;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -8,11 +8,11 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
+import org.harmony.test.jdbc.DBUtils;
+import org.harmony.test.jdbc.DBUtils.DatabaseType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.moon.test.jdbc.DBUtils;
-import org.moon.test.jdbc.DatabaseType;
 
 public class H2MetaDataTest {
 

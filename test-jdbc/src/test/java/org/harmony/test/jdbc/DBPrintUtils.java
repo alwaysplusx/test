@@ -1,10 +1,10 @@
-package org.moon.test.jdbc.meta;
+package org.harmony.test.jdbc;
+
+import static org.harmony.test.jdbc.Pad.*;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-
-import static org.moon.test.jdbc.meta.Pad.*;
 
 public class DBPrintUtils {
     

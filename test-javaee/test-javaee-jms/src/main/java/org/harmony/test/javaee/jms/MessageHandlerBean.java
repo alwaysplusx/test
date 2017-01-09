@@ -1,4 +1,4 @@
-package org.harmony.test.javaee.jms.impl;
+package org.harmony.test.javaee.jms;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -17,7 +17,7 @@ import javax.jms.TextMessage;
 import org.harmony.test.javaee.jms.MessageHandler;
 
 @Stateless
-public class MessageHandlerImpl implements MessageHandler {
+public class MessageHandlerBean implements MessageHandler {
 
     @Resource
     private ConnectionFactory connectionFactory;
@@ -52,16 +52,19 @@ public class MessageHandlerImpl implements MessageHandler {
     }
 
     @Override
-    public Object receiveMessage() throws JMSException {
+    public Object receiveMessage(long waitTime) throws JMSException {
         Connection conn = null;
         Session session = null;
         MessageConsumer consumer = null;
         try {
+            // 创建连接
             conn = connectionFactory.createConnection();
             conn.start();
             session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            // 与目的地建立会话
             consumer = session.createConsumer(destination);
-            Message message = consumer.receive();
+            // 接收消息.
+            Message message = consumer.receive(waitTime);
             if(message instanceof TextMessage){
                 return ((TextMessage)message).getText();
             }

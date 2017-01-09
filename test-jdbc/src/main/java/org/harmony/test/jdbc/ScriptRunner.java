@@ -1,4 +1,4 @@
-package org.moon.test.jdbc;
+package org.harmony.test.jdbc;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,7 +48,8 @@ public class ScriptRunner {
         }
     }
 
-    private StringBuilder handleLine(StringBuilder command, String line) throws SQLException, UnsupportedEncodingException {
+    private StringBuilder handleLine(StringBuilder command, String line)
+            throws SQLException, UnsupportedEncodingException {
         String trimmedLine = line.trim();
         if (lineIsComment(trimmedLine)) {
             // println(trimmedLine);
@@ -78,14 +79,12 @@ public class ScriptRunner {
     }
 
     private boolean commandReadyToExecute(String trimmedLine) {
-        return !fullLineDelimiter && trimmedLine.contains(delimiter) || fullLineDelimiter && trimmedLine.equals(delimiter);
+        return !fullLineDelimiter && trimmedLine.contains(delimiter)
+                || fullLineDelimiter && trimmedLine.equals(delimiter);
     }
 
     private void setAutoCommit() throws SQLException {
         connection.setAutoCommit(false);
     }
 
-    public void runScript(String path) throws IOException, SQLException {
-        runScript(new File(path));
-    }
 }

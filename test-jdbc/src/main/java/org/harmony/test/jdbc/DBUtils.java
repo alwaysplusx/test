@@ -1,4 +1,4 @@
-package org.moon.test.jdbc;
+package org.harmony.test.jdbc;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +13,16 @@ public class DBUtils {
 
     private static final Properties props = new Properties();
 
+    public static enum DatabaseType {
+        ORACLE("oracle"), H2("h2"), MYSQL("mysql");
+
+        private String name;
+
+        private DatabaseType(String name) {
+            this.name = name;
+        }
+    }
+
     static {
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.txt");
         try {
@@ -23,9 +33,9 @@ public class DBUtils {
     }
 
     public static Connection getConnection(DatabaseType type) throws SQLException {
-        String url = props.getProperty(type.desc() + ".url");
-        String user = props.getProperty(type.desc() + ".user");
-        String password = props.getProperty(type.desc() + ".password");
+        String url = props.getProperty(type.name + ".url");
+        String user = props.getProperty(type.name + ".user");
+        String password = props.getProperty(type.name + ".password");
         return DriverManager.getConnection(url, user, password);
     }
 
