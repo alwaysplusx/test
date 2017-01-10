@@ -2,6 +2,6 @@
 <beans>
   <!-- Container Dependency Inject(CDI) Feature -->
   <interceptors>
-    <class>org.harmony.test.javaee.interceptor.interceptor.LoggingInterceptor</class>
+    <class>org.harmony.test.javaee.interceptor.LoggingInterceptor</class>
   </interceptors>
 </beans>

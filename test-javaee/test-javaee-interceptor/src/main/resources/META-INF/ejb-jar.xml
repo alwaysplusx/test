@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ejb-jar version="3.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd">
+  <display-name>test-javaee-interceptor</display-name>
+  <!-- 
+  <interceptors>
+    <interceptor>
+      <interceptor-class>xxx</interceptor-class>
+      <ejb-ref>
+        <ejb-ref-name>beanName</ejb-ref-name>
+        <injection-target>
+          <injection-target-class>target-class</injection-target-class>
+          <injection-target-name>target-field</injection-target-name>
+        </injection-target>
+      </ejb-ref>
+    </interceptor>
+  </interceptors>
+  <assembly-descriptor>
+    <interceptor-binding>
+      <ejb-name>*</ejb-name>
+      <interceptor-class>xxx</interceptor-class>
+    </interceptor-binding>
+  </assembly-descriptor> 
+  -->
+</ejb-jar>

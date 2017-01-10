@@ -1,4 +1,4 @@
-package org.harmony.test.javaee.interceptor.interceptorbinding;
+package org.harmony.test.javaee.interceptor;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;

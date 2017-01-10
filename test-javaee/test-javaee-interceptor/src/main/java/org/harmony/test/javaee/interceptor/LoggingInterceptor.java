@@ -1,0 +1,24 @@
+package org.harmony.test.javaee.interceptor;
+
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
+import javax.interceptor.InvocationContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Log
+@Interceptor
+public class LoggingInterceptor {
+
+    private static final Logger log = LoggerFactory.getLogger(LoggingInterceptor.class);
+
+    @AroundInvoke
+    public Object log(InvocationContext ctx) throws Exception {
+        log.info("execute before");
+        Object result = ctx.proceed();
+        log.info("execute after");
+        return result;
+    }
+
+}

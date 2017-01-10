@@ -15,24 +15,22 @@ import org.junit.Test;
  * @author wuxii@foxmail.com
  */
 @Ignore
-public class MySQLTest {
+public class OracleTest {
 
     static Connection conn;
     static DatabaseMetaData metaData;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        conn = DBUtils.getConnection(DatabaseType.MYSQL);
+        conn = DBUtils.getConnection(DatabaseType.ORACLE);
         metaData = conn.getMetaData();
     }
 
     @Test
     public void test() throws SQLException {
-        String schema = conn.getSchema();
-        System.out.println(schema);
         printAll(metaData.getSchemas());
         printAll(metaData.getCatalogs());
-        printAll(metaData.getTables("test", null, null, new String[] { "TABLE" }));
+        printAll(metaData.getTables("platform", null, null, new String[] { "TABLE" }));
     }
 
     private static void printAll(ResultSet result) throws SQLException {
