@@ -11,7 +11,7 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-    <junit.version>4.11</junit.version>
+    <junit.version>4.12</junit.version>
     <slf4j.version>1.7.7</slf4j.version>
     <javaee.version>7.0</javaee.version>
     <eclipselink.version>2.6.4</eclipselink.version>
@@ -90,5 +90,6 @@
   <modules>
     <module>test-javaee</module>
     <module>test-jdbc</module>
+    <module>test-test</module>
   </modules>
 </project>
