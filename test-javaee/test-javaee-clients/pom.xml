@@ -12,7 +12,6 @@
   <modules>
     <module>test-javaee-tomee</module>
     <module>test-javaee-weblogic</module>
-    <module>test-javaee-glassfish</module>
     <module>test-javaee-wildfly</module>	
   </modules>
 </project>

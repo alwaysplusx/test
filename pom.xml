@@ -101,5 +101,6 @@
     <module>test-javaee</module>
     <module>test-jdbc</module>
     <module>test-test</module>
+    <module>test-microservices</module>
   </modules>
 </project>
