@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.moon.tomee</groupId>
-    <artifactId>tomee-parent</artifactId>
+    <groupId>org.harmony.test</groupId>
+    <artifactId>test-javaee-clients</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>client-test</artifactId>
+  <artifactId>test-javaee-tomee</artifactId>
   <properties>
     <openejb.version>4.7.1</openejb.version>
     <slf4j.version>1.7.5</slf4j.version>
@@ -22,7 +22,6 @@
     <dependency>
       <groupId>org.apache.openejb</groupId>
       <artifactId>openejb-core</artifactId>
-      <version>${openejb.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -40,7 +39,6 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

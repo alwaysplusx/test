@@ -17,5 +17,6 @@
     <module>test-javaee-ws</module>
     <module>test-javaee-interceptor</module>
     <module>test-javaee-websocket</module>
+    <module>test-javaee-clients</module>
   </modules>
 </project>
