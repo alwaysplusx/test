@@ -5,30 +5,26 @@ import static org.junit.Assert.*;
 import java.util.concurrent.CountDownLatch;
 
 import javax.ejb.EJB;
-import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import org.junit.BeforeClass;
+import org.harmony.tes.test.Naming;
+import org.harmony.tes.test.runner.OpenEJBRunner;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author wuxii@foxmail.com
  */
-public class BarBeanTest {
-
-    private static EJBContainer container;
-    private static Context context;
+@RunWith(OpenEJBRunner.class)
+public class StatefulBeanTest {
 
     @EJB
     private BarRemote bar;
-
-    @BeforeClass
-    public static void beforeClass() {
-        container = EJBContainer.createEJBContainer();
-        context = container.getContext();
-    }
-
+    
+    @Naming
+    private Context context;
+    
     @Test
     public void testStatelessBean() throws NamingException, InterruptedException {
         final int count = 10;
@@ -40,7 +36,7 @@ public class BarBeanTest {
                 @Override
                 public void run() {
                     try {
-                        BarBeanTest holder = new BarBeanTest();
+                        StatefulBeanTest holder = new StatefulBeanTest();
                         context.bind("inject", holder);
                         int first = holder.bar.getAndIncrement();
                         context.bind("inject", holder);
@@ -56,7 +52,8 @@ public class BarBeanTest {
 
         lock.await();
         System.out.println("finish count down");
-        assertEquals(20, BarBean.barBeanCount.get());
+        // count down 20 + BarBeanTest.bar
+        assertEquals(21, BarBean.barBeanCount.get());
     }
 
 }

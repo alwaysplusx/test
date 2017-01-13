@@ -1,26 +1,15 @@
-/*
- * Copyright 2002-2015 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package org.harmony.test.javaee.ejb;
+package org.harmony.test.javaee.jms;
 
 import java.util.Properties;
 
-import javax.ejb.EJB;
+import javax.annotation.Resource;
 import javax.ejb.embeddable.EJBContainer;
+import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
+import javax.jms.JMSException;
 
-import org.harmony.test.javaee.ejb.AppMessageSender;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,42 +17,56 @@ import org.junit.Test;
 /**
  * @author wuxii@foxmail.com
  */
-public class AppMessageTest {
+public class DynamicMessageListenerTest {
 
-    public static EJBContainer container;
+    private static EJBContainer container;
 
-    @EJB
-    private AppMessageSender sender;
+    @Resource
+    private ConnectionFactory connectionFactory;
+    @Resource
+    private Destination dest;
+
+    private DynamicMessageListener listener;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         Properties props = new Properties();
-
+        // JMS ResourceAdapter
         props.put("MyJmsResourceAdapter", "new://Resource?type=ActiveMQResourceAdapter");
         props.put("MyJmsResourceAdapter.BrokerXmlConfig", "broker:(tcp://localhost:61616)?useJmx=false");
         props.put("MyJmsResourceAdapter.ServerUrl", "tcp://localhost:61616");
-
+        // MDB Container
         props.put("MyJmsMdbContainer", "new://Container?type=MESSAGE");
         props.put("MyJmsMdbContainer.ResourceAdapter", "MyJmsResourceAdapter");
-
+        // ConnectionFactory
         props.put("jms.connectionFactory", "new://Resource?type=QueueConnectionFactory");
         props.put("jms.connectionFactory.ResourceAdapter", "MyJmsResourceAdapter");
-
+        // Queue
         props.put("jms.queue", "new://Resource?type=Queue");
-
         container = EJBContainer.createEJBContainer(props);
-
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void before() throws Exception {
         container.getContext().bind("inject", this);
+        listener = new DynamicMessageListener(connectionFactory, dest);
+        listener.start();
     }
 
     @Test
-    public void test() throws Exception {
-        sender.send(Integer.valueOf(12));
+    public void test() throws JMSException, InterruptedException {
+        MessageHelper.sendMessage("Hello World!", connectionFactory, dest);
         Thread.sleep(1000);
+    }
+
+    @After
+    public void after() throws JMSException {
+        listener.stop();
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        container.close();
     }
 
 }

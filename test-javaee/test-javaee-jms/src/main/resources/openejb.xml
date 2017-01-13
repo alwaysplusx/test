@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <openejb>
   <Resource id="jmsResourceAdapter" type="ActiveMQResourceAdapter">
-    BrokerXmlConfig broker:(tcp://localhost:8082)
+    BrokerXmlConfig broker:(tcp://localhost:8082)?useJmx=false
     ServerUrl tcp://localhost:8082
   </Resource>
   <Resource id="connectionFactory" type="javax.jms.ConnectionFactory">

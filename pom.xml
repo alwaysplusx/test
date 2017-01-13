@@ -32,7 +32,7 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-  </repositories>  
+  </repositories>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -101,6 +101,24 @@
     <module>test-javaee</module>
     <module>test-jdbc</module>
     <module>test-test</module>
+    <module>test-framework</module>
     <module>test-microservices</module>
   </modules>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * @author wuxii@foxmail.com
  */
-public class FooBeanTest {
+public class StatelessBeanTest {
 
     private static EJBContainer container;
     private static Context context;
@@ -42,7 +42,7 @@ public class FooBeanTest {
                     try {
                         // 前后绑定的会话Bean应为是无状态的, 所以其前后的两次值具有随机性
                         // 在并发多的情况下前后的值就无法保证顺序性
-                        final FooBeanTest holder = new FooBeanTest();
+                        final StatelessBeanTest holder = new StatelessBeanTest();
                         context.bind("inject", holder);
                         int first = holder.foo.getAndIncrement();
                         // 第二次

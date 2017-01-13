@@ -2,6 +2,7 @@ package org.harmony.tes.test.runner;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -10,8 +11,10 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.ejb.embeddable.EJBContainer;
+import javax.naming.Context;
 
 import org.harmony.tes.test.ContainerConfiguration;
+import org.harmony.tes.test.Naming;
 import org.harmony.tes.test.OpenEJBConfiguration;
 import org.harmony.tes.test.Property;
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -62,7 +65,8 @@ public class OpenEJBRunner extends BlockJUnit4ClassRunner {
                     properties.put("openejb.conf.file", openejbAnn.location());
                 }
                 // OpenEjbContainer(L324)
-                properties.put(org.apache.openejb.OpenEjbContainer.Provider.OPENEJB_ADDITIONNAL_CALLERS_KEY, testClass.getName());
+                properties.put(org.apache.openejb.OpenEjbContainer.Provider.OPENEJB_ADDITIONNAL_CALLERS_KEY,
+                        testClass.getName());
                 container = EJBContainer.createEJBContainer(properties);
                 statement.evaluate();
             }
@@ -89,7 +93,22 @@ public class OpenEJBRunner extends BlockJUnit4ClassRunner {
 
             @Override
             public void evaluate() throws Throwable {
-                container.getContext().bind("inject", target);
+                Context context = container.getContext();
+                context.bind("inject", target);
+                Field[] fields = target.getClass().getDeclaredFields();
+                for (Field field : fields) {
+                    Naming ann = field.getAnnotation(Naming.class);
+                    if (ann != null) {
+                        Object obj = null;
+                        if (!ann.value().trim().equals("")) {
+                            obj = context.lookup(ann.value().trim());
+                        } else {
+                            obj = context;
+                        }
+                        field.setAccessible(true);
+                        field.set(target, obj);
+                    }
+                }
                 next.evaluate();
             }
         };

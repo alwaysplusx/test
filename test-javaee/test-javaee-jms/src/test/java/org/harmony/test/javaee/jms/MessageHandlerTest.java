@@ -15,9 +15,10 @@ import org.junit.Test;
 
 public class MessageHandlerTest {
 
+    private static EJBContainer container;
+
     @EJB
     MessageHandler handler;
-    static EJBContainer container;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -39,7 +40,10 @@ public class MessageHandlerTest {
 
     @AfterClass
     public static void afterClass() throws Exception {
-        container.close();
+        try {
+            container.close();
+        } catch (Exception e) {
+        }
     }
 
 }

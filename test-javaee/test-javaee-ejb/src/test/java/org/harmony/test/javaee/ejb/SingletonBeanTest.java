@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * @author wuxii@foxmail.com
  */
-public class BazBeanTest {
+public class SingletonBeanTest {
 
     private static EJBContainer container;
     private static Context context;
@@ -40,10 +40,10 @@ public class BazBeanTest {
                 @Override
                 public void run() {
                     try {
-                        BazBeanTest holder1 = new BazBeanTest();
+                        SingletonBeanTest holder1 = new SingletonBeanTest();
                         context.bind("inject", holder1);
                         int first = holder1.baz.getAndIncrement();
-                        BazBeanTest holder2 = new BazBeanTest();
+                        SingletonBeanTest holder2 = new SingletonBeanTest();
                         context.bind("inject", holder2);
                         int second = holder2.baz.getAndIncrement();
                         System.out.println(Thread.currentThread().getName() + ", first get:" + first + ", second get:" + second);

@@ -1,35 +1,24 @@
-package org.harmony.test.javaee.ejb;
+package org.harmony.test.javaee.jms;
 
 import java.io.Serializable;
 
-import javax.annotation.Resource;
-import javax.ejb.Stateless;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * @author wuxii@foxmail.com
  */
-@Stateless
-public class AppMessageSender {
+public class MessageHelper {
 
-    private static final Logger log = LoggerFactory.getLogger(AppMessageSender.class);
-
-    @Resource
-    private ConnectionFactory connectionFactory;
-
-    @Resource
-    private Destination destination;
-
-    public boolean send(Serializable message) {
+    public static void sendMessage(Serializable message, ConnectionFactory connectionFactory, Destination dest)
+            throws JMSException {
         Connection connection = null;
         Session session = null;
         MessageProducer producer = null;
@@ -37,14 +26,12 @@ public class AppMessageSender {
             connection = connectionFactory.createConnection();
             connection.start();
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            log.info("message listener -> {}", session.getMessageListener());
-            producer = session.createProducer(destination);
+            producer = session.createProducer(dest);
             ObjectMessage om = session.createObjectMessage();
             om.setObject(message);
             producer.send(om);
         } catch (JMSException e) {
-            log.error("发送失败{}", message, e);
-            return false;
+            e.printStackTrace();
         } finally {
             try {
                 if (producer != null) {
@@ -57,9 +44,28 @@ public class AppMessageSender {
                     connection.close();
                 }
             } catch (JMSException e) {
-                log.debug("", e);
             }
         }
-        return true;
     }
+
+    public static Message receiveMessage(long waitTime, ConnectionFactory connectionFactory, Destination dest)
+            throws JMSException {
+        Connection conn = null;
+        Session session = null;
+        MessageConsumer consumer = null;
+        try {
+            // 创建连接
+            conn = connectionFactory.createConnection();
+            conn.start();
+            session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            // 与目的地建立会话
+            consumer = session.createConsumer(dest);
+            return consumer.receive(waitTime);
+        } finally {
+            consumer.close();
+            session.close();
+            conn.close();
+        }
+    }
+
 }
