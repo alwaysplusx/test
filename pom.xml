@@ -22,6 +22,7 @@
     <hsqldb.version>2.3.1</hsqldb.version>
     <mysql.version>5.1.40</mysql.version>
     <oracle.version>11.2.0.3</oracle.version>
+    <spring.version>4.3.5.RELEASE</spring.version>
   </properties>
   <repositories>
     <repository>
@@ -98,6 +99,7 @@
     </dependencies>
   </dependencyManagement>
   <modules>
+    <module>test-aop</module>
     <module>test-javaee</module>
     <module>test-jdbc</module>
     <module>test-test</module>

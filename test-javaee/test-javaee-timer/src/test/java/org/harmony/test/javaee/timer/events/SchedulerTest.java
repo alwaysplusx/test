@@ -18,10 +18,10 @@ import org.slf4j.LoggerFactory;
 @Ignore
 public class SchedulerTest {
 
-    static Logger LOG = LoggerFactory.getLogger(SchedulerTest.class);
-    EJBContainer container;
+    private static final Logger LOG = LoggerFactory.getLogger(SchedulerTest.class);
+    private EJBContainer container;
     @EJB
-    Scheduler scheduler;
+    private Scheduler scheduler;
 
     @Before
     public void setUp() throws Exception {

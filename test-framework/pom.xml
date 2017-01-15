@@ -13,7 +13,6 @@
     <module>test-framework-activemq</module>
   </modules>
   <properties>
-    <junit.version>4.11</junit.version>
     <tomcat.plugin.version>2.2</tomcat.plugin.version>
     <jetty.plugin.version>9.1.4.v20140401</jetty.plugin.version>
   </properties>

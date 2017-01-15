@@ -16,9 +16,9 @@ import javax.enterprise.inject.spi.BeanManager;
 public class Scheduler {
 
     @Resource
-    TimerService timerService;
+    private TimerService timerService;
     @Resource
-    BeanManager beanManager;
+    private BeanManager beanManager;
 
     public void scheduleEvent(ScheduleExpression schedule, Object event, Annotation... qualifiers) {
         timerService.createCalendarTimer(schedule, new TimerConfig(new Event(event, qualifiers), false));

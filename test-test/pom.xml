@@ -20,6 +20,8 @@
       <groupId>org.apache.openejb</groupId>
       <artifactId>openejb-junit</artifactId>
       <version>${openejb.version}</version>
+      <scope>compile</scope>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.apache.openejb</groupId>

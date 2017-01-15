@@ -14,6 +14,7 @@
     <module>test-javaee-ejb</module>
     <module>test-javaee-jta</module>
     <module>test-javaee-timer</module>
+    <module>test-javaee-mail</module>
     <module>test-javaee-ws</module>
     <module>test-javaee-interceptor</module>
     <module>test-javaee-websocket</module>
