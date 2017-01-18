@@ -100,6 +100,7 @@
   </dependencyManagement>
   <modules>
     <module>test-aop</module>
+    <module>test-javase</module>
     <module>test-javaee</module>
     <module>test-jdbc</module>
     <module>test-test</module>

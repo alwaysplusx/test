@@ -7,7 +7,6 @@ import org.apache.activemq.broker.TransportConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -31,9 +30,9 @@ public class BrokerController {
         return o.toString();
     }
 
-    @GetMapping("/ping")
-    public long ping(@RequestParam("uri") String uri) throws Exception {
-        return -1;
-    }
+    /*@RequestMapping(path = "/discovery", method = { RequestMethod.GET, RequestMethod.POST })
+    public String discovery(@RequestParam("url") String url) {
+        return null;
+    }*/
 
 }
