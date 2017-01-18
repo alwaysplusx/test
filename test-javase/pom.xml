@@ -12,5 +12,7 @@
   <modules>
     <module>test-javase-jmx</module>
     <module>test-javase-rmi</module>
+    <module>test-javase-vm</module>
+    <module>test-javase-io</module>
   </modules>
 </project>
