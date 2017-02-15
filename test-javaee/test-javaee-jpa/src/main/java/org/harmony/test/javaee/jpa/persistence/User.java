@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -17,6 +19,12 @@ import javax.persistence.TemporalType;
 @NamedQuery(//
         name = "findById", //
         query = "SELECT o FROM User o WHERE o.userId = :userId"//
+)
+@NamedEntityGraph(//
+        name = "user.find", //
+        attributeNodes = { //
+                @NamedAttributeNode("username") //
+        }//
 )
 public class User implements Serializable {
 
