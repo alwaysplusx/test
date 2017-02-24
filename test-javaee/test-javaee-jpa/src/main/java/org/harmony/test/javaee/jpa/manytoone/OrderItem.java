@@ -54,4 +54,9 @@ public class OrderItem {
         this.order = order;
     }
 
+    @Override
+    public String toString() {
+        return "{itemNo:" + itemNo + "}";
+    }
+
 }

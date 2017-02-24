@@ -20,8 +20,8 @@
       <property name="hibernate.show_sql" value="true" />
       <property name="hibernate.format_sql" value="true" />
     </properties>
-  </persistence-unit>  
-  <!-- <persistence-unit name="harmony" transaction-type="RESOURCE_LOCAL">
+  </persistence-unit>
+  <persistence-unit name="harmony2" transaction-type="RESOURCE_LOCAL">
     <description>persistence unit privided by eclipselink</description>
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
@@ -35,5 +35,5 @@
       <property name="eclipselink.logging.level.sql" value="FINE" />
       <property name="eclipselink.logging.parameters" value="true" />
     </properties>
-  </persistence-unit> -->
+  </persistence-unit>
 </persistence>

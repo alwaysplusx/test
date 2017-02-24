@@ -1,5 +1,7 @@
 package org.harmony.test.javaee.jpa.persistence;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
@@ -15,7 +17,7 @@ public class LobEntity {
     @Id
     private String id;
     @Lob
-    private Exception[] exceptions;
+    private Serializable exceptions;
 
     public String getId() {
         return id;
@@ -26,7 +28,7 @@ public class LobEntity {
     }
 
     public Exception[] getExceptions() {
-        return exceptions;
+        return (Exception[]) exceptions;
     }
 
     public void setExceptions(Exception[] exceptions) {

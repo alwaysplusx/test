@@ -61,4 +61,9 @@ public class Order {
         });
     }
 
+    @Override
+    public String toString() {
+        return "{id:" + id + ", orderNo:" + orderNo + ", items:" + items + "}";
+    }
+
 }

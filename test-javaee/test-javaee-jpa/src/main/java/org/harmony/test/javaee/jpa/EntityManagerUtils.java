@@ -62,6 +62,11 @@ public class EntityManagerUtils {
         return proxyEntityManager(emf.createEntityManager());
     }
 
+    public static EntityManager getEntityManager2() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("harmony2");
+        return proxyEntityManager(emf.createEntityManager());
+    }
+
     private static EntityManager proxyEntityManager(EntityManager entityManager) {
         return (EntityManager) Proxy.newProxyInstance(//
                 Thread.currentThread().getContextClassLoader(), //
