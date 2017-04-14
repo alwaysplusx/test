@@ -11,6 +11,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>test-framework-activemq</module>
+    <module>test-framework-freemarker</module>
   </modules>
   <properties>
     <tomcat.plugin.version>2.2</tomcat.plugin.version>
