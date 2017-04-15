@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.moon.test.mybatis.repository.UserRepository">
+<mapper namespace="org.harmony.test.mybatis.repository.UserRepository">
 
-	<resultMap type="org.moon.test.mybatis.persistence.User" id="UserGroupCountryMapper">
+	<resultMap type="org.harmony.test.mybatis.persistence.User" id="UserGroupCountryMapper">
 		<id column="id" property="id" />
 		<result column="username" property="username" />
 		<result column="password" property="password" />
 		<result column="status" property="status" />
-		<association property="group" column="groupId" javaType="org.moon.test.mybatis.persistence.Group">
+		<association property="group" column="groupId" javaType="org.harmony.test.mybatis.persistence.Group">
 			<id column="id" property="id" />
 			<result column="groupName" property="groupName" />
 		</association>
-		<association property="country" column="countryId" javaType="org.moon.test.mybatis.persistence.Country" select="selectCountry" />
+		<association property="country" column="countryId" javaType="org.harmony.test.mybatis.persistence.Country" select="selectCountry" />
 	</resultMap>
 	
-	<select id="selectCountry" resultType="org.moon.test.mybatis.persistence.Country" parameterType="long">
+	<select id="selectCountry" resultType="org.harmony.test.mybatis.persistence.Country" parameterType="long">
 		select * from t_country where id = #{id}
 	</select>
 	
@@ -23,7 +23,7 @@
 		select u.*,g.* from t_user u, t_group g where u.id = #{id} and u.groupId = g.id
 	</select>
 
-	<insert id="save" parameterType="org.moon.test.mybatis.persistence.User">
+	<insert id="save" parameterType="org.harmony.test.mybatis.persistence.User">
 		insert into t_user(id, username, password, status, groupId, countryId, createTime, createUser)
 		values (#{id},#{username},#{password},#{status},#{group.id}, #{country.id},#{createTime},#{createUser})
 	</insert>
@@ -32,7 +32,7 @@
 		delete from t_user where id = #{id}
 	</update>
 
-	<update id="update" parameterType="org.moon.test.mybatis.persistence.User">
+	<update id="update" parameterType="org.harmony.test.mybatis.persistence.User">
 		update t_user
 		<set>
 			<if test="username != null">username = #{username},</if>
@@ -44,7 +44,7 @@
 		where id = #{id}
 	</update>
 	
-	<select id="findById" parameterType="long" resultType="org.moon.test.mybatis.persistence.User">
+	<select id="findById" parameterType="long" resultType="org.harmony.test.mybatis.persistence.User">
 		select * from t_user u where id = #{id}
 	</select>
 	

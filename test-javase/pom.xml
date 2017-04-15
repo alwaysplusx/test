@@ -14,5 +14,6 @@
     <module>test-javase-rmi</module>
     <module>test-javase-vm</module>
     <module>test-javase-io</module>
+    <module>test-javase-java8</module>
   </modules>
 </project>

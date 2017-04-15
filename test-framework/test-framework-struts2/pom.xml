@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.moon.test</groupId>
-    <artifactId>framework-parent</artifactId>
+    <groupId>org.harmony.test</groupId>
+    <artifactId>test-framework</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>struts2-web</artifactId>
+  <artifactId>test-framework-struts2</artifactId>
   <packaging>war</packaging>
   <properties>
     <struts2.version>2.3.16</struts2.version>
@@ -19,7 +19,6 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -27,9 +26,7 @@
       <artifactId>struts2-core</artifactId>
       <version>${struts2.version}</version>
     </dependency>
-        <!-- 
-        struts 注解包
-         -->
+    <!-- struts 注解包 -->
     <dependency>
       <groupId>org.apache.struts</groupId>
       <artifactId>struts2-convention-plugin</artifactId>
@@ -43,12 +40,10 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
-      <version>${slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
-      <version>${javaee.api.version}</version>
       <scope>provided</scope>
       <optional>false</optional>
     </dependency>

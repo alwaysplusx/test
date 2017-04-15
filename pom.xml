@@ -10,6 +10,17 @@
   <artifactId>test-parent</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <modules>
+    <module>test-aop</module>
+    <module>test-ioc</module>
+    <module>test-javase</module>
+    <module>test-javaee</module>
+    <module>test-jdbc</module>
+    <module>test-logger</module>
+    <module>test-test</module>
+    <module>test-framework</module>
+    <module>test-microservices</module>
+  </modules>
   <properties>
     <junit.version>4.12</junit.version>
     <slf4j.version>1.7.7</slf4j.version>
@@ -98,30 +109,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <modules>
-    <module>test-aop</module>
-    <module>test-javase</module>
-    <module>test-javaee</module>
-    <module>test-jdbc</module>
-    <module>test-test</module>
-    <module>test-framework</module>
-    <module>test-microservices</module>
-  </modules>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 </project>

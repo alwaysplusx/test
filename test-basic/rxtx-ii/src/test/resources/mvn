@@ -1,1 +1,0 @@
-mvn install:install-file -DgroupId=gnu.io.rxtx -DartifactId=rxtx-comm -Dversion=2.2-stabilize-SNAPSHOT -Dpackaging=jar -Dfile=rxtx-comm-2.2-stabilize-SNAPSHOT.jar

@@ -2,17 +2,21 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.moon.test</groupId>
+    <groupId>org.harmony.test</groupId>
     <artifactId>test-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>basic-parent</artifactId>
+  <artifactId>test-basic</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>collection-test</module>
-    <module>ehcache-test</module>
-    <module>mail-test</module>
-    <module>dozer-test</module>
+    <module>test-basic-collection</module>
+    <module>test-basic-ehcache</module>
+    <module>test-basic-json</module>
+    <module>test-basic-xml</module>
+    <module>test-basic-socket</module>
+    <module>test-basic-rxtx</module>
+    <module>test-basic-io</module>
+    <module>test-basic-file</module>
   </modules>
 </project>

@@ -6,14 +6,14 @@
   <package name="root" extends="struts-default" namespace="/">
 
     <interceptors>
-      <interceptor name="urlInterceptor" class="org.moon.test.struts2.interceptor.UrlInterceptor" />
+      <interceptor name="urlInterceptor" class="org.harmony.test.struts2.interceptor.UrlInterceptor" />
       <interceptor-stack name="urlStack">
         <interceptor-ref name="urlInterceptor" />
         <interceptor-ref name="defaultStack" />
       </interceptor-stack>
     </interceptors>
 
-    <action name="*_*" class="org.moon.test.struts2.action.{1}Action" method="{2}">
+    <action name="*_*" class="org.harmony.test.struts2.action.{1}Action" method="{2}">
       <interceptor-ref name="urlInterceptor" />
       <result name="success">/success.jsp</result>
     </action>
