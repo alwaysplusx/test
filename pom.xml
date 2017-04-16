@@ -12,14 +12,18 @@
   <packaging>pom</packaging>
   <modules>
     <module>test-aop</module>
+    <module>test-basic</module>
+    <module>test-framework</module>
     <module>test-ioc</module>
-    <module>test-javase</module>
     <module>test-javaee</module>
+    <module>test-javase</module>
     <module>test-jdbc</module>
     <module>test-logger</module>
-    <module>test-test</module>
-    <module>test-framework</module>
+    <module>test-maven</module>
     <module>test-microservices</module>
+    <module>test-test</module>
+    <module>test-timer</module>
+    <module>test-spring</module>
   </modules>
   <properties>
     <junit.version>4.12</junit.version>
