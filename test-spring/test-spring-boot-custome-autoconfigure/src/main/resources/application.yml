@@ -1,0 +1,4 @@
+harmony:
+  greet:
+    enabled: true
+    url: /test

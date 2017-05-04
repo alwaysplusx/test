@@ -11,5 +11,6 @@
   <modules>
     <module>test-spring-webmvc</module>
     <module>test-spring-data</module>
+    <module>test-spring-boot</module>
   </modules>
 </project>
