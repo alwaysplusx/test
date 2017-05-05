@@ -20,6 +20,7 @@
     <module>test-framework-dozer</module>
     <!-- <module>test-framework-jaxrs</module> -->
     <!-- <module>test-framework-barcode</module> -->
+    <module>test-framework-grpc</module>
   </modules>
   <properties>
     <tomcat.plugin.version>2.2</tomcat.plugin.version>

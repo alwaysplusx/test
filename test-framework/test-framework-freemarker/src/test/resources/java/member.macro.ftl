@@ -13,3 +13,7 @@
         this.${data.name} = ${data.name};
     }
 </#macro>
+
+<#macro annotation data>
+    @${data.name}(<#list data.entrys as entry>${entry.key} = ${entry.value}<#sep>, </#list>)
+</#macro>

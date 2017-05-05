@@ -10,7 +10,6 @@ public class ${name} implements Serializable {
     private static final long serialVersionUID = 1L;
     
     <#import "member.macro.ftl" as e>
-    
     <#list fields as field>
         <@e.field data=field />
     </#list>
@@ -20,6 +19,5 @@ public class ${name} implements Serializable {
         
         <@e.setter data=field />
     </#list>
-    
-    
+
 }

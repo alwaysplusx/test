@@ -1,4 +1,4 @@
-package com.harmony.test.framework.freemarker;
+package org.harmony.test.framework.freemarker;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,11 +15,11 @@ import freemarker.template.TemplateExceptionHandler;
 /**
  * @author wuxii@foxmail.com
  */
-public class ClazzTest {
+public class JavaGenerateTest {
 
     public static void main(String[] args) throws IOException, TemplateException {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
-        cfg.setDirectoryForTemplateLoading(new File("src/test/resources/clazz"));
+        cfg.setDirectoryForTemplateLoading(new File("src/test/resources/java"));
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(false);
@@ -33,7 +33,12 @@ public class ClazzTest {
                   + " */";
         o.name = "TestEntity";
         o.imports = Arrays.asList("com.huiju.test.A", "com.huiju.test.B");
-        o.fields = Arrays.asList(new TField("String", "name"), new TField("int", "age"));
+        TField f1 = new TField("String", "name");
+        TField f2 = new TField("int", "age");
+        f1.anns = Arrays.asList(new TAnnotation("", ""));
+        f2.anns = Arrays.asList(new TAnnotation());
+        
+        o.fields = Arrays.asList(f1, f2);
         
         Template temp = cfg.getTemplate("entity.ftl");
         Writer out = new OutputStreamWriter(System.out);
@@ -45,6 +50,7 @@ public class ClazzTest {
 
         private String type;
         private String name;
+        private List<TAnnotation> anns;
 
         public TField() {
         }
@@ -68,6 +74,46 @@ public class ClazzTest {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public List<TAnnotation> getAnnotations() {
+            return this.anns;
+        }
+
+        public void setAnnotations(List<TAnnotation> anns) {
+            this.anns = anns;
+        }
+
+    }
+    
+    public static class TAnnotation {
+        
+        String name;
+        String key;
+        String value;
+
+        public TAnnotation() {
+        }
+        
+        public TAnnotation(String key, String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
         }
 
     }
