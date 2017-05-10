@@ -24,7 +24,7 @@ public class ManyToOneTest {
 
     @BeforeClass
     public static void beforeClass() {
-        entityManager = EntityManagerUtils.getEntityManager();
+        entityManager = EntityManagerUtils.getEntityManager2();
     }
 
     @Before
@@ -71,4 +71,12 @@ public class ManyToOneTest {
         assertEquals(0l, count.longValue());
     }
 
+    public static void main(String[] args) {
+        ManyToOneTest.beforeClass();
+        entityManager.persist(new Order("ORDER-19390383", new OrderItem("ITEM-0001"), new OrderItem("ITEM-0002")));
+        Order order = entityManager.createQuery("select o from Order o", Order.class).getSingleResult();
+        entityManager.close();
+        System.out.println(order);
+        System.out.println(order.getItems());
+    }
 }
