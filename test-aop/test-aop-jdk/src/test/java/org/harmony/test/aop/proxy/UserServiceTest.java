@@ -1,4 +1,4 @@
-package org.moon.test.aop.proxy.service;
+package org.harmony.test.aop.proxy;
 
 import static org.junit.Assert.*;
 

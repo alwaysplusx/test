@@ -12,7 +12,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>test-aop</module>
-    <module>test-basic</module>
     <module>test-framework</module>
     <module>test-ioc</module>
     <module>test-javaee</module>

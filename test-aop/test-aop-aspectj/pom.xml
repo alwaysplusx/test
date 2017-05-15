@@ -9,7 +9,7 @@
   </parent>
   <artifactId>test-aop-aspectj</artifactId>
   <properties>
-    <aspectj.version>1.8.1</aspectj.version>
+    <aspectj.version>1.8.9</aspectj.version>
   </properties>
   <dependencies>
     <dependency>
@@ -17,5 +17,37 @@
       <artifactId>aspectjrt</artifactId>
       <version>${aspectj.version}</version>
     </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>aspectj-maven-plugin</artifactId>
+        <version>1.10</version>
+        <configuration>
+          <sources>
+            <source>
+              <basedir>src/main/java</basedir>
+              <includes>
+                <include>**/*.java</include>
+                <include>**/*.aj</include>
+              </includes>
+            </source>
+          </sources>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

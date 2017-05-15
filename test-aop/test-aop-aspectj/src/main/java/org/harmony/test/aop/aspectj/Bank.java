@@ -1,4 +1,4 @@
-package org.moon.test.aop.aspectj;
+package org.harmony.test.aop.aspectj;
 
 public class Bank {
 
