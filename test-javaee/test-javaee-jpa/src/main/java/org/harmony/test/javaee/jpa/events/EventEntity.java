@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "T_EVENT")
-@EntityListeners(EntityEventListener.class)
+@EntityListeners({ EntityEventListener.class })
 public class EventEntity {
 
     @Id

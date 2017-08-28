@@ -3,9 +3,13 @@
 **/target
 **/.gitignore
 **/.classpath
-/.idea
+**/.idea
 /**/*.iml
 /**/rebel.xml
 **/.gitignore
 **/.springBeans
 **/.factorypath
+**/build
+**/frontend/node
+**/node_modules
+**/npm-debug.log
