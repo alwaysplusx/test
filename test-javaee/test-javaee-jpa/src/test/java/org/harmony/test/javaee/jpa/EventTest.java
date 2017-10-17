@@ -22,6 +22,8 @@ public class EventTest {
     public void test() {
         EventEntity entity = new EventEntity("wuxii");
         entityManager.persist(entity);
+        entity.setName("gogogo");
+        entityManager.merge(entity);
     }
 
 }
