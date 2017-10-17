@@ -23,6 +23,8 @@
     <module>test-test</module>
     <module>test-timer</module>
     <module>test-spring</module>
+    <module>test-java9</module>
+    <module>test-weixin</module>
   </modules>
   <properties>
     <junit.version>4.12</junit.version>
