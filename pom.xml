@@ -1,11 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.harmony</groupId>
-    <artifactId>harmony</artifactId>
-    <version>3</version>
-  </parent>
   <groupId>org.harmony.test</groupId>
   <artifactId>test-parent</artifactId>
   <version>1.0.0-SNAPSHOT</version>
@@ -27,9 +22,13 @@
     <module>test-weixin</module>
   </modules>
   <properties>
-    <junit.version>4.12</junit.version>
-    <slf4j.version>1.7.7</slf4j.version>
-    <javaee.version>7.0</javaee.version>
+    <spring.dependencies.version>1.5.2.RELEASE</spring.dependencies.version>
+    <encoding>UTF-8</encoding>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
     <eclipselink.version>2.6.4</eclipselink.version>
     <hibernate.version>5.2.5.Final</hibernate.version>
     <openejb.version>4.7.4</openejb.version>
@@ -38,7 +37,6 @@
     <hsqldb.version>2.3.1</hsqldb.version>
     <mysql.version>5.1.40</mysql.version>
     <oracle.version>11.2.0.3</oracle.version>
-    <spring.version>4.3.5.RELEASE</spring.version>
   </properties>
   <repositories>
     <repository>
@@ -53,9 +51,16 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.dependencies.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>javax</groupId>
         <artifactId>javaee-api</artifactId>
-        <version>${javaee.version}</version>
+        <version>7.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.openejb</groupId>
@@ -63,34 +68,9 @@
         <version>${openejb.version}</version>
       </dependency>
       <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-      <dependency>
         <groupId>org.eclipse.persistence</groupId>
         <artifactId>eclipselink</artifactId>
         <version>${eclipselink.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-core</artifactId>
-        <version>${hibernate.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.h2database</groupId>
-        <artifactId>h2</artifactId>
-        <version>${h2.version}</version>
       </dependency>
       <dependency>
         <groupId>mysql</groupId>
