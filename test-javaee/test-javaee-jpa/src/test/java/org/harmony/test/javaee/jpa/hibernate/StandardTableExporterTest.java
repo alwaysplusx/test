@@ -1,10 +1,8 @@
 package org.harmony.test.javaee.jpa.hibernate;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.HashMap;
 
 import org.hibernate.boot.model.relational.AuxiliaryDatabaseObject;
 import org.hibernate.boot.model.relational.Database;
@@ -13,8 +11,6 @@ import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.jdbc.internal.DDLFormatterImpl;
 import org.hibernate.internal.SessionFactoryImpl;
-import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
-import org.hibernate.jpa.boot.spi.Bootstrap;
 import org.hibernate.mapping.ForeignKey;
 import org.hibernate.mapping.Table;
 import org.hibernate.tool.schema.spi.Exporter;
@@ -25,12 +21,21 @@ import org.hibernate.tool.schema.spi.Exporter;
 public class StandardTableExporterTest {
 
     public static void main(String[] args) throws MalformedURLException, SQLException {
-        File file = new File("src/main/resources/META-INF/persistence.xml");
-        EntityManagerFactoryBuilderImpl builder = (EntityManagerFactoryBuilderImpl) Bootstrap.getEntityManagerFactoryBuilder(file.toURI().toURL(), "harmony", new HashMap());
-        SessionFactoryImpl sessionFactory = (SessionFactoryImpl) builder.build();
-        MetadataImplementor metadata = builder.getMetadata();
-        Dialect dialect = sessionFactory.getJdbcServices().getDialect();
+        // File file = new File("src/main/resources/META-INF/persistence.xml");
+        // PersistenceUnitDescriptor pud = null;
+        // EntityManagerFactoryBuilderImpl builder = (EntityManagerFactoryBuilderImpl)
+        // Bootstrap.getEntityManagerFactoryBuilder(pud, new HashMap());
+        // EntityManagerFactoryBuilderImpl builder = (EntityManagerFactoryBuilderImpl)
+        // Bootstrap.getEntityManagerFactoryBuilder(file.toURI().toURL(), "harmony", new HashMap());
+        boolean flag = true;
+        if (flag) {
+            return;
+        }
+        SessionFactoryImpl sessionFactory = new SessionFactoryImpl(null, null);
+        MetadataImplementor metadata = (MetadataImplementor) new Object();
         Database database = metadata.getDatabase();
+
+        Dialect dialect = sessionFactory.getJdbcServices().getDialect();
         Iterable<Namespace> namespaces = database.getNamespaces();
         Exporter<Table> tableExporter = dialect.getTableExporter();
         DDLFormatterImpl formatter = new DDLFormatterImpl();
@@ -50,7 +55,7 @@ public class StandardTableExporterTest {
                 System.out.println(formatter.format(sql));
             }
         }
-        // ========== 
+        // ==========
         Exporter<ForeignKey> foreignKeyExporter = dialect.getForeignKeyExporter();
         for (Namespace namespace : namespaces) {
             Collection<Table> tables = namespace.getTables();

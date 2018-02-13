@@ -11,7 +11,7 @@
   <artifactId>test-microservices</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>test-spring-boot</module>
-    <module>test-wildfly-swarm</module>
+    <module>test-microservices-spring-boot</module>
+    <module>test-microservices-wildfly-swarm</module>
   </modules>
 </project>

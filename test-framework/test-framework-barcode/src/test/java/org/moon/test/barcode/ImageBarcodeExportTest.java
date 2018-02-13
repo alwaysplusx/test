@@ -16,9 +16,9 @@ import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.export.JExcelApiExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 
+import org.harmony.test.barcode.persistence.Material;
 import org.junit.Before;
 import org.junit.Test;
-import org.moon.test.persistence.Material;
 
 @SuppressWarnings("deprecation")
 public class ImageBarcodeExportTest {

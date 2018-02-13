@@ -11,13 +11,13 @@
   <packaging>ear</packaging>
   <dependencies>
     <dependency>
-      <groupId>org.harmony.test</groupId>
+      <groupId>org.harmony.test.maven</groupId>
       <artifactId>ejb</artifactId>
       <version>${project.version}</version>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.harmony.test</groupId>
+      <groupId>org.harmony.test.maven</groupId>
       <artifactId>web</artifactId>
       <version>${project.version}</version>
       <type>war</type>
@@ -35,11 +35,11 @@
           <includeLibInApplicationXml>true</includeLibInApplicationXml>
           <modules>
             <ejbModule>
-              <groupId>org.harmony.test</groupId>
+              <groupId>org.harmony.test.maven</groupId>
               <artifactId>ejb</artifactId>
             </ejbModule>
             <webModule>
-              <groupId>org.harmony.test</groupId>
+              <groupId>org.harmony.test.maven</groupId>
               <artifactId>web</artifactId>
               <contextRoot>/test</contextRoot>
             </webModule>

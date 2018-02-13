@@ -15,8 +15,8 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.harmony.test</groupId>
-      <artifactId>test-test</artifactId>
+      <groupId>org.harmony.test.javaee</groupId>
+      <artifactId>test-javaee-test</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>

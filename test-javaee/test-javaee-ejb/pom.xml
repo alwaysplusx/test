@@ -15,6 +15,11 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>org.harmony.test.javaee</groupId>
+      <artifactId>test-javaee-test</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.openejb</groupId>
       <artifactId>openejb-core</artifactId>
       <scope>test</scope>

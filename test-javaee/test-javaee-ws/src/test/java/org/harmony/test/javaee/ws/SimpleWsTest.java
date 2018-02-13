@@ -9,14 +9,16 @@ import javax.xml.ws.Endpoint;
 import javax.xml.ws.Service;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.harmony.tes.test.OpenEJBConfiguration;
-import org.harmony.tes.test.Property;
-import org.harmony.tes.test.runner.OpenEJBRunner;
+import org.harmony.test.javaee.OpenEJBConfiguration;
+import org.harmony.test.javaee.Property;
+import org.harmony.test.javaee.runner.OpenEJBRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(OpenEJBRunner.class)
-@OpenEJBConfiguration(properties = { @Property(name = "openejb.embedded.remotable", value = "true") })
+@OpenEJBConfiguration(properties = { //
+        @Property(name = "openejb.embedded.remotable", value = "true")//
+})
 public class SimpleWsTest {
 
     private static final String ADDRESS = "http://localhost:4204/test-javaee-ws/SimpleWs";

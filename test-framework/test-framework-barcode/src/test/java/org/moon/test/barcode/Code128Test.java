@@ -3,7 +3,7 @@ package org.moon.test.barcode;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.moon.test.barcode.Code128;
+import org.harmony.test.barcode.Code128;
 
 @SuppressWarnings("resource")
 public class Code128Test {

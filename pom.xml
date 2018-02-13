@@ -13,10 +13,9 @@
     <module>test-javase</module>
     <module>test-maven</module>
     <module>test-microservices</module>
-    <module>test-java9</module>
     <module>test-spring</module>
     <module>test-weixin</module>
-    <module>test-windows-authorization</module>
+    <module>test-winauthz</module>
   </modules>
   <properties>
     <spring.dependencies.version>1.5.2.RELEASE</spring.dependencies.version>

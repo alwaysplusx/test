@@ -12,16 +12,19 @@
   <packaging>pom</packaging>
   <modules>
     <module>test-framework-activemq</module>
-    <module>test-framework-freemarker</module>
+    <module>test-framework-barcode</module>
     <module>test-framework-cxf</module>
+    <module>test-framework-dozer</module>
+    <module>test-framework-ehcache</module>
+    <module>test-framework-freemarker</module>
+    <module>test-framework-grpc</module>
+    <module>test-framework-jaxrs</module>
+    <module>test-framework-jsf</module>
     <module>test-framework-mybatis</module>
+    <module>test-framework-netty</module>
+    <module>test-framework-pdf</module>
     <module>test-framework-shiro</module>
     <module>test-framework-struts2</module>
-    <module>test-framework-ehcache</module>
-    <module>test-framework-dozer</module>
-    <!-- <module>test-framework-jaxrs</module> -->
-    <!-- <module>test-framework-barcode</module> -->
-    <module>test-framework-grpc</module>
   </modules>
   <properties>
     <tomcat.plugin.version>2.2</tomcat.plugin.version>

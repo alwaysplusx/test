@@ -12,7 +12,8 @@
   <packaging>pom</packaging>
   <modules>
     <module>test-javaee-tomee</module>
-    <!-- <module>test-javaee-weblogic</module> -->
     <module>test-javaee-wildfly</module>
+    <!-- <module>test-javaee-weblogic</module> -->
+    <module>test-javaee-glassfish</module>
   </modules>
 </project>

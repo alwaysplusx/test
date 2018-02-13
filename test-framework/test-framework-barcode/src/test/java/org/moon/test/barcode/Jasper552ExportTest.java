@@ -18,9 +18,9 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 import net.sf.jasperreports.export.XlsReportConfiguration;
 
+import org.harmony.test.barcode.persistence.Material;
 import org.junit.Before;
 import org.junit.Test;
-import org.moon.test.persistence.Material;
 
 public class Jasper552ExportTest {
 

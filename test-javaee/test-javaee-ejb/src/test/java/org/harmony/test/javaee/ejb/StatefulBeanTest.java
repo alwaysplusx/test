@@ -8,8 +8,8 @@ import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import org.harmony.tes.test.Naming;
-import org.harmony.tes.test.runner.OpenEJBRunner;
+import org.harmony.test.javaee.Naming;
+import org.harmony.test.javaee.runner.OpenEJBRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -21,10 +21,10 @@ public class StatefulBeanTest {
 
     @EJB
     private BarRemote bar;
-    
+
     @Naming
     private Context context;
-    
+
     @Test
     public void testStatelessBean() throws NamingException, InterruptedException {
         final int count = 10;

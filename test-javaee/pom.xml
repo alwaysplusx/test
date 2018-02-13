@@ -11,15 +11,17 @@
   <artifactId>test-javaee</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>test-javaee-jpa</module>
-    <module>test-javaee-jms</module>
-    <module>test-javaee-ejb</module>
-    <module>test-javaee-jta</module>
-    <module>test-javaee-timer</module>
-    <module>test-javaee-mail</module>
-    <module>test-javaee-ws</module>
-    <module>test-javaee-interceptor</module>
-    <module>test-javaee-websocket</module>
+    <module>test-javaee-cdi</module>
     <module>test-javaee-clients</module>
+    <module>test-javaee-ejb</module>
+    <module>test-javaee-interceptor</module>
+    <module>test-javaee-jms</module>
+    <module>test-javaee-jpa</module>
+    <module>test-javaee-jta</module>
+    <module>test-javaee-mail</module>
+    <module>test-javaee-test</module>
+    <module>test-javaee-timer</module>
+    <module>test-javaee-websocket</module>
+    <module>test-javaee-ws</module>
   </modules>
 </project>

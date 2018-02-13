@@ -21,7 +21,6 @@
     <dependency>
       <groupId>dom4j</groupId>
       <artifactId>dom4j</artifactId>
-      <version>${dom4j.version}</version>
     </dependency>
     <dependency>
       <groupId>javax.mail</groupId>
@@ -34,8 +33,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.harmony.test</groupId>
-      <artifactId>test-test</artifactId>
+      <groupId>org.harmony.test.javaee</groupId>
+      <artifactId>test-javaee-test</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
