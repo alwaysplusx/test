@@ -23,6 +23,7 @@
     <module>test-framework-mybatis</module>
     <module>test-framework-netty</module>
     <module>test-framework-pdf</module>
+    <module>test-framework-rxtx</module>
     <module>test-framework-shiro</module>
     <module>test-framework-struts2</module>
   </modules>
