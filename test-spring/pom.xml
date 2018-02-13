@@ -6,6 +6,7 @@
     <artifactId>test-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
+  <groupId>org.harmony.test.spring</groupId>
   <artifactId>test-spring</artifactId>
   <packaging>pom</packaging>
   <modules>
