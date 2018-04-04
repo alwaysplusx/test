@@ -8,15 +8,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @SpringBootApplication
-public class SampleController {
+public class SampleApplication {
 
-    @RequestMapping("/")
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(SampleApplication.class, args);
+    }
+
     @ResponseBody
-    String home() {
+    @RequestMapping("/")
+    public String home() {
         return "Hello World!";
     }
 
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(SampleController.class, args);
-    }
 }

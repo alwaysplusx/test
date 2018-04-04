@@ -23,5 +23,6 @@
     <module>test-javaee-timer</module>
     <module>test-javaee-websocket</module>
     <module>test-javaee-ws</module>
+    <module>test-javaee-servlet</module>
   </modules>
 </project>
