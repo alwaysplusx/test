@@ -28,7 +28,6 @@
     <module>test-framework-shiro</module>
     <module>test-framework-struts2</module>
     <module>test-framework-jdbcpool</module>
-    <module>test-framework-mapdb</module>
   </modules>
   <properties>
     <tomcat.plugin.version>2.2</tomcat.plugin.version>
