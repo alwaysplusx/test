@@ -9,6 +9,7 @@
     <module>test-aop</module>
     <module>test-framework</module>
     <module>test-ioc</module>
+    <module>test-java9</module>
     <module>test-javaee</module>
     <module>test-javase</module>
     <module>test-maven</module>
