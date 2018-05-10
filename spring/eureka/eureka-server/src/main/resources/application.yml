@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: eureka-server
+eureka:
+  client:
+    register-with-eureka: false # 不将自己注册在服务中
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8080/eureka
+  server:
+    wait-time-in-ms-when-sync-empty: 0

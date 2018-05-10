@@ -1,0 +1,25 @@
+package org.harmony.eureka.apis;
+
+/**
+ * @author wuxii@foxmail.com
+ */
+public class MemberNotFoundException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+
+    public MemberNotFoundException() {
+    }
+
+    public MemberNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public MemberNotFoundException(String message) {
+        super(message);
+    }
+
+    public MemberNotFoundException(Throwable cause) {
+        super(cause);
+    }
+
+}
