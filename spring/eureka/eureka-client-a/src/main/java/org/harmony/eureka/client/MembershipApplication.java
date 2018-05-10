@@ -24,9 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/member")
 public class MembershipApplication {
 
-    private static Logger log = LoggerFactory.getLogger(MembershipApplication.class);
-
-    private int port;
+    private static final Logger log = LoggerFactory.getLogger(MembershipApplication.class);
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(MembershipApplication.class, args);
@@ -37,7 +35,7 @@ public class MembershipApplication {
 
     @GetMapping("/{name}")
     public Member member(@PathVariable("name") String name) {
-        log.info("find member {}, at port {}", name, port);
+        log.info("member service invoke");
         Optional<Member> member = members.stream().filter(e -> name.equals(e.getName())).findFirst();
         return member.isPresent() ? member.get() : null;
     }
