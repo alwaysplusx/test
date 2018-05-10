@@ -1,4 +1,4 @@
-package org.moon.ii.netty.echo;
+package org.harmony.test.netty.echo;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -19,11 +19,12 @@ public class EchoClient {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
-            Bootstrap b = new Bootstrap(); // (1)
-            b.group(workerGroup); // (2)
-            b.channel(NioSocketChannel.class); // (3)
-            b.option(ChannelOption.TCP_NODELAY, true); // (4)
+            Bootstrap b = new Bootstrap(); //
+            b.group(workerGroup); //
+            b.channel(NioSocketChannel.class); //
+            b.option(ChannelOption.TCP_NODELAY, true); //
             b.handler(new ChannelInitializer<SocketChannel>() {
+
                 @Override
                 public void initChannel(SocketChannel ch) throws Exception {
                     ch.pipeline().addLast(new EchoClientHandler());
@@ -31,11 +32,11 @@ public class EchoClient {
             });
 
             // Start the client.
-            ChannelFuture f = b.connect(host, port).sync(); // (5)
+            ChannelFuture f = b.connect(host, port).sync(); //
 
             // Wait until the connection is closed.
             f.channel().closeFuture().sync();
-            
+
         } finally {
             workerGroup.shutdownGracefully();
         }

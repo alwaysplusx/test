@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.moon.ii.netty.echo;
+package org.harmony.test.netty.echo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -37,8 +37,7 @@ public class EchoServer {
         new EchoServer().run();
     }
 
-    // use telnet localhost 8080 and input char. that server will return same
-    // char
+    // use telnet localhost 8080 and input char. that server will return same char
     public void run() throws Exception {
 
         // 是用来处理I/O操作的多线程事件循环器
