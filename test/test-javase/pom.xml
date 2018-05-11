@@ -13,7 +13,6 @@
   <modules>
     <module>test-javase-concurrent</module>
     <module>test-javase-io</module>
-    <module>test-javase-java9</module>
     <module>test-javase-jdbc</module>
     <module>test-javase-jmx</module>
     <module>test-javase-net</module>

@@ -10,8 +10,8 @@
   <packaging>pom</packaging>
   <modules>
     <module>eureka-server</module>
-    <module>eureka-client-a</module>
-    <module>eureka-client-b</module>
+    <module>eureka-client-member</module>
+    <module>eureka-client-movie</module>
     <module>apis</module>
   </modules>
 </project>
