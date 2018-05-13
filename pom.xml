@@ -7,6 +7,7 @@
   <modules>
     <module>test</module>
     <module>spring</module>
+    <module>dubbo</module>
   </modules>
   <properties>
     <spring.dependencies.version>1.5.2.RELEASE</spring.dependencies.version>
