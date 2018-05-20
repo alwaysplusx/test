@@ -13,5 +13,6 @@
   <modules>
     <module>app</module>
     <!-- <module>frontend</module> -->
+    <module>jmeter</module>
   </modules>
 </project>
