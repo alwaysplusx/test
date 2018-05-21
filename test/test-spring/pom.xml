@@ -13,5 +13,6 @@
     <module>test-spring-webmvc</module>
     <module>test-spring-data</module>
     <module>test-spring-boot-custome-autoconfigure</module>
+    <module>test-spring-transaction</module>
   </modules>
 </project>
