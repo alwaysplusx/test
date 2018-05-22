@@ -1,4 +1,4 @@
-package org.harmony.test.socket;
+package org.harmony.test.socket.multicast;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

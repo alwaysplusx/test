@@ -1,4 +1,4 @@
-package org.harmony.test.socket;
+package org.harmony.test.socket.multicast;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
