@@ -1,0 +1,24 @@
+= RESTful Api Documentation Example
+wuxii;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+
+[overview]
+= Overview
+
+使用spring-restdocs来生成RESTful Api文档.
+
+[用户]
+= 用户
+
+.request
+include::{snippets}/user/http-request.adoc[]
+
+.response
+include::{snippets}/user/http-response.adoc[]
