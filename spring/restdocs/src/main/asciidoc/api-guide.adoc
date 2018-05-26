@@ -14,11 +14,38 @@ wuxii;
 
 使用spring-restdocs来生成RESTful Api文档.
 
+[echo]
+= Echo
+
+.curl
+include::{snippets}/echo/curl-request.adoc[]
+
+.request
+include::{snippets}/echo/http-request.adoc[]
+
+.response
+include::{snippets}/echo/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/echo/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/echo/request-body.adoc[]
+
+.request-parameters
+include::{snippets}/echo/request-parameters.adoc[]
+
+.response-body
+include::{snippets}/echo/response-body.adoc[]
+
+.response-fields
+include::{snippets}/echo/response-fields.adoc[]
+
 [用户]
 = 用户
 
-.request
 include::{snippets}/user/http-request.adoc[]
 
-.response
 include::{snippets}/user/http-response.adoc[]
+
+include::{snippets}/user/response-fields.adoc[]

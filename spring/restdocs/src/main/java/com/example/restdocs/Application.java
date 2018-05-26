@@ -18,8 +18,8 @@ public class Application {
     }
 
     @RequestMapping("/")
-    public String echo() {
-        return "{\"Hello\":\"World\"}";
+    public String echo(String name) {
+        return "{\"Hello\":\"" + (name == null ? "World" : name) + "\"}";
     }
 
     @RequestMapping("/user")
