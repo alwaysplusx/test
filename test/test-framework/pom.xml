@@ -31,6 +31,7 @@
     <module>test-framework-lombok</module>
     <module>test-framework-j2cache</module>
     <module>test-framework-redis</module>
+    <module>test-framework-paho</module>
   </modules>
   <properties>
     <tomcat.plugin.version>2.2</tomcat.plugin.version>
