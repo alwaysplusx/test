@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author wuxii@foxmail.com
  */
-@EnableDiscoveryClient
+// @EnableDiscoveryClient
 @SpringBootApplication
 @RestController
-@RequestMapping("/api/member")
+@RequestMapping("/member")
 public class MembershipApplication {
 
     private static final Logger log = LoggerFactory.getLogger(MembershipApplication.class);
@@ -33,11 +32,16 @@ public class MembershipApplication {
     private List<Member> members = Arrays.asList(new Member("wuxii", 18), new Member("david", 10), //
             new Member("mary", 22), new Member("linda", 30), new Member("kent", 7));
 
-    @GetMapping("/{name}")
+    @GetMapping("/u/{name}")
     public Member member(@PathVariable("name") String name) {
         log.info("member service invoke");
         Optional<Member> member = members.stream().filter(e -> name.equals(e.getName())).findFirst();
         return member.isPresent() ? member.get() : null;
+    }
+
+    @GetMapping("/all")
+    public List<Member> all() {
+        return members;
     }
 
 }

@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.harmony.playground</groupId>
   <artifactId>playground</artifactId>
@@ -8,11 +9,14 @@
     <module>test</module>
     <module>spring</module>
     <module>dubbo</module>
+    <module>framework</module>
   </modules>
   <properties>
-    <spring.dependencies.version>1.5.2.RELEASE</spring.dependencies.version>
     <encoding>UTF-8</encoding>
     <java.version>1.8</java.version>
+    <spring.boot.version>2.0.2.RELEASE</spring.boot.version>
+    <spring.cloud.version>Finchley.RC1</spring.cloud.version>
+    <spring.cloud.netflix.version>2.0.0.RC2</spring.cloud.netflix.version>
     <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
     <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
     <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -21,7 +25,6 @@
     <hibernate.version>5.2.5.Final</hibernate.version>
     <openejb.version>4.7.4</openejb.version>
     <mybatis.version>3.2.3</mybatis.version>
-    <h2.version>1.4.193</h2.version>
     <hsqldb.version>2.3.1</hsqldb.version>
     <mysql.version>5.1.40</mysql.version>
     <oracle.version>11.2.0.3</oracle.version>
@@ -35,13 +38,43 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <id>spring-snapshots</id>
+      <name>Spring snapshots</name>
+      <url>https://repo.spring.io/libs-snapshot</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/libs-milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
   </repositories>
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring.dependencies.version}</version>
+        <version>${spring.boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring.cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-netflix-dependencies</artifactId>
+        <version>${spring.cloud.netflix.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -82,4 +115,15 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>2.0.1.RELEASE</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>

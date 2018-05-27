@@ -10,9 +10,7 @@ import org.harmony.eureka.apis.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +23,11 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 /**
  * @author wuxii@foxmail.com
  */
-@EnableDiscoveryClient
-@EnableHystrix
+//@EnableDiscoveryClient
+//@EnableHystrix
 @SpringBootApplication
 @RestController
-@RequestMapping("/api/movie")
+@RequestMapping("/movie")
 public class RecommendationApplication {
 
     public static void main(String[] args) throws Exception {
@@ -52,7 +50,7 @@ public class RecommendationApplication {
     @GetMapping("/recommendations/{user}")
     @HystrixCommand(fallbackMethod = "fallback")
     public List<Movie> recommendations(@PathVariable("user") String user) {
-        Member member = restTemplate.getForObject("http://membership/api/member/{user}", Member.class, user);
+        Member member = restTemplate.getForObject("http://membership/member/u/{user}", Member.class, user);
         if (member == null) {
             throw new MemberNotFoundException();
         }
