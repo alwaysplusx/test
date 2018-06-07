@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @RequestMapping("/member")
-public class MembershipApplication {
+public class MemberApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(MembershipApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(MemberApplication.class);
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(MembershipApplication.class, args);
+        SpringApplication.run(MemberApplication.class, args);
     }
 
     private List<Member> members = Arrays.asList(new Member("wuxii", 18), new Member("david", 10), //

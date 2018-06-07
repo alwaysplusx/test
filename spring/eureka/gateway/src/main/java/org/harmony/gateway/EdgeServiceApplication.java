@@ -24,8 +24,8 @@ public class EdgeServiceApplication {
     @Bean
     RouteLocator gatewayRouters(RouteLocatorBuilder builder) {
         return builder.routes()//
-                .route(r -> r.path("/member/**").uri("lb://membership/"))//
-                .route(r -> r.path("/recommendation/**").uri("lb://recommendation/"))//
+                .route(r -> r.path("/member/**").uri("lb://mebmer/"))//
+                .route(r -> r.path("/movie/**").uri("lb://movie/"))//
                 .build();
     }
 

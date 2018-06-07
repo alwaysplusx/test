@@ -10,9 +10,9 @@
   <artifactId>eureka</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>eureka-server</module>
-    <module>eureka-client-member</module>
-    <module>eureka-client-movie</module>
+    <module>server</module>
+    <module>member</module>
+    <module>movie</module>
     <module>apis</module>
     <module>gateway</module>
   </modules>

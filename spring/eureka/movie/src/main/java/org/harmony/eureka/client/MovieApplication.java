@@ -23,15 +23,15 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 /**
  * @author wuxii@foxmail.com
  */
-//@EnableDiscoveryClient
-//@EnableHystrix
+// @EnableDiscoveryClient
+// @EnableHystrix
 @SpringBootApplication
 @RestController
 @RequestMapping("/movie")
-public class RecommendationApplication {
+public class MovieApplication {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(RecommendationApplication.class, args);
+        SpringApplication.run(MovieApplication.class, args);
     }
 
     @LoadBalanced
@@ -47,10 +47,15 @@ public class RecommendationApplication {
             new Movie("shawshank redemption", 18), new Movie("the sendlot", 0), //
             new Movie("hook", 0));
 
+    @GetMapping("/all")
+    public List<Movie> all() {
+        return movies;
+    }
+
     @GetMapping("/recommendations/{user}")
     @HystrixCommand(fallbackMethod = "fallback")
     public List<Movie> recommendations(@PathVariable("user") String user) {
-        Member member = restTemplate.getForObject("http://membership/member/u/{user}", Member.class, user);
+        Member member = restTemplate.getForObject("http://member/member/u/{user}", Member.class, user);
         if (member == null) {
             throw new MemberNotFoundException();
         }
