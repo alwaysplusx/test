@@ -15,5 +15,6 @@
     <module>movie</module>
     <module>apis</module>
     <module>gateway</module>
+    <module>zuul</module>
   </modules>
 </project>
