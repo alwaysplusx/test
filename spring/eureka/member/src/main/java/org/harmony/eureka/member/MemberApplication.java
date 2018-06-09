@@ -1,4 +1,4 @@
-package org.harmony.eureka.client;
+package org.harmony.eureka.member;
 
 import java.util.Arrays;
 import java.util.List;

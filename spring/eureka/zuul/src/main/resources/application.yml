@@ -1,3 +1,4 @@
+debug: true
 server:
   port: 9000
 spring:
@@ -10,3 +11,10 @@ zuul:
       service-id: movie
     member:
       path: /member/**
+#ribbon: # ribbon global setting
+#    ReadTimeout: 10000
+#    ConnectionTimeout: 5000
+#movie: # ribbon setting by service-id
+#  ribbon:
+#    ReadTimeout: 5000
+#    ConnectionTimeout: 5000

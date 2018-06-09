@@ -1,5 +1,12 @@
+server:
+  port: 8080
 spring:
   application:
     name: gateway
-server:
-  port: 8080
+  cloud:
+    gateway:
+      routes:
+      - id: movie
+        uri: http://httpbin.org:80/get
+        predicates:
+        - Path=/get
