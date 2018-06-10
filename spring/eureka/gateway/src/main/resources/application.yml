@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: gateway
+  sleuth:
+    sampler:
+      probability: 1.0
   cloud:
     gateway:
       routes:

@@ -2,21 +2,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.harmony.spring</groupId>
-    <artifactId>spring</artifactId>
+    <groupId>org.harmony.spring.eureka</groupId>
+    <artifactId>eureka</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>org.harmony.spring.eureka</groupId>
-  <artifactId>eureka</artifactId>
+  <groupId>org.harmony.spring.client</groupId>
+  <artifactId>clients</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>server</module>
+    <module>apis</module>
     <module>member</module>
     <module>movie</module>
-    <module>apis</module>
-    <module>gateway</module>
-    <module>zuul</module>
-    <module>clients</module>
-    <module>zipkin</module>
   </modules>
 </project>
