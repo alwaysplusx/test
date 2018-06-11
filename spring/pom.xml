@@ -16,6 +16,7 @@
     <module>micrometer</module>
     <module>eureka</module>
     <module>restdocs</module>
+    <module>streams</module>
   </modules>
 
 </project>
