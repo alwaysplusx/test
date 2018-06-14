@@ -1,20 +1,22 @@
 #debug: true
 server:
-  port: 8082
+  port: 0
 spring:
   application:
     name: movie
   sleuth:
     sampler:
       probability: 1.0
+#    messaging:
+#      kafka:
+#        enabled: true
   zipkin:
-    base-url: http://localhost:9412
+    base-url: http://localhost:9411
     discovery-client-enabled: true
 #eureka:
 #  client:
 #    service-url:
 #      defaultZone: http://localhost:8080/eureka
-
 #feign: # see MemberClient
 #  client:
 #    config:

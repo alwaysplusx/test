@@ -2,5 +2,5 @@ server:
   port: 9090
 spring:
   redis:
-    host: 192.168.198.134
-    password: 123456
+    host: 106.14.127.176
+    password: 5dMMBk0QOE2VBAA4Hxlgd7LXhy8=
