@@ -1,11 +1,39 @@
+debug: true
 spring:
   application:
     name: kafka-streams
-  kafka:
-    bootstrap-servers: 106.14.127.176:9092
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    consumer:
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  cloud:
+    stream.kafka.binder.configuration:
+      commit.interval.ms: 1000
+      default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    stream.bindings:
+      user-event-in:
+        destination: user-events
+        producer:
+          header-mode: raw
+      user-event-out:
+        destination: user-events
+        producer:
+          header-mode: raw
+      action-count-out:
+        destination: action-counts
+        producer:
+          header-mode: raw
+          use-native-encoding: true
+      action-count-in:
+        destination: action-counts
+        content-type: application/json
+        group: action-counts
+        consumer:
+          header-mode: raw
+          use-native-decoding: true
+    stream.kafka.streams.bindings:
+      action-count-out:
+        producer:
+          key-serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+          value-serde: org.apache.kafka.common.serialization.Serdes$LongSerde
+      action-count-in:
+        consumer:
+          key-serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+          value-serde: org.apache.kafka.common.serialization.Serdes$LongSerde
