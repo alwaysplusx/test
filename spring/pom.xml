@@ -17,6 +17,8 @@
     <module>eureka</module>
     <module>restdocs</module>
     <module>streams</module>
+    <module>jta</module>
+    <module>config</module>
   </modules>
 
 </project>

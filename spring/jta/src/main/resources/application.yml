@@ -1,0 +1,10 @@
+debug: true
+spring.datasource.url: jdbc:h2:~/.harmony/test
+spring.datasource.username: sa
+spring.datasource.password: null
+spring.jpa.database: h2
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
