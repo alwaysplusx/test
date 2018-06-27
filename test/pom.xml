@@ -22,5 +22,6 @@
     <module>test-winauthz</module>
     <module>test-issues</module>
     <module>test-lock</module>
+    <module>test-javadoc</module>
   </modules>
 </project>
